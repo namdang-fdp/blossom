@@ -1,0 +1,2302 @@
+{
+  "product": "Nở",
+  "project_name": "Bloom",
+  "project_id": "i11re6ts0794c06k7o1wbd10",
+  "workspace_id": "L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN",
+  "project_url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/board",
+  "transport": "Kaneo REST API using configured API key; built-in HTTP MCP rejected API key with 401",
+  "publication_state": "verified",
+  "tasks": {
+    "NO-001": {
+      "id": "s7jc4lmn6wdpv6sc8pjklbt1",
+      "number": 1,
+      "title": "[NO-001] [P1] Khởi tạo Flutter Android với cấu trúc feature",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/s7jc4lmn6wdpv6sc8pjklbt1"
+    },
+    "NO-002": {
+      "id": "kwc73d9ip5ecvkvhuqwrpzn7",
+      "number": 2,
+      "title": "[NO-002] [P1] Khởi tạo Spring Boot với PostgreSQL dev",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/kwc73d9ip5ecvkvhuqwrpzn7"
+    },
+    "NO-003": {
+      "id": "vc6ayvbzrm6urudrfoij7pjx",
+      "number": 3,
+      "title": "[NO-003] [P1] Định nghĩa envelope đồng bộ và fixture lỗi API",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/vc6ayvbzrm6urudrfoij7pjx"
+    },
+    "NO-004": {
+      "id": "w3ctcc2hsc0mpqh2a7d4ivo2",
+      "number": 4,
+      "title": "[NO-004] [P1] Chốt FSRS chạy tương thích Dart và Java",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/w3ctcc2hsc0mpqh2a7d4ivo2"
+    },
+    "NO-005": {
+      "id": "qzpnjfus9e0seycqel35s8fj",
+      "number": 5,
+      "title": "[NO-005] [P1] Định nghĩa schema gói nghĩa và mẫu dùng",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/qzpnjfus9e0seycqel35s8fj"
+    },
+    "NO-006": {
+      "id": "plhiz6br8je9etv4otxqvuqa",
+      "number": 6,
+      "title": "[NO-006] [P1] Tạo bộ component nền màu hồng",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/plhiz6br8je9etv4otxqvuqa"
+    },
+    "NO-007": {
+      "id": "xc1vmwt6xhgzvirgqyd81r62",
+      "number": 7,
+      "title": "[NO-007] [P1] Khởi tạo guest profile trong SQLite",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/xc1vmwt6xhgzvirgqyd81r62"
+    },
+    "NO-008": {
+      "id": "jtwps122ynwod4qow2f18tg5",
+      "number": 8,
+      "title": "[NO-008] [P1] Tạo validator gói bài học",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/jtwps122ynwod4qow2f18tg5"
+    },
+    "NO-009": {
+      "id": "l6ppw6vcf0kd4l5ymrd85v04",
+      "number": 9,
+      "title": "[NO-009] [P1] Soạn starter 20 mục về sinh hoạt và sở thích",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/l6ppw6vcf0kd4l5ymrd85v04"
+    },
+    "NO-010": {
+      "id": "ur5t7bj8dgkmug5ekbrbmfds",
+      "number": 10,
+      "title": "[NO-010] [P1] Review sư phạm starter 20 mục",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ur5t7bj8dgkmug5ekbrbmfds"
+    },
+    "NO-011": {
+      "id": "dzqyh0rp6x2dssmgtaigyds3",
+      "number": 11,
+      "title": "[NO-011] [P1] Chuẩn bị audio offline cho starter",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/dzqyh0rp6x2dssmgtaigyds3"
+    },
+    "NO-012": {
+      "id": "p6gm2uj838gjlsv27efu8ldb",
+      "number": 12,
+      "title": "[NO-012] [P1] Cài starter pack từ asset vào kho local",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/p6gm2uj838gjlsv27efu8ldb"
+    },
+    "NO-013": {
+      "id": "mp2tnjp0zy21axbh205ygb4n",
+      "number": 13,
+      "title": "[NO-013] [P1] Tạo trang Hôm nay từ dữ liệu local",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/mp2tnjp0zy21axbh205ygb4n"
+    },
+    "NO-014": {
+      "id": "zhvijo1vsu7x1hblyaznu29w",
+      "number": 14,
+      "title": "[NO-014] [P1] Hiển thị bài nghĩa và mẫu dùng có audio",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/zhvijo1vsu7x1hblyaznu29w"
+    },
+    "NO-015": {
+      "id": "k17fhlh9y3kkyg2beti1zrdh",
+      "number": 15,
+      "title": "[NO-015] [P1] Chấm bài đóng theo mục tiêu và hint",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/k17fhlh9y3kkyg2beti1zrdh"
+    },
+    "NO-016": {
+      "id": "w2e6tih86bqw6nu8xfb8yng0",
+      "number": 16,
+      "title": "[NO-016] [P1] Tạo runner cho phiên học từng bước",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/w2e6tih86bqw6nu8xfb8yng0"
+    },
+    "NO-017": {
+      "id": "u18dkn8mlc55ys35cj6e94fn",
+      "number": 17,
+      "title": "[NO-017] [P1] Ghi attempt cùng tiến độ và outbox atomically",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/u18dkn8mlc55ys35cj6e94fn"
+    },
+    "NO-018": {
+      "id": "t5ywgek4aamaap10nnlzirdp",
+      "number": 18,
+      "title": "[NO-018] [P1] Khôi phục phiên sau force-kill",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/t5ywgek4aamaap10nnlzirdp"
+    },
+    "NO-019": {
+      "id": "vo1zk6b6sqn0goifbnfwuuqj",
+      "number": 19,
+      "title": "[NO-019] [P1] Tính lịch ôn FSRS trên thiết bị",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/vo1zk6b6sqn0goifbnfwuuqj"
+    },
+    "NO-020": {
+      "id": "k5rjfm5310xu8b6h87ax8p85",
+      "number": 20,
+      "title": "[NO-020] [P1] Chọn phiên theo due reviews và ngân sách thời gian",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/k5rjfm5310xu8b6h87ax8p85"
+    },
+    "NO-021": {
+      "id": "zv5urgoj6tzvzo3u66x5c9ng",
+      "number": 21,
+      "title": "[NO-021] [P1] Luyện tự gõ từ với gợi ý tăng dần",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/zv5urgoj6tzvzo3u66x5c9ng"
+    },
+    "NO-022": {
+      "id": "sorsu32bm0hugcfqs5hjktzu",
+      "number": 22,
+      "title": "[NO-022] [P1] Luyện giới từ và cụm trong câu",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/sorsu32bm0hugcfqs5hjktzu"
+    },
+    "NO-023": {
+      "id": "qd85t1cbd3hqy7okcznw8yok",
+      "number": 23,
+      "title": "[NO-023] [P1] Luyện nghe điền từ bằng audio đã tải",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/qd85t1cbd3hqy7okcznw8yok"
+    },
+    "NO-024": {
+      "id": "g20i742llchmr894xot5ph1j",
+      "number": 24,
+      "title": "[NO-024] [P1] Hiển thị kết quả phiên và lựa chọn học tiếp",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/g20i742llchmr894xot5ph1j"
+    },
+    "NO-025": {
+      "id": "gwilyuktqretw5x2s0g99n4a",
+      "number": 25,
+      "title": "[NO-025] [P1] Checkpoint: hoàn thành buổi học đầu tiên không mạng",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/gwilyuktqretw5x2s0g99n4a"
+    },
+    "NO-026": {
+      "id": "hhsvtetruj4enijv5zhsorom",
+      "number": 26,
+      "title": "[NO-026] [P2] Xác minh danh tính cho API riêng tư",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/hhsvtetruj4enijv5zhsorom"
+    },
+    "NO-027": {
+      "id": "e6y7rc755l562nsqtz0ebied",
+      "number": 27,
+      "title": "[NO-027] [P2] Đăng nhập tùy chọn để bật backup",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/e6y7rc755l562nsqtz0ebied"
+    },
+    "NO-028": {
+      "id": "i6scsxzur8ndmxgkbvctn3aq",
+      "number": 28,
+      "title": "[NO-028] [P2] Lưu event đồng bộ và change log PostgreSQL",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/i6scsxzur8ndmxgkbvctn3aq"
+    },
+    "NO-029": {
+      "id": "gotwxvhpdghr9fuuxhrgkx3m",
+      "number": 29,
+      "title": "[NO-029] [P2] Nhận batch attempt với ack từng operation",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/gotwxvhpdghr9fuuxhrgkx3m"
+    },
+    "NO-030": {
+      "id": "ezk05nushh26govkcotefmbf",
+      "number": 30,
+      "title": "[NO-030] [P2] Cung cấp pull cursor gồm tombstone",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ezk05nushh26govkcotefmbf"
+    },
+    "NO-031": {
+      "id": "az9cjqgjcq3byv87jh5c3904",
+      "number": 31,
+      "title": "[NO-031] [P2] Gửi outbox theo ack và retry an toàn",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/az9cjqgjcq3byv87jh5c3904"
+    },
+    "NO-032": {
+      "id": "wxnloxvnf1dytwao1lc48l3s",
+      "number": 32,
+      "title": "[NO-032] [P2] Áp dụng pull và hiển thị trạng thái sync",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/wxnloxvnf1dytwao1lc48l3s"
+    },
+    "NO-033": {
+      "id": "w6u3wwwpremwutbd59prjbbj",
+      "number": 33,
+      "title": "[NO-033] [P2] Replay lịch ôn từ event log canonical",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/w6u3wwwpremwutbd59prjbbj"
+    },
+    "NO-034": {
+      "id": "e7tajlol21o5acxld8ecpjxw",
+      "number": 34,
+      "title": "[NO-034] [P2] Reconcile lịch ôn mà giữ pending events",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/e7tajlol21o5acxld8ecpjxw"
+    },
+    "NO-035": {
+      "id": "h0x2b6uz0wvcw0zop1t8g50w",
+      "number": 35,
+      "title": "[NO-035] [P2] Nhập guest history vào account có idempotency",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/h0x2b6uz0wvcw0zop1t8g50w"
+    },
+    "NO-036": {
+      "id": "h7cworlhxqxe0bunmdp4vgep",
+      "number": 36,
+      "title": "[NO-036] [P2] Preview và hoàn tất liên kết guest",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/h7cworlhxqxe0bunmdp4vgep"
+    },
+    "NO-037": {
+      "id": "y8kuqcww9y8t8zbow9xbhd1k",
+      "number": 37,
+      "title": "[NO-037] [P2] Bảo vệ dữ liệu khi logout hoặc đổi account",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/y8kuqcww9y8t8zbow9xbhd1k"
+    },
+    "NO-038": {
+      "id": "ij5lrn187nd3qtajyeuwgfiv",
+      "number": 38,
+      "title": "[NO-038] [P2] Cung cấp snapshot phục hồi khi cursor hết hạn",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ij5lrn187nd3qtajyeuwgfiv"
+    },
+    "NO-039": {
+      "id": "xk41tdx9l21lbu8myevs5nfs",
+      "number": 39,
+      "title": "[NO-039] [P2] Phục hồi snapshot và rebase outbox",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/xk41tdx9l21lbu8myevs5nfs"
+    },
+    "NO-040": {
+      "id": "g1jq54akb416tf7cmu3zxsqa",
+      "number": 40,
+      "title": "[NO-040] [P2] Checkpoint: offline rồi đồng bộ không mất hoặc trùng",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/g1jq54akb416tf7cmu3zxsqa"
+    },
+    "NO-041": {
+      "id": "mza4jbrbqed9pc41mphn2hjt",
+      "number": 41,
+      "title": "[NO-041] [P3] Tìm kiếm và xem kho từ local",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/mza4jbrbqed9pc41mphn2hjt"
+    },
+    "NO-042": {
+      "id": "haxkcyeng3vdobzw62c2sqjq",
+      "number": 42,
+      "title": "[NO-042] [P3] Thêm sửa mục từ cá nhân offline",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/haxkcyeng3vdobzw62c2sqjq"
+    },
+    "NO-043": {
+      "id": "p15euvrmv0btd099iqydgh1s",
+      "number": 43,
+      "title": "[NO-043] [P3] Parse CSV và văn bản dán an toàn",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/p15euvrmv0btd099iqydgh1s"
+    },
+    "NO-044": {
+      "id": "r78fvgn2q5j59pwfrc7fc0wt",
+      "number": 44,
+      "title": "[NO-044] [P3] Preview và commit import vào kho local",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/r78fvgn2q5j59pwfrc7fc0wt"
+    },
+    "NO-045": {
+      "id": "ugl4hahttvqv4sz4qvkfchgl",
+      "number": 45,
+      "title": "[NO-045] [P3] Đồng bộ personal items với optimistic revision",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ugl4hahttvqv4sz4qvkfchgl"
+    },
+    "NO-046": {
+      "id": "cvigkp37bye83qnwyicdbar1",
+      "number": 46,
+      "title": "[NO-046] [P3] Giải quyết conflict mục từ cá nhân",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/cvigkp37bye83qnwyicdbar1"
+    },
+    "NO-047": {
+      "id": "klwhj4npduhjq46p3dws978w",
+      "number": 47,
+      "title": "[NO-047] [P3] Áp dụng tombstone cho mục từ bị xóa",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/klwhj4npduhjq46p3dws978w"
+    },
+    "NO-048": {
+      "id": "cy1g46tr1ff4wa5vm1ziv12b",
+      "number": 48,
+      "title": "[NO-048] [P3] Xóa mục từ offline với khôi phục có chủ ý",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/cy1g46tr1ff4wa5vm1ziv12b"
+    },
+    "NO-049": {
+      "id": "yof1664v9b21y9tik6rr4qng",
+      "number": 49,
+      "title": "[NO-049] [P3] Phát hành catalog và manifest versioned",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/yof1664v9b21y9tik6rr4qng"
+    },
+    "NO-050": {
+      "id": "e5igrto8qcuman8j8eecolpf",
+      "number": 50,
+      "title": "[NO-050] [P3] Tải gói nội dung với retry và checksum",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/e5igrto8qcuman8j8eecolpf"
+    },
+    "NO-051": {
+      "id": "vvpf273e1tb99bt4r87jo74y",
+      "number": 51,
+      "title": "[NO-051] [P3] Quản lý dung lượng và nâng revision gói",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/vvpf273e1tb99bt4r87jo74y"
+    },
+    "NO-052": {
+      "id": "o2hw584k120t4vqfm6o0a2yb",
+      "number": 52,
+      "title": "[NO-052] [P3] Checkpoint: import rồi học và sync trọn luồng",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/o2hw584k120t4vqfm6o0a2yb"
+    },
+    "NO-053": {
+      "id": "qe3yhwen3ahw6177mh4l0td8",
+      "number": 53,
+      "title": "[NO-053] [P4] Tạo sổ lỗi từ attempts khách quan",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/qe3yhwen3ahw6177mh4l0td8"
+    },
+    "NO-054": {
+      "id": "x7kh2oomlvjgclw6ry9ulu2b",
+      "number": 54,
+      "title": "[NO-054] [P4] Sinh phiên luyện lại từ sổ lỗi",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/x7kh2oomlvjgclw6ry9ulu2b"
+    },
+    "NO-055": {
+      "id": "ykpdi4t6wpfjntmna0qj2ij1",
+      "number": 55,
+      "title": "[NO-055] [P4] Lưu câu cá nhân có khung và nháp offline",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ykpdi4t6wpfjntmna0qj2ij1"
+    },
+    "NO-056": {
+      "id": "qy1el5pmx7zyfjw9qx0ohw0j",
+      "number": 56,
+      "title": "[NO-056] [P4] Thu âm và nghe lại câu trên thiết bị",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/qy1el5pmx7zyfjw9qx0ohw0j"
+    },
+    "NO-057": {
+      "id": "sxtdiijdyqxpjkfopbrpjf29",
+      "number": 57,
+      "title": "[NO-057] [P4] Tích hợp phản hồi câu qua AI adapter",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/sxtdiijdyqxpjkfopbrpjf29"
+    },
+    "NO-058": {
+      "id": "l1ug192lhwdyrxyulklhy8i1",
+      "number": 58,
+      "title": "[NO-058] [P4] Giới hạn chi phí và chống gửi AI trùng",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/l1ug192lhwdyrxyulklhy8i1"
+    },
+    "NO-059": {
+      "id": "a62oaolpjl1ua5uukf81eib1",
+      "number": 59,
+      "title": "[NO-059] [P4] Nhận sửa câu online mà không chặn học offline",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/a62oaolpjl1ua5uukf81eib1"
+    },
+    "NO-060": {
+      "id": "j06xe297y75mlpbwg0tghq3z",
+      "number": 60,
+      "title": "[NO-060] [P4] Báo nội dung hoặc phản hồi chấm sai",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/j06xe297y75mlpbwg0tghq3z"
+    },
+    "NO-061": {
+      "id": "ajkw11f57fesktsj5nt6b0hp",
+      "number": 61,
+      "title": "[NO-061] [P4] Tạo bài kiểm tra trì hoãn có ngữ cảnh mới",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ajkw11f57fesktsj5nt6b0hp"
+    },
+    "NO-062": {
+      "id": "o9rc917pq50l8uf3akpxeux9",
+      "number": 62,
+      "title": "[NO-062] [P4] Hiển thị tiến bộ tách nhớ nghĩa và dùng mẫu",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/o9rc917pq50l8uf3akpxeux9"
+    },
+    "NO-063": {
+      "id": "yix0hou98fvkjzqrpx7hlpl8",
+      "number": 63,
+      "title": "[NO-063] [P4] Checkpoint: từ biết nghĩa tới tự đặt câu",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/yix0hou98fvkjzqrpx7hlpl8"
+    },
+    "NO-064": {
+      "id": "jiwxh5nefd9at25liq86sl7u",
+      "number": 64,
+      "title": "[NO-064] [P5] Lưu lịch học và mục tiêu tuần offline",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/jiwxh5nefd9at25liq86sl7u"
+    },
+    "NO-065": {
+      "id": "o4322vndl1srxmiukuxj7ij7",
+      "number": 65,
+      "title": "[NO-065] [P5] Cấp credit ngày học theo nỗ lực",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/o4322vndl1srxmiukuxj7ij7"
+    },
+    "NO-066": {
+      "id": "k4y7vbj9oiraxtk876308e16",
+      "number": 66,
+      "title": "[NO-066] [P5] Tạo bộ mascot hoa hồng nguyên bản",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/k4y7vbj9oiraxtk876308e16"
+    },
+    "NO-067": {
+      "id": "u92lvgihq81gamt1x56ax93z",
+      "number": 67,
+      "title": "[NO-067] [P5] Tính mood và growth của hoa từ lịch local",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/u92lvgihq81gamt1x56ax93z"
+    },
+    "NO-068": {
+      "id": "esf5n0843upw8u3cw2etjd30",
+      "number": 68,
+      "title": "[NO-068] [P5] Hiển thị vườn và animation hoa sau phiên",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/esf5n0843upw8u3cw2etjd30"
+    },
+    "NO-069": {
+      "id": "fioxkl5v1nth9j6q97wptyes",
+      "number": 69,
+      "title": "[NO-069] [P5] Xin quyền và đặt local notification",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/fioxkl5v1nth9j6q97wptyes"
+    },
+    "NO-070": {
+      "id": "ir9dvugf1eztvbtro013h1k9",
+      "number": 70,
+      "title": "[NO-070] [P5] Điều phối nhắc học theo lịch và credit",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ir9dvugf1eztvbtro013h1k9"
+    },
+    "NO-071": {
+      "id": "e0r3xlj926t89yi8eg66vbwg",
+      "number": 71,
+      "title": "[NO-071] [P5] Mở đúng buổi học từ thông báo",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/e0r3xlj926t89yi8eg66vbwg"
+    },
+    "NO-072": {
+      "id": "os68937js4qwf0o9rwuslp17",
+      "number": 72,
+      "title": "[NO-072] [P5] Checkpoint: hoa và nhắc học hoạt động offline",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/os68937js4qwf0o9rwuslp17"
+    },
+    "NO-073": {
+      "id": "wtnu27d8jc0iq883r7zyensh",
+      "number": 73,
+      "title": "[NO-073] [P6] Soạn 20 mục/cụm: Bản thân và giới thiệu",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/wtnu27d8jc0iq883r7zyensh"
+    },
+    "NO-074": {
+      "id": "tzutpcihy4d34f2zzsqx8s57",
+      "number": 74,
+      "title": "[NO-074] [P6] Review và duyệt 20 mục: Bản thân và giới thiệu",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/tzutpcihy4d34f2zzsqx8s57"
+    },
+    "NO-075": {
+      "id": "i4bxkx9q1svirm4fc3v4c1f8",
+      "number": 75,
+      "title": "[NO-075] [P6] Soạn 20 mục/cụm: Gia đình và quan hệ",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/i4bxkx9q1svirm4fc3v4c1f8"
+    },
+    "NO-076": {
+      "id": "hhse7lzku2bvpfnkqff9tcqv",
+      "number": 76,
+      "title": "[NO-076] [P6] Review và duyệt 20 mục: Gia đình và quan hệ",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/hhse7lzku2bvpfnkqff9tcqv"
+    },
+    "NO-077": {
+      "id": "xxt991wvgzvd0jrbhadf1w9m",
+      "number": 77,
+      "title": "[NO-077] [P6] Soạn 20 mục/cụm: Học tập",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/xxt991wvgzvd0jrbhadf1w9m"
+    },
+    "NO-078": {
+      "id": "w7qwo3lf8vyqtc0ku88tofqn",
+      "number": 78,
+      "title": "[NO-078] [P6] Review và duyệt 20 mục: Học tập",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/w7qwo3lf8vyqtc0ku88tofqn"
+    },
+    "NO-079": {
+      "id": "t4j1une856c39y1fyi414lr8",
+      "number": 79,
+      "title": "[NO-079] [P6] Soạn 20 mục/cụm: Công việc",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/t4j1une856c39y1fyi414lr8"
+    },
+    "NO-080": {
+      "id": "ua0en161wqiumac0n734mmh7",
+      "number": 80,
+      "title": "[NO-080] [P6] Review và duyệt 20 mục: Công việc",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ua0en161wqiumac0n734mmh7"
+    },
+    "NO-081": {
+      "id": "snmmquuf2ybm6dyiy7sodb1v",
+      "number": 81,
+      "title": "[NO-081] [P6] Soạn 20 mục/cụm: Ăn uống",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/snmmquuf2ybm6dyiy7sodb1v"
+    },
+    "NO-082": {
+      "id": "eyuyphbx2dnrp77hhyzqx3ib",
+      "number": 82,
+      "title": "[NO-082] [P6] Review và duyệt 20 mục: Ăn uống",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/eyuyphbx2dnrp77hhyzqx3ib"
+    },
+    "NO-083": {
+      "id": "s7ie1prg5rbmjj36jioo2c54",
+      "number": 83,
+      "title": "[NO-083] [P6] Soạn 20 mục/cụm: Đi lại",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/s7ie1prg5rbmjj36jioo2c54"
+    },
+    "NO-084": {
+      "id": "p7e7ncfiw5zqzj4vuwbkngjj",
+      "number": 84,
+      "title": "[NO-084] [P6] Review và duyệt 20 mục: Đi lại",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/p7e7ncfiw5zqzj4vuwbkngjj"
+    },
+    "NO-085": {
+      "id": "kxroq3qsz5cct129po5x12ro",
+      "number": 85,
+      "title": "[NO-085] [P6] Soạn 20 mục/cụm: Sức khỏe và môi trường",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/kxroq3qsz5cct129po5x12ro"
+    },
+    "NO-086": {
+      "id": "npd8ogk08gcpvm1c5p98xheo",
+      "number": 86,
+      "title": "[NO-086] [P6] Review và duyệt 20 mục: Sức khỏe và môi trường",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/npd8ogk08gcpvm1c5p98xheo"
+    },
+    "NO-087": {
+      "id": "ds2syzscbxgzc94a206jzw2r",
+      "number": 87,
+      "title": "[NO-087] [P6] Tạo audio cho 20 mục: Bản thân và giới thiệu",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ds2syzscbxgzc94a206jzw2r"
+    },
+    "NO-088": {
+      "id": "pta7698zst7a9u7lsig1g3xh",
+      "number": 88,
+      "title": "[NO-088] [P6] Duyệt audio cho 20 mục: Bản thân và giới thiệu",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/pta7698zst7a9u7lsig1g3xh"
+    },
+    "NO-089": {
+      "id": "oelwgdaf8nhjtnf9jxxtbu89",
+      "number": 89,
+      "title": "[NO-089] [P7] Thiết lập CI Flutter",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/oelwgdaf8nhjtnf9jxxtbu89"
+    },
+    "NO-090": {
+      "id": "zkynlgonql3oupmr217lxzld",
+      "number": 90,
+      "title": "[NO-090] [P7] Thiết lập CI Spring và migration",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/zkynlgonql3oupmr217lxzld"
+    },
+    "NO-091": {
+      "id": "u2lgtg7ldnpqcse5gqtokbgz",
+      "number": 91,
+      "title": "[NO-091] [P7] Chuẩn bị staging backend và object storage",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/u2lgtg7ldnpqcse5gqtokbgz"
+    },
+    "NO-092": {
+      "id": "cvgpz767duzb5dvf03siv2kx",
+      "number": 92,
+      "title": "[NO-092] [P7] Quan sát lỗi sync và AI không log dữ liệu riêng tư",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/cvgpz767duzb5dvf03siv2kx"
+    },
+    "NO-093": {
+      "id": "gdozkjvyx1s3wp69oswoe451",
+      "number": 93,
+      "title": "[NO-093] [P7] Kiểm chứng backup và restore PostgreSQL",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/gdozkjvyx1s3wp69oswoe451"
+    },
+    "NO-094": {
+      "id": "p60bi5pxmkcsoya7n4foi6f5",
+      "number": 94,
+      "title": "[NO-094] [P7] Xóa account và vô hiệu hóa sync cũ",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/p60bi5pxmkcsoya7n4foi6f5"
+    },
+    "NO-095": {
+      "id": "isb9jk8cein188ezrdt404oi",
+      "number": 95,
+      "title": "[NO-095] [P7] Cung cấp quản lý và xóa dữ liệu trong app",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/isb9jk8cein188ezrdt404oi"
+    },
+    "NO-096": {
+      "id": "nkvun32qzc8b0wb0mwxzr254",
+      "number": 96,
+      "title": "[NO-096] [P7] Chuẩn bị trang privacy và yêu cầu xóa account",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/nkvun32qzc8b0wb0mwxzr254"
+    },
+    "NO-097": {
+      "id": "v97np95g9trby5zufdxm81j8",
+      "number": 97,
+      "title": "[NO-097] [P7] Rà accessibility và bố cục trên Android thật",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/v97np95g9trby5zufdxm81j8"
+    },
+    "NO-098": {
+      "id": "eh8y29kgzv65ar84vpsqdkea",
+      "number": 98,
+      "title": "[NO-098] [P7] Kiểm tra phân quyền và xử lý input",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/eh8y29kgzv65ar84vpsqdkea"
+    },
+    "NO-099": {
+      "id": "o950tg19lxm5bmjptvubtpio",
+      "number": 99,
+      "title": "[NO-099] [P7] Chạy ma trận offline và phục hồi end-to-end",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/o950tg19lxm5bmjptvubtpio"
+    },
+    "NO-100": {
+      "id": "nik5a0n50n8jcf4sxjlfgrak",
+      "number": 100,
+      "title": "[NO-100] [P7] Pilot với Tâm và đánh giá độ khó",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/nik5a0n50n8jcf4sxjlfgrak"
+    },
+    "NO-101": {
+      "id": "pw535wzxlqspp0hhp8ngn7pg",
+      "number": 101,
+      "title": "[NO-101] [P7] Chốt định danh phát hành và bộ icon Nở",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/pw535wzxlqspp0hhp8ngn7pg"
+    },
+    "NO-102": {
+      "id": "teg12qnsbi42ckd5pha51set",
+      "number": 102,
+      "title": "[NO-102] [P7] Tạo Android App Bundle ký số cho beta",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/teg12qnsbi42ckd5pha51set"
+    },
+    "NO-103": {
+      "id": "i7wj2uz3nm6pny0g0phivsvk",
+      "number": 103,
+      "title": "[NO-103] [P7] Chuẩn bị listing và Data Safety Google Play",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/i7wj2uz3nm6pny0g0phivsvk"
+    },
+    "NO-104": {
+      "id": "db0wct2iunj8tsrehj1r8qk2",
+      "number": 104,
+      "title": "[NO-104] [P7] Thực hiện closed beta với người học phù hợp",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/db0wct2iunj8tsrehj1r8qk2"
+    },
+    "NO-105": {
+      "id": "v00xansd8kj5ndjaif4ju26e",
+      "number": 105,
+      "title": "[NO-105] [P7] Checkpoint: MVP đủ điều kiện xin phát hành",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/v00xansd8kj5ndjaif4ju26e"
+    },
+    "NO-106": {
+      "id": "daacrg0s8upqpvlzpd4zfs23",
+      "number": 106,
+      "title": "[NO-106] [P6] Tạo audio cho 20 mục: Gia đình và quan hệ",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/daacrg0s8upqpvlzpd4zfs23"
+    },
+    "NO-107": {
+      "id": "i9lioljbuxxkkwbwg0ltrvqi",
+      "number": 107,
+      "title": "[NO-107] [P6] Duyệt audio cho 20 mục: Gia đình và quan hệ",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/i9lioljbuxxkkwbwg0ltrvqi"
+    },
+    "NO-108": {
+      "id": "vx65n6pxh8vna3s54hm8w4pj",
+      "number": 108,
+      "title": "[NO-108] [P6] Tạo audio cho 20 mục: Học tập",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/vx65n6pxh8vna3s54hm8w4pj"
+    },
+    "NO-109": {
+      "id": "nqxrn9rsb6otelqnti7ir3s8",
+      "number": 109,
+      "title": "[NO-109] [P6] Duyệt audio cho 20 mục: Học tập",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/nqxrn9rsb6otelqnti7ir3s8"
+    },
+    "NO-110": {
+      "id": "vtnluz61kgts9ysyitfam30k",
+      "number": 110,
+      "title": "[NO-110] [P6] Tạo audio cho 20 mục: Công việc",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/vtnluz61kgts9ysyitfam30k"
+    },
+    "NO-111": {
+      "id": "bace4i57bxc3voxvly3sjiot",
+      "number": 111,
+      "title": "[NO-111] [P6] Duyệt audio cho 20 mục: Công việc",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/bace4i57bxc3voxvly3sjiot"
+    },
+    "NO-112": {
+      "id": "fuszpu4xhxvpj2i6wdlf2dqa",
+      "number": 112,
+      "title": "[NO-112] [P6] Tạo audio cho 20 mục: Ăn uống",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/fuszpu4xhxvpj2i6wdlf2dqa"
+    },
+    "NO-113": {
+      "id": "ve2zrf42wjl99szsaujtci4w",
+      "number": 113,
+      "title": "[NO-113] [P6] Duyệt audio cho 20 mục: Ăn uống",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ve2zrf42wjl99szsaujtci4w"
+    },
+    "NO-114": {
+      "id": "taxfg6ryh4ighg6dv5402n36",
+      "number": 114,
+      "title": "[NO-114] [P6] Tạo audio cho 20 mục: Đi lại",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/taxfg6ryh4ighg6dv5402n36"
+    },
+    "NO-115": {
+      "id": "kzwyzcnfg4zr2k41os9qzx2p",
+      "number": 115,
+      "title": "[NO-115] [P6] Duyệt audio cho 20 mục: Đi lại",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/kzwyzcnfg4zr2k41os9qzx2p"
+    },
+    "NO-116": {
+      "id": "gdxv0lbhb41g46yepdxf0ff6",
+      "number": 116,
+      "title": "[NO-116] [P6] Tạo audio cho 20 mục: Sức khỏe và môi trường",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/gdxv0lbhb41g46yepdxf0ff6"
+    },
+    "NO-117": {
+      "id": "y5e5e4prdnxoj0z4lg74zkeb",
+      "number": 117,
+      "title": "[NO-117] [P6] Duyệt audio cho 20 mục: Sức khỏe và môi trường",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/y5e5e4prdnxoj0z4lg74zkeb"
+    },
+    "NO-118": {
+      "id": "hg8js9e92w0intwsczfayf8b",
+      "number": 118,
+      "title": "[NO-118] [P6] Xuất bản catalog beta 160 mục đã duyệt",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/hg8js9e92w0intwsczfayf8b"
+    },
+    "NO-119": {
+      "id": "ceneijldcvmvnsxmeqqgktll",
+      "number": 119,
+      "title": "[NO-119] [P2] Đồng bộ lịch học và hợp nhất daily credits",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ceneijldcvmvnsxmeqqgktll"
+    },
+    "NO-120": {
+      "id": "ny88eyl0mmrwvhlb81kwf1yg",
+      "number": 120,
+      "title": "[NO-120] [P5] Reconcile lịch học và credit về hoa local",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ny88eyl0mmrwvhlb81kwf1yg"
+    },
+    "NO-121": {
+      "id": "tglcf75wqy7he91yk8oylj6v",
+      "number": 121,
+      "title": "[NO-121] [P1] Đánh giá nền tảng nhẹ và chọn mức hỗ trợ",
+      "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/tglcf75wqy7he91yk8oylj6v"
+    }
+  },
+  "relations": {
+    "NO-002->NO-003": {
+      "id": "c4aypbaxhio503xx2gfebqod",
+      "source": "NO-002",
+      "target": "NO-003",
+      "type": "blocks"
+    },
+    "NO-001->NO-004": {
+      "id": "q7zntddyi7rwlxvt2stiy6mg",
+      "source": "NO-001",
+      "target": "NO-004",
+      "type": "blocks"
+    },
+    "NO-002->NO-004": {
+      "id": "i4jenz2jz3vt9xvkzpe92et7",
+      "source": "NO-002",
+      "target": "NO-004",
+      "type": "blocks"
+    },
+    "NO-001->NO-006": {
+      "id": "er22zcbtg72knz1s1dgphecq",
+      "source": "NO-001",
+      "target": "NO-006",
+      "type": "blocks"
+    },
+    "NO-001->NO-007": {
+      "id": "o4hr6mxug1a77ynbx58206q5",
+      "source": "NO-001",
+      "target": "NO-007",
+      "type": "blocks"
+    },
+    "NO-005->NO-008": {
+      "id": "icv4z075kk81jm97pbx3bg4t",
+      "source": "NO-005",
+      "target": "NO-008",
+      "type": "blocks"
+    },
+    "NO-005->NO-009": {
+      "id": "z2fo6pdknqhaieyfh2qavzpl",
+      "source": "NO-005",
+      "target": "NO-009",
+      "type": "blocks"
+    },
+    "NO-008->NO-009": {
+      "id": "ehmvj71jwmxk4g1n6emmnkdx",
+      "source": "NO-008",
+      "target": "NO-009",
+      "type": "blocks"
+    },
+    "NO-008->NO-010": {
+      "id": "dud7o0pbkqdqntfam3478n18",
+      "source": "NO-008",
+      "target": "NO-010",
+      "type": "blocks"
+    },
+    "NO-009->NO-010": {
+      "id": "fbaf8l3nrd2tvd02zds2blpe",
+      "source": "NO-009",
+      "target": "NO-010",
+      "type": "blocks"
+    },
+    "NO-010->NO-011": {
+      "id": "zmqo7hh20260xd58tfocmiau",
+      "source": "NO-010",
+      "target": "NO-011",
+      "type": "blocks"
+    },
+    "NO-007->NO-012": {
+      "id": "k7sl7v3t3gg1tcyq4sfsidvx",
+      "source": "NO-007",
+      "target": "NO-012",
+      "type": "blocks"
+    },
+    "NO-008->NO-012": {
+      "id": "dqmjmivlsep97t0dggtm19ih",
+      "source": "NO-008",
+      "target": "NO-012",
+      "type": "blocks"
+    },
+    "NO-011->NO-012": {
+      "id": "fxalkouktz3drg028md2yis8",
+      "source": "NO-011",
+      "target": "NO-012",
+      "type": "blocks"
+    },
+    "NO-006->NO-013": {
+      "id": "xk9fvauy5ak2ffj761ujnxm7",
+      "source": "NO-006",
+      "target": "NO-013",
+      "type": "blocks"
+    },
+    "NO-012->NO-013": {
+      "id": "zbt5v0vkhri76edzs9h2pypu",
+      "source": "NO-012",
+      "target": "NO-013",
+      "type": "blocks"
+    },
+    "NO-006->NO-014": {
+      "id": "t7aatwveu6chi51ph727h5p2",
+      "source": "NO-006",
+      "target": "NO-014",
+      "type": "blocks"
+    },
+    "NO-012->NO-014": {
+      "id": "wfr3e4epgs5t8x7kc82adqh9",
+      "source": "NO-012",
+      "target": "NO-014",
+      "type": "blocks"
+    },
+    "NO-005->NO-015": {
+      "id": "jt0ht6epspljer4zhufzxhbu",
+      "source": "NO-005",
+      "target": "NO-015",
+      "type": "blocks"
+    },
+    "NO-001->NO-015": {
+      "id": "t6015zelfnikveh5trnrbibv",
+      "source": "NO-001",
+      "target": "NO-015",
+      "type": "blocks"
+    },
+    "NO-014->NO-016": {
+      "id": "o0si0tkcuxjbgft9uuir5t5s",
+      "source": "NO-014",
+      "target": "NO-016",
+      "type": "blocks"
+    },
+    "NO-015->NO-016": {
+      "id": "hr7u1t7fecvbufjnbyxze7l3",
+      "source": "NO-015",
+      "target": "NO-016",
+      "type": "blocks"
+    },
+    "NO-007->NO-017": {
+      "id": "ttz1yjn8ou3lktvusv2bjzk0",
+      "source": "NO-007",
+      "target": "NO-017",
+      "type": "blocks"
+    },
+    "NO-016->NO-017": {
+      "id": "lzbopnlng64kuxpk8w6phzpk",
+      "source": "NO-016",
+      "target": "NO-017",
+      "type": "blocks"
+    },
+    "NO-017->NO-018": {
+      "id": "mb7en6apbucbuo0hu0wrke7i",
+      "source": "NO-017",
+      "target": "NO-018",
+      "type": "blocks"
+    },
+    "NO-004->NO-019": {
+      "id": "k75hrdc4r8l08edyvpf3c4mm",
+      "source": "NO-004",
+      "target": "NO-019",
+      "type": "blocks"
+    },
+    "NO-017->NO-019": {
+      "id": "ge5m9ioz1glb3yhje4juzbon",
+      "source": "NO-017",
+      "target": "NO-019",
+      "type": "blocks"
+    },
+    "NO-019->NO-020": {
+      "id": "v1e6990hf72p6frm3fcdczlc",
+      "source": "NO-019",
+      "target": "NO-020",
+      "type": "blocks"
+    },
+    "NO-013->NO-020": {
+      "id": "kfmsxk6up4k2kgzovqcfsvoe",
+      "source": "NO-013",
+      "target": "NO-020",
+      "type": "blocks"
+    },
+    "NO-016->NO-021": {
+      "id": "p20rdefch4itep3b18cixupq",
+      "source": "NO-016",
+      "target": "NO-021",
+      "type": "blocks"
+    },
+    "NO-019->NO-021": {
+      "id": "yzmesifu0t7n12v9kx5vwzm9",
+      "source": "NO-019",
+      "target": "NO-021",
+      "type": "blocks"
+    },
+    "NO-016->NO-022": {
+      "id": "lzu2zigo9klzxe5x65nt9tvl",
+      "source": "NO-016",
+      "target": "NO-022",
+      "type": "blocks"
+    },
+    "NO-019->NO-022": {
+      "id": "ocbna0cxwbipehkfftnhq0ln",
+      "source": "NO-019",
+      "target": "NO-022",
+      "type": "blocks"
+    },
+    "NO-016->NO-023": {
+      "id": "c5ypr9od1l3b08s2fyl9zcxh",
+      "source": "NO-016",
+      "target": "NO-023",
+      "type": "blocks"
+    },
+    "NO-012->NO-023": {
+      "id": "mvia9gchlll172n0c1isb7m8",
+      "source": "NO-012",
+      "target": "NO-023",
+      "type": "blocks"
+    },
+    "NO-018->NO-024": {
+      "id": "d05ek7xmuih9uoiziw25h1pi",
+      "source": "NO-018",
+      "target": "NO-024",
+      "type": "blocks"
+    },
+    "NO-020->NO-024": {
+      "id": "khmlas9u85irz1ooysjwlroz",
+      "source": "NO-020",
+      "target": "NO-024",
+      "type": "blocks"
+    },
+    "NO-021->NO-024": {
+      "id": "svmxo1s88989e2moh4go2byz",
+      "source": "NO-021",
+      "target": "NO-024",
+      "type": "blocks"
+    },
+    "NO-022->NO-024": {
+      "id": "jj2upl80uwfmiqapfpfcsw0m",
+      "source": "NO-022",
+      "target": "NO-024",
+      "type": "blocks"
+    },
+    "NO-023->NO-024": {
+      "id": "omakjrsxxzqdw0y6bbobz6mw",
+      "source": "NO-023",
+      "target": "NO-024",
+      "type": "blocks"
+    },
+    "NO-024->NO-025": {
+      "id": "yd7ngke441b7l6de0oxud4zs",
+      "source": "NO-024",
+      "target": "NO-025",
+      "type": "blocks"
+    },
+    "NO-002->NO-026": {
+      "id": "tzqi10z67kz3xluxvxj00aw0",
+      "source": "NO-002",
+      "target": "NO-026",
+      "type": "blocks"
+    },
+    "NO-003->NO-026": {
+      "id": "rmc9uw0hnud4rus2co5lm70n",
+      "source": "NO-003",
+      "target": "NO-026",
+      "type": "blocks"
+    },
+    "NO-007->NO-027": {
+      "id": "cmx8iq2ykwoqngac54l6kibt",
+      "source": "NO-007",
+      "target": "NO-027",
+      "type": "blocks"
+    },
+    "NO-026->NO-027": {
+      "id": "aairn6wz133dthuqd8crrt4q",
+      "source": "NO-026",
+      "target": "NO-027",
+      "type": "blocks"
+    },
+    "NO-002->NO-028": {
+      "id": "qonm1j46v9a5glfs6o1c5mhc",
+      "source": "NO-002",
+      "target": "NO-028",
+      "type": "blocks"
+    },
+    "NO-003->NO-028": {
+      "id": "ehnc99pkbpzmh5hw81moiuv8",
+      "source": "NO-003",
+      "target": "NO-028",
+      "type": "blocks"
+    },
+    "NO-026->NO-028": {
+      "id": "u7pnqig9vryvzlv0bnnijaq8",
+      "source": "NO-026",
+      "target": "NO-028",
+      "type": "blocks"
+    },
+    "NO-028->NO-029": {
+      "id": "eq4t3xnn3q75kgs2xcfaa7bg",
+      "source": "NO-028",
+      "target": "NO-029",
+      "type": "blocks"
+    },
+    "NO-028->NO-030": {
+      "id": "z2c9tpdiyf9bl30oufrtg9y2",
+      "source": "NO-028",
+      "target": "NO-030",
+      "type": "blocks"
+    },
+    "NO-003->NO-031": {
+      "id": "cl5qleak5z9dn8w9t2st8zpk",
+      "source": "NO-003",
+      "target": "NO-031",
+      "type": "blocks"
+    },
+    "NO-017->NO-031": {
+      "id": "g37l9exgmk2o3g6eumuyqf9t",
+      "source": "NO-017",
+      "target": "NO-031",
+      "type": "blocks"
+    },
+    "NO-027->NO-031": {
+      "id": "fjjvda08p6s9dniy8tfrpujf",
+      "source": "NO-027",
+      "target": "NO-031",
+      "type": "blocks"
+    },
+    "NO-029->NO-031": {
+      "id": "x8452ca4ja907eo1letlwbyk",
+      "source": "NO-029",
+      "target": "NO-031",
+      "type": "blocks"
+    },
+    "NO-030->NO-032": {
+      "id": "jpcdkwp90b9jga683ty4oni6",
+      "source": "NO-030",
+      "target": "NO-032",
+      "type": "blocks"
+    },
+    "NO-031->NO-032": {
+      "id": "vcgfeuvamvi91v56mamqg4s4",
+      "source": "NO-031",
+      "target": "NO-032",
+      "type": "blocks"
+    },
+    "NO-004->NO-033": {
+      "id": "pv6k4v35gqr08olnxelg3zb7",
+      "source": "NO-004",
+      "target": "NO-033",
+      "type": "blocks"
+    },
+    "NO-029->NO-033": {
+      "id": "xpex5rcznbvthjpfsi4i98b1",
+      "source": "NO-029",
+      "target": "NO-033",
+      "type": "blocks"
+    },
+    "NO-019->NO-034": {
+      "id": "miahjk84c13q50z6k7nvdpe8",
+      "source": "NO-019",
+      "target": "NO-034",
+      "type": "blocks"
+    },
+    "NO-032->NO-034": {
+      "id": "bnxqg53nhg7lz11dcp41yi1u",
+      "source": "NO-032",
+      "target": "NO-034",
+      "type": "blocks"
+    },
+    "NO-033->NO-034": {
+      "id": "mgv136foh52pjoc5tf1g84kf",
+      "source": "NO-033",
+      "target": "NO-034",
+      "type": "blocks"
+    },
+    "NO-026->NO-035": {
+      "id": "knp69kq68r52m6oserw6ia6f",
+      "source": "NO-026",
+      "target": "NO-035",
+      "type": "blocks"
+    },
+    "NO-029->NO-035": {
+      "id": "l0t02oobdudcknlp8rpxranc",
+      "source": "NO-029",
+      "target": "NO-035",
+      "type": "blocks"
+    },
+    "NO-033->NO-035": {
+      "id": "ark4fn0jkhoqe7o9p23ha2eu",
+      "source": "NO-033",
+      "target": "NO-035",
+      "type": "blocks"
+    },
+    "NO-027->NO-036": {
+      "id": "hw0k14191y00r2nusmsxqc1g",
+      "source": "NO-027",
+      "target": "NO-036",
+      "type": "blocks"
+    },
+    "NO-034->NO-036": {
+      "id": "ygavx0mtu4r0dth76fb090i4",
+      "source": "NO-034",
+      "target": "NO-036",
+      "type": "blocks"
+    },
+    "NO-035->NO-036": {
+      "id": "bj1xtlx4t1bj7o5xrhxwqczw",
+      "source": "NO-035",
+      "target": "NO-036",
+      "type": "blocks"
+    },
+    "NO-036->NO-037": {
+      "id": "ibgzxoqra0pi8vywu715gfoy",
+      "source": "NO-036",
+      "target": "NO-037",
+      "type": "blocks"
+    },
+    "NO-030->NO-038": {
+      "id": "tc03trxjlwg08se5vm4p9nkv",
+      "source": "NO-030",
+      "target": "NO-038",
+      "type": "blocks"
+    },
+    "NO-033->NO-038": {
+      "id": "c3msxzqkrba6ye50ofx0yjlh",
+      "source": "NO-033",
+      "target": "NO-038",
+      "type": "blocks"
+    },
+    "NO-032->NO-039": {
+      "id": "mwvlgny4rkup3aydfga1z2yz",
+      "source": "NO-032",
+      "target": "NO-039",
+      "type": "blocks"
+    },
+    "NO-034->NO-039": {
+      "id": "vhzzb083wi3qlyi9zlnmcwtk",
+      "source": "NO-034",
+      "target": "NO-039",
+      "type": "blocks"
+    },
+    "NO-038->NO-039": {
+      "id": "bfip5ifk7ao6tx8xdufnnvbv",
+      "source": "NO-038",
+      "target": "NO-039",
+      "type": "blocks"
+    },
+    "NO-034->NO-040": {
+      "id": "dy7e50j5fsmtxb0xm2ed1anr",
+      "source": "NO-034",
+      "target": "NO-040",
+      "type": "blocks"
+    },
+    "NO-036->NO-040": {
+      "id": "lru19u8kd6e3j9xobkeas6rf",
+      "source": "NO-036",
+      "target": "NO-040",
+      "type": "blocks"
+    },
+    "NO-037->NO-040": {
+      "id": "fq7r6xthsqhh4dub4jle1nss",
+      "source": "NO-037",
+      "target": "NO-040",
+      "type": "blocks"
+    },
+    "NO-039->NO-040": {
+      "id": "ajb5li99qganyjwbq723rtxm",
+      "source": "NO-039",
+      "target": "NO-040",
+      "type": "blocks"
+    },
+    "NO-012->NO-041": {
+      "id": "fg1k922nnc0k4u9t57glw0rj",
+      "source": "NO-012",
+      "target": "NO-041",
+      "type": "blocks"
+    },
+    "NO-006->NO-041": {
+      "id": "zhem3tu40rl0fqf1mh0nj3zr",
+      "source": "NO-006",
+      "target": "NO-041",
+      "type": "blocks"
+    },
+    "NO-041->NO-042": {
+      "id": "i0elb74v8jwli1wanzlpghrp",
+      "source": "NO-041",
+      "target": "NO-042",
+      "type": "blocks"
+    },
+    "NO-017->NO-042": {
+      "id": "pj90n18dke6bbapidbzm0au4",
+      "source": "NO-017",
+      "target": "NO-042",
+      "type": "blocks"
+    },
+    "NO-005->NO-043": {
+      "id": "bh9afhshtahi0kz61femer92",
+      "source": "NO-005",
+      "target": "NO-043",
+      "type": "blocks"
+    },
+    "NO-042->NO-044": {
+      "id": "yq4sidlrcl6vxxdcn39rydb0",
+      "source": "NO-042",
+      "target": "NO-044",
+      "type": "blocks"
+    },
+    "NO-043->NO-044": {
+      "id": "p674rm33o83uljne5pszytei",
+      "source": "NO-043",
+      "target": "NO-044",
+      "type": "blocks"
+    },
+    "NO-029->NO-045": {
+      "id": "eg26zexfc515zdv2l8sxtihz",
+      "source": "NO-029",
+      "target": "NO-045",
+      "type": "blocks"
+    },
+    "NO-030->NO-045": {
+      "id": "n8rsdvjadmt21lde4r8f7u2g",
+      "source": "NO-030",
+      "target": "NO-045",
+      "type": "blocks"
+    },
+    "NO-032->NO-046": {
+      "id": "s8pygmf8csyl5u60gynmdyi2",
+      "source": "NO-032",
+      "target": "NO-046",
+      "type": "blocks"
+    },
+    "NO-042->NO-046": {
+      "id": "at9q826yudrukcww61z68irl",
+      "source": "NO-042",
+      "target": "NO-046",
+      "type": "blocks"
+    },
+    "NO-045->NO-046": {
+      "id": "evpmor7dp4tnrmdjy0je6yt6",
+      "source": "NO-045",
+      "target": "NO-046",
+      "type": "blocks"
+    },
+    "NO-045->NO-047": {
+      "id": "kerujivhyzillge0ekk72j1f",
+      "source": "NO-045",
+      "target": "NO-047",
+      "type": "blocks"
+    },
+    "NO-042->NO-048": {
+      "id": "guhgv1rwu7xjmk5sqn806wa4",
+      "source": "NO-042",
+      "target": "NO-048",
+      "type": "blocks"
+    },
+    "NO-046->NO-048": {
+      "id": "mmy1yv03tz2z9yns2v8xp7y2",
+      "source": "NO-046",
+      "target": "NO-048",
+      "type": "blocks"
+    },
+    "NO-047->NO-048": {
+      "id": "arrl6w8h0gx162z49ercaxud",
+      "source": "NO-047",
+      "target": "NO-048",
+      "type": "blocks"
+    },
+    "NO-002->NO-049": {
+      "id": "uxs0gqpd9jvum309sj17s4fv",
+      "source": "NO-002",
+      "target": "NO-049",
+      "type": "blocks"
+    },
+    "NO-005->NO-049": {
+      "id": "zpc32azty4tnp2j6u36w7shz",
+      "source": "NO-005",
+      "target": "NO-049",
+      "type": "blocks"
+    },
+    "NO-008->NO-049": {
+      "id": "tdsbfkqvr27kwp2he6i9gsgs",
+      "source": "NO-008",
+      "target": "NO-049",
+      "type": "blocks"
+    },
+    "NO-012->NO-050": {
+      "id": "suky07sem2v9aa1glidr3uvi",
+      "source": "NO-012",
+      "target": "NO-050",
+      "type": "blocks"
+    },
+    "NO-049->NO-050": {
+      "id": "tvhdg4rf8dfecn8mv2feuy60",
+      "source": "NO-049",
+      "target": "NO-050",
+      "type": "blocks"
+    },
+    "NO-050->NO-051": {
+      "id": "n5ojoo5kuupx04yy6wptzpzx",
+      "source": "NO-050",
+      "target": "NO-051",
+      "type": "blocks"
+    },
+    "NO-018->NO-051": {
+      "id": "hm0zm3yzytxqj4svhe2j0c0a",
+      "source": "NO-018",
+      "target": "NO-051",
+      "type": "blocks"
+    },
+    "NO-044->NO-052": {
+      "id": "wdz7cg5kc31142lh9t7spdvz",
+      "source": "NO-044",
+      "target": "NO-052",
+      "type": "blocks"
+    },
+    "NO-046->NO-052": {
+      "id": "yk526c42lzai5e9w21klu48x",
+      "source": "NO-046",
+      "target": "NO-052",
+      "type": "blocks"
+    },
+    "NO-048->NO-052": {
+      "id": "krhb484hrkfwaruz0jr8ngpc",
+      "source": "NO-048",
+      "target": "NO-052",
+      "type": "blocks"
+    },
+    "NO-051->NO-052": {
+      "id": "rrm3z6yvdw1eat8vp73jgdnv",
+      "source": "NO-051",
+      "target": "NO-052",
+      "type": "blocks"
+    },
+    "NO-040->NO-052": {
+      "id": "jzwn6wrqjytveckz41czexif",
+      "source": "NO-040",
+      "target": "NO-052",
+      "type": "blocks"
+    },
+    "NO-021->NO-053": {
+      "id": "dk24b8jkcf6uh15drxgn8la6",
+      "source": "NO-021",
+      "target": "NO-053",
+      "type": "blocks"
+    },
+    "NO-022->NO-053": {
+      "id": "n35vn97vhqg76iuaui96b7eg",
+      "source": "NO-022",
+      "target": "NO-053",
+      "type": "blocks"
+    },
+    "NO-041->NO-053": {
+      "id": "kh4dbfk699rjfivr9uhz17y3",
+      "source": "NO-041",
+      "target": "NO-053",
+      "type": "blocks"
+    },
+    "NO-053->NO-054": {
+      "id": "e6yy92wfyitjsg59l47dqjk1",
+      "source": "NO-053",
+      "target": "NO-054",
+      "type": "blocks"
+    },
+    "NO-020->NO-054": {
+      "id": "apasp6ijnd2wuy46a6tjuous",
+      "source": "NO-020",
+      "target": "NO-054",
+      "type": "blocks"
+    },
+    "NO-022->NO-055": {
+      "id": "wck9ldsikhk007m9zaxxyr26",
+      "source": "NO-022",
+      "target": "NO-055",
+      "type": "blocks"
+    },
+    "NO-042->NO-055": {
+      "id": "apynqj3xpdz33c0yxg77jpsq",
+      "source": "NO-042",
+      "target": "NO-055",
+      "type": "blocks"
+    },
+    "NO-014->NO-056": {
+      "id": "erfe1njc0gtzbjhfp3131cq1",
+      "source": "NO-014",
+      "target": "NO-056",
+      "type": "blocks"
+    },
+    "NO-055->NO-056": {
+      "id": "qhn24i8edlm6rmrt8oxqqv53",
+      "source": "NO-055",
+      "target": "NO-056",
+      "type": "blocks"
+    },
+    "NO-026->NO-057": {
+      "id": "ezi5eqfsdfsm9r9p74g2zqls",
+      "source": "NO-026",
+      "target": "NO-057",
+      "type": "blocks"
+    },
+    "NO-057->NO-058": {
+      "id": "widk5wfj272kqp2cnqdno7vx",
+      "source": "NO-057",
+      "target": "NO-058",
+      "type": "blocks"
+    },
+    "NO-028->NO-058": {
+      "id": "jecuzfwlygttsysn321jl42v",
+      "source": "NO-028",
+      "target": "NO-058",
+      "type": "blocks"
+    },
+    "NO-055->NO-059": {
+      "id": "iat4x5f58gy8x7z12sl3uc24",
+      "source": "NO-055",
+      "target": "NO-059",
+      "type": "blocks"
+    },
+    "NO-058->NO-059": {
+      "id": "vixgz6a7d7u8eumyncsz9e59",
+      "source": "NO-058",
+      "target": "NO-059",
+      "type": "blocks"
+    },
+    "NO-032->NO-059": {
+      "id": "n8ab3g6n5f5vnjnthibpnalp",
+      "source": "NO-032",
+      "target": "NO-059",
+      "type": "blocks"
+    },
+    "NO-026->NO-060": {
+      "id": "sqhw0fo5b66nplo3ewd1xrro",
+      "source": "NO-026",
+      "target": "NO-060",
+      "type": "blocks"
+    },
+    "NO-059->NO-060": {
+      "id": "qb51m45lf56guqefnztmbrr6",
+      "source": "NO-059",
+      "target": "NO-060",
+      "type": "blocks"
+    },
+    "NO-020->NO-061": {
+      "id": "wrjjrr28h0912kuhv3yb1wcc",
+      "source": "NO-020",
+      "target": "NO-061",
+      "type": "blocks"
+    },
+    "NO-022->NO-061": {
+      "id": "vpefwooevzvzin3netuajy86",
+      "source": "NO-022",
+      "target": "NO-061",
+      "type": "blocks"
+    },
+    "NO-054->NO-061": {
+      "id": "qonqsyxuupf9cfx7dir7skev",
+      "source": "NO-054",
+      "target": "NO-061",
+      "type": "blocks"
+    },
+    "NO-024->NO-062": {
+      "id": "s4v56xbst7z5n9w1qji1ti0j",
+      "source": "NO-024",
+      "target": "NO-062",
+      "type": "blocks"
+    },
+    "NO-053->NO-062": {
+      "id": "sb1m3puw3pour7ds7vwc1y5x",
+      "source": "NO-053",
+      "target": "NO-062",
+      "type": "blocks"
+    },
+    "NO-061->NO-062": {
+      "id": "dd9wvkg2zzqs8w0nkz36xb9u",
+      "source": "NO-061",
+      "target": "NO-062",
+      "type": "blocks"
+    },
+    "NO-054->NO-063": {
+      "id": "o1ur8hsyl98jh9lnqt89btgd",
+      "source": "NO-054",
+      "target": "NO-063",
+      "type": "blocks"
+    },
+    "NO-056->NO-063": {
+      "id": "kv3dcbni5wurbjwb8wtgwxi1",
+      "source": "NO-056",
+      "target": "NO-063",
+      "type": "blocks"
+    },
+    "NO-059->NO-063": {
+      "id": "x0sabiwmv8nvn197gzt9q78t",
+      "source": "NO-059",
+      "target": "NO-063",
+      "type": "blocks"
+    },
+    "NO-060->NO-063": {
+      "id": "ikp5daq6r3aon48uc949kdl0",
+      "source": "NO-060",
+      "target": "NO-063",
+      "type": "blocks"
+    },
+    "NO-062->NO-063": {
+      "id": "u22vrqouugput48148yjy7ig",
+      "source": "NO-062",
+      "target": "NO-063",
+      "type": "blocks"
+    },
+    "NO-007->NO-064": {
+      "id": "mblk9s9lck19wywdwv4oqorv",
+      "source": "NO-007",
+      "target": "NO-064",
+      "type": "blocks"
+    },
+    "NO-006->NO-064": {
+      "id": "gdhzx9bs2elt5x81mr0b6jxy",
+      "source": "NO-006",
+      "target": "NO-064",
+      "type": "blocks"
+    },
+    "NO-024->NO-065": {
+      "id": "ii2j128tw80mbrrtl1h9mp86",
+      "source": "NO-024",
+      "target": "NO-065",
+      "type": "blocks"
+    },
+    "NO-064->NO-065": {
+      "id": "aycwmt3t9gxiurwhrdz1cst2",
+      "source": "NO-064",
+      "target": "NO-065",
+      "type": "blocks"
+    },
+    "NO-006->NO-066": {
+      "id": "gjnj9iid8kgm2jevk3zl6x6l",
+      "source": "NO-006",
+      "target": "NO-066",
+      "type": "blocks"
+    },
+    "NO-065->NO-067": {
+      "id": "v089j09hbvq1dbbywzug6boz",
+      "source": "NO-065",
+      "target": "NO-067",
+      "type": "blocks"
+    },
+    "NO-066->NO-068": {
+      "id": "unudmx39v67l7f9ee18dx5m7",
+      "source": "NO-066",
+      "target": "NO-068",
+      "type": "blocks"
+    },
+    "NO-067->NO-068": {
+      "id": "q85ppj8dua9sqwgcbplzpo4g",
+      "source": "NO-067",
+      "target": "NO-068",
+      "type": "blocks"
+    },
+    "NO-062->NO-068": {
+      "id": "drf4zlvtr5gv6bxp3kp6pct6",
+      "source": "NO-062",
+      "target": "NO-068",
+      "type": "blocks"
+    },
+    "NO-001->NO-069": {
+      "id": "r50zyh4vaa12jlmwy6rccj5x",
+      "source": "NO-001",
+      "target": "NO-069",
+      "type": "blocks"
+    },
+    "NO-064->NO-069": {
+      "id": "qm1aqvoitfhim39l655x5in9",
+      "source": "NO-064",
+      "target": "NO-069",
+      "type": "blocks"
+    },
+    "NO-065->NO-070": {
+      "id": "f7211g3wd9n4uiyyj6juyib9",
+      "source": "NO-065",
+      "target": "NO-070",
+      "type": "blocks"
+    },
+    "NO-069->NO-070": {
+      "id": "d3yn3b6tpzddoi9f9kydn3h5",
+      "source": "NO-069",
+      "target": "NO-070",
+      "type": "blocks"
+    },
+    "NO-070->NO-071": {
+      "id": "qrxcmlgezlj2qznmlw0h7ff8",
+      "source": "NO-070",
+      "target": "NO-071",
+      "type": "blocks"
+    },
+    "NO-020->NO-071": {
+      "id": "avtjlyp2zdrtvqp0im38ew70",
+      "source": "NO-020",
+      "target": "NO-071",
+      "type": "blocks"
+    },
+    "NO-068->NO-072": {
+      "id": "d89hflq0qhse1bukuplginqj",
+      "source": "NO-068",
+      "target": "NO-072",
+      "type": "blocks"
+    },
+    "NO-071->NO-072": {
+      "id": "x3202yleurhioh67yaeilnps",
+      "source": "NO-071",
+      "target": "NO-072",
+      "type": "blocks"
+    },
+    "NO-120->NO-072": {
+      "id": "ujk0qy87czozmnodgvj7zmjg",
+      "source": "NO-120",
+      "target": "NO-072",
+      "type": "blocks"
+    },
+    "NO-010->NO-073": {
+      "id": "pr6uwhlj2juw70f6pi8yhwnb",
+      "source": "NO-010",
+      "target": "NO-073",
+      "type": "blocks"
+    },
+    "NO-073->NO-074": {
+      "id": "rjz6d6qq80gh3cygcqa5u8m1",
+      "source": "NO-073",
+      "target": "NO-074",
+      "type": "blocks"
+    },
+    "NO-008->NO-074": {
+      "id": "pgp7es0ksta602b8ubx8sj6m",
+      "source": "NO-008",
+      "target": "NO-074",
+      "type": "blocks"
+    },
+    "NO-010->NO-075": {
+      "id": "mju4v0qksukka9ukfc75zm0h",
+      "source": "NO-010",
+      "target": "NO-075",
+      "type": "blocks"
+    },
+    "NO-075->NO-076": {
+      "id": "qau3al3emm3owzqf9qq2jdbr",
+      "source": "NO-075",
+      "target": "NO-076",
+      "type": "blocks"
+    },
+    "NO-008->NO-076": {
+      "id": "xtt0k03bgxct44pcqa9sbxn3",
+      "source": "NO-008",
+      "target": "NO-076",
+      "type": "blocks"
+    },
+    "NO-010->NO-077": {
+      "id": "kdf9tov61s73h37kiufnzetb",
+      "source": "NO-010",
+      "target": "NO-077",
+      "type": "blocks"
+    },
+    "NO-077->NO-078": {
+      "id": "dcd6bknuy3o642llg5gb23s2",
+      "source": "NO-077",
+      "target": "NO-078",
+      "type": "blocks"
+    },
+    "NO-008->NO-078": {
+      "id": "gr5ts2wwbbuuyn6rxk9cwtxp",
+      "source": "NO-008",
+      "target": "NO-078",
+      "type": "blocks"
+    },
+    "NO-010->NO-079": {
+      "id": "zkr9p15toi9k2xl7t69sy38i",
+      "source": "NO-010",
+      "target": "NO-079",
+      "type": "blocks"
+    },
+    "NO-079->NO-080": {
+      "id": "a5j5t25mhoszuyeri4ulhncr",
+      "source": "NO-079",
+      "target": "NO-080",
+      "type": "blocks"
+    },
+    "NO-008->NO-080": {
+      "id": "n1ca6w0l3v04024ik2oh3hob",
+      "source": "NO-008",
+      "target": "NO-080",
+      "type": "blocks"
+    },
+    "NO-010->NO-081": {
+      "id": "ktl0c29ijbmvb4yletwhps8k",
+      "source": "NO-010",
+      "target": "NO-081",
+      "type": "blocks"
+    },
+    "NO-081->NO-082": {
+      "id": "s2w7xqtuexzorioi60fa531i",
+      "source": "NO-081",
+      "target": "NO-082",
+      "type": "blocks"
+    },
+    "NO-008->NO-082": {
+      "id": "os9r08w5lqenpu6t0dj5s4cc",
+      "source": "NO-008",
+      "target": "NO-082",
+      "type": "blocks"
+    },
+    "NO-010->NO-083": {
+      "id": "nohyqxei1lhwngflq12c1hz7",
+      "source": "NO-010",
+      "target": "NO-083",
+      "type": "blocks"
+    },
+    "NO-083->NO-084": {
+      "id": "ddoyrws2tq4b3bl23wtwnvsd",
+      "source": "NO-083",
+      "target": "NO-084",
+      "type": "blocks"
+    },
+    "NO-008->NO-084": {
+      "id": "drnizlqj49bjlcn3n260wyut",
+      "source": "NO-008",
+      "target": "NO-084",
+      "type": "blocks"
+    },
+    "NO-010->NO-085": {
+      "id": "xyg5jnpkqm1z4s1qn8f0thag",
+      "source": "NO-010",
+      "target": "NO-085",
+      "type": "blocks"
+    },
+    "NO-085->NO-086": {
+      "id": "lpxqeeuceqw80oedy3ltkk8q",
+      "source": "NO-085",
+      "target": "NO-086",
+      "type": "blocks"
+    },
+    "NO-008->NO-086": {
+      "id": "dzmwnaqs6wy5hv21q1mirqzz",
+      "source": "NO-008",
+      "target": "NO-086",
+      "type": "blocks"
+    },
+    "NO-011->NO-087": {
+      "id": "jsdk1v1wjqfd11x7ogael2wd",
+      "source": "NO-011",
+      "target": "NO-087",
+      "type": "blocks"
+    },
+    "NO-074->NO-087": {
+      "id": "no2r16ue1c1c9e58yz30zrat",
+      "source": "NO-074",
+      "target": "NO-087",
+      "type": "blocks"
+    },
+    "NO-087->NO-088": {
+      "id": "jukh2tsi4et2apv6pyd8907t",
+      "source": "NO-087",
+      "target": "NO-088",
+      "type": "blocks"
+    },
+    "NO-001->NO-089": {
+      "id": "xg5bic7emeiaeze1j2xa6uvg",
+      "source": "NO-001",
+      "target": "NO-089",
+      "type": "blocks"
+    },
+    "NO-002->NO-090": {
+      "id": "f2hol05scc8nrrpcjw0yl42t",
+      "source": "NO-002",
+      "target": "NO-090",
+      "type": "blocks"
+    },
+    "NO-026->NO-091": {
+      "id": "uhny9u1wxr16b7spndk9jyxy",
+      "source": "NO-026",
+      "target": "NO-091",
+      "type": "blocks"
+    },
+    "NO-049->NO-091": {
+      "id": "o5oef51p8y3oy9gjuqve2bq4",
+      "source": "NO-049",
+      "target": "NO-091",
+      "type": "blocks"
+    },
+    "NO-058->NO-091": {
+      "id": "ub1ualyjgg8r7wpzc8v364iv",
+      "source": "NO-058",
+      "target": "NO-091",
+      "type": "blocks"
+    },
+    "NO-029->NO-092": {
+      "id": "y898nlyaigatlcdqkt9540uv",
+      "source": "NO-029",
+      "target": "NO-092",
+      "type": "blocks"
+    },
+    "NO-033->NO-092": {
+      "id": "zhojgxdzewapa6fndv5h7y09",
+      "source": "NO-033",
+      "target": "NO-092",
+      "type": "blocks"
+    },
+    "NO-058->NO-092": {
+      "id": "c52bpbzx4n45rfxt7wfuhiq4",
+      "source": "NO-058",
+      "target": "NO-092",
+      "type": "blocks"
+    },
+    "NO-091->NO-093": {
+      "id": "nqvgtpz842kcue0xfonyqakj",
+      "source": "NO-091",
+      "target": "NO-093",
+      "type": "blocks"
+    },
+    "NO-026->NO-094": {
+      "id": "pa7jpapxzbkt0tywrl91lh64",
+      "source": "NO-026",
+      "target": "NO-094",
+      "type": "blocks"
+    },
+    "NO-045->NO-094": {
+      "id": "yiq0sp2fj2576ya8fb6ddbpd",
+      "source": "NO-045",
+      "target": "NO-094",
+      "type": "blocks"
+    },
+    "NO-058->NO-094": {
+      "id": "bc4fg0u9c3feim2x3b4ucseq",
+      "source": "NO-058",
+      "target": "NO-094",
+      "type": "blocks"
+    },
+    "NO-037->NO-095": {
+      "id": "euw9o9bq5ydn1n9pdu3bnns8",
+      "source": "NO-037",
+      "target": "NO-095",
+      "type": "blocks"
+    },
+    "NO-094->NO-095": {
+      "id": "fufnxh17qblf084oksxjefue",
+      "source": "NO-094",
+      "target": "NO-095",
+      "type": "blocks"
+    },
+    "NO-094->NO-096": {
+      "id": "ss248d6g34k10fnjj6un2f3x",
+      "source": "NO-094",
+      "target": "NO-096",
+      "type": "blocks"
+    },
+    "NO-095->NO-096": {
+      "id": "s7g5b2pk5whk6e8ndl5fh9l4",
+      "source": "NO-095",
+      "target": "NO-096",
+      "type": "blocks"
+    },
+    "NO-052->NO-097": {
+      "id": "ufhypqswbz5zvhdho3c8faxa",
+      "source": "NO-052",
+      "target": "NO-097",
+      "type": "blocks"
+    },
+    "NO-063->NO-097": {
+      "id": "rwreuwrxfnyfw9qshk834bu9",
+      "source": "NO-063",
+      "target": "NO-097",
+      "type": "blocks"
+    },
+    "NO-072->NO-097": {
+      "id": "pwd9p2o4lt9tgcn9xkz1leqc",
+      "source": "NO-072",
+      "target": "NO-097",
+      "type": "blocks"
+    },
+    "NO-040->NO-098": {
+      "id": "w153ujyc7d3g7buoui0hsx5t",
+      "source": "NO-040",
+      "target": "NO-098",
+      "type": "blocks"
+    },
+    "NO-045->NO-098": {
+      "id": "z668yzpejundlxi8yt079xu1",
+      "source": "NO-045",
+      "target": "NO-098",
+      "type": "blocks"
+    },
+    "NO-058->NO-098": {
+      "id": "pzu3uwmwq2xmx8b3kaq2hw5o",
+      "source": "NO-058",
+      "target": "NO-098",
+      "type": "blocks"
+    },
+    "NO-094->NO-098": {
+      "id": "wx4i29bcga41bs5ie06uno35",
+      "source": "NO-094",
+      "target": "NO-098",
+      "type": "blocks"
+    },
+    "NO-052->NO-099": {
+      "id": "ku4elmoyisumx2v0tsnyb959",
+      "source": "NO-052",
+      "target": "NO-099",
+      "type": "blocks"
+    },
+    "NO-063->NO-099": {
+      "id": "qxnmf15y9f5e3jcsso3s0vzf",
+      "source": "NO-063",
+      "target": "NO-099",
+      "type": "blocks"
+    },
+    "NO-072->NO-099": {
+      "id": "of9nj3iv9oqfaljfa7h0682e",
+      "source": "NO-072",
+      "target": "NO-099",
+      "type": "blocks"
+    },
+    "NO-118->NO-099": {
+      "id": "wzg0kmuxdoh0i0o6mus5siem",
+      "source": "NO-118",
+      "target": "NO-099",
+      "type": "blocks"
+    },
+    "NO-095->NO-099": {
+      "id": "x6gwf0a5um0wygebgmlhav1e",
+      "source": "NO-095",
+      "target": "NO-099",
+      "type": "blocks"
+    },
+    "NO-025->NO-100": {
+      "id": "qziowvzbmidbrkhkni5lh5zd",
+      "source": "NO-025",
+      "target": "NO-100",
+      "type": "blocks"
+    },
+    "NO-063->NO-100": {
+      "id": "wlqz63id8x6o15eexmq2y2a5",
+      "source": "NO-063",
+      "target": "NO-100",
+      "type": "blocks"
+    },
+    "NO-072->NO-100": {
+      "id": "oaqhkmnf1kdx08aiqpkfpks9",
+      "source": "NO-072",
+      "target": "NO-100",
+      "type": "blocks"
+    },
+    "NO-121->NO-100": {
+      "id": "kdtdvyfxx6msi0ncemlccexr",
+      "source": "NO-121",
+      "target": "NO-100",
+      "type": "blocks"
+    },
+    "NO-066->NO-101": {
+      "id": "dv4oi484hh49w3lffmg5fc9p",
+      "source": "NO-066",
+      "target": "NO-101",
+      "type": "blocks"
+    },
+    "NO-089->NO-102": {
+      "id": "s99658jm23mkdrd46leidlzq",
+      "source": "NO-089",
+      "target": "NO-102",
+      "type": "blocks"
+    },
+    "NO-090->NO-102": {
+      "id": "ir1b37k035nww8ahqrcopmg5",
+      "source": "NO-090",
+      "target": "NO-102",
+      "type": "blocks"
+    },
+    "NO-091->NO-102": {
+      "id": "oymez63zcfb04ppsstvehhur",
+      "source": "NO-091",
+      "target": "NO-102",
+      "type": "blocks"
+    },
+    "NO-101->NO-102": {
+      "id": "hj4exd5prf05c8onrym60swy",
+      "source": "NO-101",
+      "target": "NO-102",
+      "type": "blocks"
+    },
+    "NO-096->NO-103": {
+      "id": "uaryzq8pr4rf7xon99366yk4",
+      "source": "NO-096",
+      "target": "NO-103",
+      "type": "blocks"
+    },
+    "NO-101->NO-103": {
+      "id": "qzg5d4ynhp4hhcwjvq41qpmf",
+      "source": "NO-101",
+      "target": "NO-103",
+      "type": "blocks"
+    },
+    "NO-102->NO-103": {
+      "id": "us3kou7cwgv24v5mzskrt3si",
+      "source": "NO-102",
+      "target": "NO-103",
+      "type": "blocks"
+    },
+    "NO-093->NO-104": {
+      "id": "ex6sjbj1yxxkotgctjuailcs",
+      "source": "NO-093",
+      "target": "NO-104",
+      "type": "blocks"
+    },
+    "NO-097->NO-104": {
+      "id": "yo5a3deyke29jh8kffg9pa4m",
+      "source": "NO-097",
+      "target": "NO-104",
+      "type": "blocks"
+    },
+    "NO-098->NO-104": {
+      "id": "shjj8b3fruaq44m2fo5wq5jl",
+      "source": "NO-098",
+      "target": "NO-104",
+      "type": "blocks"
+    },
+    "NO-099->NO-104": {
+      "id": "juq4r44t6kg45e4m27otqptu",
+      "source": "NO-099",
+      "target": "NO-104",
+      "type": "blocks"
+    },
+    "NO-100->NO-104": {
+      "id": "fam88q9mj5w2g4k1c66amfuh",
+      "source": "NO-100",
+      "target": "NO-104",
+      "type": "blocks"
+    },
+    "NO-103->NO-104": {
+      "id": "m9an4302jbicj3tgjljzvu0k",
+      "source": "NO-103",
+      "target": "NO-104",
+      "type": "blocks"
+    },
+    "NO-092->NO-104": {
+      "id": "eg7x0qmzh8q79qr1zlv1yq9t",
+      "source": "NO-092",
+      "target": "NO-104",
+      "type": "blocks"
+    },
+    "NO-104->NO-105": {
+      "id": "r8vc6j833baub2cwld3347fk",
+      "source": "NO-104",
+      "target": "NO-105",
+      "type": "blocks"
+    },
+    "NO-011->NO-106": {
+      "id": "weqw8b9a0af07a282qnle8dm",
+      "source": "NO-011",
+      "target": "NO-106",
+      "type": "blocks"
+    },
+    "NO-076->NO-106": {
+      "id": "bg2v1szroipiymmfsqqsjvrb",
+      "source": "NO-076",
+      "target": "NO-106",
+      "type": "blocks"
+    },
+    "NO-106->NO-107": {
+      "id": "w83i9dkt1yothekdvmmb5rs5",
+      "source": "NO-106",
+      "target": "NO-107",
+      "type": "blocks"
+    },
+    "NO-011->NO-108": {
+      "id": "uos2qjwoku9tmad5fl5apmbj",
+      "source": "NO-011",
+      "target": "NO-108",
+      "type": "blocks"
+    },
+    "NO-078->NO-108": {
+      "id": "w6ofyu6mn833u84szb5garnp",
+      "source": "NO-078",
+      "target": "NO-108",
+      "type": "blocks"
+    },
+    "NO-108->NO-109": {
+      "id": "gm6shnr044rqcnp1hl5txhf3",
+      "source": "NO-108",
+      "target": "NO-109",
+      "type": "blocks"
+    },
+    "NO-011->NO-110": {
+      "id": "comjjas00bzhi55xu88jfgpg",
+      "source": "NO-011",
+      "target": "NO-110",
+      "type": "blocks"
+    },
+    "NO-080->NO-110": {
+      "id": "tpctlh3of2e3lmw192fj7i25",
+      "source": "NO-080",
+      "target": "NO-110",
+      "type": "blocks"
+    },
+    "NO-110->NO-111": {
+      "id": "jlua8bqrsl2uun6u3fgkohrt",
+      "source": "NO-110",
+      "target": "NO-111",
+      "type": "blocks"
+    },
+    "NO-011->NO-112": {
+      "id": "i16zto7wkvgp5tadexzgo5dt",
+      "source": "NO-011",
+      "target": "NO-112",
+      "type": "blocks"
+    },
+    "NO-082->NO-112": {
+      "id": "ecpqz4g6ehlil6bzmsib4lh5",
+      "source": "NO-082",
+      "target": "NO-112",
+      "type": "blocks"
+    },
+    "NO-112->NO-113": {
+      "id": "hf63uzeelobxst2id95qnue0",
+      "source": "NO-112",
+      "target": "NO-113",
+      "type": "blocks"
+    },
+    "NO-011->NO-114": {
+      "id": "kkl5kyivmoc3thqlozso3bpu",
+      "source": "NO-011",
+      "target": "NO-114",
+      "type": "blocks"
+    },
+    "NO-084->NO-114": {
+      "id": "q27mm3zdjc7n7bmcc4fbp166",
+      "source": "NO-084",
+      "target": "NO-114",
+      "type": "blocks"
+    },
+    "NO-114->NO-115": {
+      "id": "xguy1i72ndn5vzcceaxmfsbw",
+      "source": "NO-114",
+      "target": "NO-115",
+      "type": "blocks"
+    },
+    "NO-011->NO-116": {
+      "id": "mz3xam216yu5zz26tykkbswn",
+      "source": "NO-011",
+      "target": "NO-116",
+      "type": "blocks"
+    },
+    "NO-086->NO-116": {
+      "id": "jb3bqot4g975kvbp8wk7nve7",
+      "source": "NO-086",
+      "target": "NO-116",
+      "type": "blocks"
+    },
+    "NO-116->NO-117": {
+      "id": "pd0nfo6kv1oxbaestmizil8e",
+      "source": "NO-116",
+      "target": "NO-117",
+      "type": "blocks"
+    },
+    "NO-088->NO-118": {
+      "id": "r3yfc8a13zc0qvntzpmvt21t",
+      "source": "NO-088",
+      "target": "NO-118",
+      "type": "blocks"
+    },
+    "NO-107->NO-118": {
+      "id": "uc9al5hesfj7cm4smu1k1ckb",
+      "source": "NO-107",
+      "target": "NO-118",
+      "type": "blocks"
+    },
+    "NO-109->NO-118": {
+      "id": "ks9m0z6vat5u0wcc34twyoct",
+      "source": "NO-109",
+      "target": "NO-118",
+      "type": "blocks"
+    },
+    "NO-111->NO-118": {
+      "id": "gfcut4v2rhpb3ocwf9drjxjo",
+      "source": "NO-111",
+      "target": "NO-118",
+      "type": "blocks"
+    },
+    "NO-113->NO-118": {
+      "id": "wttduhkbo7qn6wxbha76b71l",
+      "source": "NO-113",
+      "target": "NO-118",
+      "type": "blocks"
+    },
+    "NO-115->NO-118": {
+      "id": "lo9570tfygixq0gxe2ot8owk",
+      "source": "NO-115",
+      "target": "NO-118",
+      "type": "blocks"
+    },
+    "NO-117->NO-118": {
+      "id": "xaornfdvl7zaosgxrec0h94r",
+      "source": "NO-117",
+      "target": "NO-118",
+      "type": "blocks"
+    },
+    "NO-049->NO-118": {
+      "id": "z2t27nlwid28ure6nwhw9qmq",
+      "source": "NO-049",
+      "target": "NO-118",
+      "type": "blocks"
+    },
+    "NO-050->NO-118": {
+      "id": "qgwv7l3rx31f01fstc0p4ksn",
+      "source": "NO-050",
+      "target": "NO-118",
+      "type": "blocks"
+    },
+    "NO-029->NO-119": {
+      "id": "ashfmr4ehcyvy6mmdt73mz9u",
+      "source": "NO-029",
+      "target": "NO-119",
+      "type": "blocks"
+    },
+    "NO-030->NO-119": {
+      "id": "fjq5f6k2ymhh3m1fpkvx6be8",
+      "source": "NO-030",
+      "target": "NO-119",
+      "type": "blocks"
+    },
+    "NO-065->NO-119": {
+      "id": "sh2qbh3ajxbkrq8f2o0ev6qo",
+      "source": "NO-065",
+      "target": "NO-119",
+      "type": "blocks"
+    },
+    "NO-119->NO-120": {
+      "id": "g7o18t4anze7vb1w1htqly7p",
+      "source": "NO-119",
+      "target": "NO-120",
+      "type": "blocks"
+    },
+    "NO-034->NO-120": {
+      "id": "e3wwmj0tewxubzw91rbfrot8",
+      "source": "NO-034",
+      "target": "NO-120",
+      "type": "blocks"
+    },
+    "NO-067->NO-120": {
+      "id": "ff5y13nhx2g02lf0dke4s92y",
+      "source": "NO-067",
+      "target": "NO-120",
+      "type": "blocks"
+    },
+    "NO-070->NO-120": {
+      "id": "pxoc7nfz4qd421qiec9l46fo",
+      "source": "NO-070",
+      "target": "NO-120",
+      "type": "blocks"
+    },
+    "NO-012->NO-121": {
+      "id": "kuiflwrsbsx0f535b2ihj3vb",
+      "source": "NO-012",
+      "target": "NO-121",
+      "type": "blocks"
+    },
+    "NO-015->NO-121": {
+      "id": "ote3pl8fcav7p1r6rysvge50",
+      "source": "NO-015",
+      "target": "NO-121",
+      "type": "blocks"
+    },
+    "NO-064->NO-121": {
+      "id": "s0eyekr5bvrs43zvo06oqfzo",
+      "source": "NO-064",
+      "target": "NO-121",
+      "type": "blocks"
+    }
+  },
+  "verified_at": "2026-10-04",
+  "verified_task_count": 121,
+  "verified_dependency_count": 260
+}

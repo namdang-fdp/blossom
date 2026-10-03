@@ -1,0 +1,3517 @@
+{
+  "schema_version": 1,
+  "product": "Nở",
+  "tracker_project": "Bloom",
+  "created_at": "2026-10-04",
+  "status_source": "Kaneo",
+  "note": "Specification snapshot; no live task statuses. Each task should fit a focused session; split if implementation reveals >5 core files or independent outcomes.",
+  "tasks": [
+    {
+      "key": "NO-001",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Khởi tạo Flutter Android với cấu trúc feature",
+      "description": "App Android chạy từ repo bằng toolchain được pin.",
+      "dependencies": [],
+      "acceptance_criteria": [
+        "App Android chạy từ repo bằng toolchain được pin.",
+        "Có config dev/staging, router 4 tab và ghi lệnh build/analyze/test thực tế."
+      ],
+      "verification": "Build debug trên emulator; flutter analyze sạch.",
+      "likely_paths": [
+        "apps/mobile/",
+        "docs/architecture.md"
+      ],
+      "references": [
+        "docs/architecture.md"
+      ],
+      "requirements": [
+        "R01"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-002",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "backend",
+      "title": "Khởi tạo Spring Boot với PostgreSQL dev",
+      "description": "Spring khởi động cùng PostgreSQL bằng cấu hình dev có mẫu env không chứa secret.",
+      "dependencies": [],
+      "acceptance_criteria": [
+        "Spring khởi động cùng PostgreSQL bằng cấu hình dev có mẫu env không chứa secret.",
+        "Flyway baseline và healthcheck hoạt động; có wrapper và lệnh test."
+      ],
+      "verification": "Chạy migration trên DB trống và healthcheck; integration test kết nối DB.",
+      "likely_paths": [
+        "services/api/",
+        "infra/compose.yaml"
+      ],
+      "references": [
+        "docs/architecture.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-003",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "contract",
+      "title": "Định nghĩa envelope đồng bộ và fixture lỗi API",
+      "description": "OpenAPI định nghĩa operation UUID, revision, per-item ack, cursor, snapshot và problem response.",
+      "dependencies": [
+        "NO-002"
+      ],
+      "acceptance_criteria": [
+        "OpenAPI định nghĩa operation UUID, revision, per-item ack, cursor, snapshot và problem response.",
+        "Có fixture duplicate, conflict, partial success, token expiry; không tin userId trong payload."
+      ],
+      "verification": "Validate OpenAPI và round-trip fixtures bằng client/server DTO mẫu.",
+      "likely_paths": [
+        "contracts/openapi.yaml",
+        "contracts/fixtures/sync/"
+      ],
+      "references": [
+        "docs/architecture.md",
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-004",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "research",
+      "title": "Chốt FSRS chạy tương thích Dart và Java",
+      "description": "ADR ghi phiên bản thuật toán, thư viện/license, parameter set và clock rule.",
+      "dependencies": [
+        "NO-001",
+        "NO-002"
+      ],
+      "acceptance_criteria": [
+        "ADR ghi phiên bản thuật toán, thư viện/license, parameter set và clock rule.",
+        "Có vectors cho lapse, assisted, nhiều ngày offline, event đến muộn; ghi tolerance số thực và due-time parity."
+      ],
+      "verification": "Chạy thử cùng vectors hai runtime; nếu thất bại ghi blocker/phương án, không tuyên bố FSRS đã sẵn sàng.",
+      "likely_paths": [
+        "contracts/fixtures/scheduler/",
+        "docs/decisions.md"
+      ],
+      "references": [
+        "docs/learning-design.md",
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R05"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "spike"
+    },
+    {
+      "key": "NO-005",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "content",
+      "title": "Định nghĩa schema gói nghĩa và mẫu dùng",
+      "description": "Schema có sense, pattern slot, exercise, answer variants, audio manifest, revision và license.",
+      "dependencies": [],
+      "acceptance_criteria": [
+        "Schema có sense, pattern slot, exercise, answer variants, audio manifest, revision và license.",
+        "Có sample interested và depend thể hiện khác biệt nghĩa/mẫu, UUID ổn định."
+      ],
+      "verification": "Validate sample hợp lệ; reject thiếu đáp án, reference hỏng hoặc revision không hợp lệ.",
+      "likely_paths": [
+        "contracts/content.schema.json",
+        "content/samples/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R03",
+        "R10"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-006",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "design",
+      "title": "Tạo bộ component nền màu hồng",
+      "description": "Tokens màu/spacing/type và button/input/card/feedback states nhất quán.",
+      "dependencies": [
+        "NO-001"
+      ],
+      "acceptance_criteria": [
+        "Tokens màu/spacing/type và button/input/card/feedback states nhất quán.",
+        "Có chữ tiếng Việt, touch 48dp, contrast đo được và reduced motion hook."
+      ],
+      "verification": "Kiểm tra gallery ở 200% text scale, bàn phím và màn hình nhỏ.",
+      "likely_paths": [
+        "apps/mobile/lib/design/"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R02"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-007",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Khởi tạo guest profile trong SQLite",
+      "description": "Lần mở đầu không mạng tạo guest ID/device ID và profile local.",
+      "dependencies": [
+        "NO-001"
+      ],
+      "acceptance_criteria": [
+        "Lần mở đầu không mạng tạo guest ID/device ID và profile local.",
+        "Drift migrations có version, profile scoping và transaction API; có test nâng DB không mất dữ liệu."
+      ],
+      "verification": "Cài mới airplane mode và chạy upgrade fixture version cũ.",
+      "likely_paths": [
+        "apps/mobile/lib/data/local/",
+        "apps/mobile/lib/features/profile/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R01",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-008",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "content",
+      "title": "Tạo validator gói bài học",
+      "description": "CLI validate schema, IDs, refs, answer variants và asset checksums.",
+      "dependencies": [
+        "NO-005"
+      ],
+      "acceptance_criteria": [
+        "CLI validate schema, IDs, refs, answer variants và asset checksums.",
+        "Lỗi chỉ rõ mục và field; không cho publish revision đã đổi bytes."
+      ],
+      "verification": "Chạy tập fixture gói tốt/hỏng gồm audio thiếu và duplicate ID.",
+      "likely_paths": [
+        "content/tools/",
+        "contracts/content.schema.json"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-009",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "content",
+      "title": "Soạn starter 20 mục về sinh hoạt và sở thích",
+      "description": "20 mục có một nghĩa/mẫu chính, hai câu nguyên bản, bài recall/pattern và giải thích tiếng Việt.",
+      "dependencies": [
+        "NO-005",
+        "NO-008"
+      ],
+      "acceptance_criteria": [
+        "20 mục có một nghĩa/mẫu chính, hai câu nguyên bản, bài recall/pattern và giải thích tiếng Việt.",
+        "Có hoàn cảnh dùng, lỗi điển hình, variants và provenance; chưa tự đánh dấu reviewed."
+      ],
+      "verification": "Chạy validator; đọc thử 3 mục theo hành trình học đầy đủ.",
+      "likely_paths": [
+        "content/starter/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R03",
+        "R10"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-010",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "content",
+      "title": "Review sư phạm starter 20 mục",
+      "description": "Reviewer kiểm tra nghĩa, giới từ, register, câu và variants của cả 20 mục.",
+      "dependencies": [
+        "NO-008",
+        "NO-009"
+      ],
+      "acceptance_criteria": [
+        "Reviewer kiểm tra nghĩa, giới từ, register, câu và variants của cả 20 mục.",
+        "Mọi lỗi được sửa; ghi reviewer/date và quyền nội dung; AI draft không thay review."
+      ],
+      "verification": "Lập checklist review từng mục và chạy validator sau sửa.",
+      "likely_paths": [
+        "content/starter/",
+        "content/reviews/starter.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "review"
+    },
+    {
+      "key": "NO-011",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "content",
+      "title": "Chuẩn bị audio offline cho starter",
+      "description": "Chọn nguồn giọng có quyền sử dụng; tạo audio từ/câu cho 20 mục và manifest hash/size.",
+      "dependencies": [
+        "NO-010"
+      ],
+      "acceptance_criteria": [
+        "Chọn nguồn giọng có quyền sử dụng; tạo audio từ/câu cho 20 mục và manifest hash/size.",
+        "Nghe kiểm tra phát âm/khớp text; ghi license, dung lượng và nguồn."
+      ],
+      "verification": "Phát toàn bộ audio; validate hash và thử giải mã trên Android.",
+      "likely_paths": [
+        "content/starter/audio/",
+        "content/tools/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R04",
+        "R10"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-012",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Cài starter pack từ asset vào kho local",
+      "description": "Gói starter/text/audio đi kèm binary, cài một lần atomically không cần server.",
+      "dependencies": [
+        "NO-007",
+        "NO-008",
+        "NO-011"
+      ],
+      "acceptance_criteria": [
+        "Gói starter/text/audio đi kèm binary, cài một lần atomically không cần server.",
+        "Đứt cài/thiếu dung lượng có retry; không nhân đôi khi mở lại app."
+      ],
+      "verification": "Cài mới không mạng, nghe audio và force-kill giữa bootstrap.",
+      "likely_paths": [
+        "apps/mobile/lib/features/content/",
+        "apps/mobile/assets/starter/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R01",
+        "R10"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-013",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Tạo trang Hôm nay từ dữ liệu local",
+      "description": "Hiện tên profile, một CTA, thời lượng 5/15/30 phút và resume nếu có phiên dở.",
+      "dependencies": [
+        "NO-006",
+        "NO-012"
+      ],
+      "acceptance_criteria": [
+        "Hiện tên profile, một CTA, thời lượng 5/15/30 phút và resume nếu có phiên dở.",
+        "Offline không có spinner chờ API; zero-due có lựa chọn học mới phù hợp."
+      ],
+      "verification": "Widget test offline/empty/resume và thử trên điện thoại.",
+      "likely_paths": [
+        "apps/mobile/lib/features/today/"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R02"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-014",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Hiển thị bài nghĩa và mẫu dùng có audio",
+      "description": "Một mục hiển thị nghĩa cụ thể, pattern, ví dụ, hoàn cảnh và audio local.",
+      "dependencies": [
+        "NO-006",
+        "NO-012"
+      ],
+      "acceptance_criteria": [
+        "Một mục hiển thị nghĩa cụ thể, pattern, ví dụ, hoàn cảnh và audio local.",
+        "Đọc được ở text scale lớn; audio không tự phát khi người dùng chưa chọn."
+      ],
+      "verification": "Kiểm tra 3 mục và airplane-mode audio với keyboard mở.",
+      "likely_paths": [
+        "apps/mobile/lib/features/lesson/presentation/"
+      ],
+      "references": [
+        "docs/learning-design.md",
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R03",
+        "R04"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-015",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "learning",
+      "title": "Chấm bài đóng theo mục tiêu và hint",
+      "description": "Grader phân biệt correct/incorrect/assisted và objective được kiểm tra.",
+      "dependencies": [
+        "NO-005",
+        "NO-001"
+      ],
+      "acceptance_criteria": [
+        "Grader phân biệt correct/incorrect/assisted và objective được kiểm tra.",
+        "Chuẩn hóa an toàn; không bỏ qua giới từ/phủ định/V-ing mục tiêu; variants do content định nghĩa."
+      ],
+      "verification": "Unit fixtures case/spacing/typo, phủ định, hint làm lộ đáp án và câu đồng nghĩa hợp lệ.",
+      "likely_paths": [
+        "apps/mobile/lib/features/learning/domain/grading/",
+        "contracts/fixtures/grading/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R04",
+        "R05"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-016",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Tạo runner cho phiên học từng bước",
+      "description": "Runner hỗ trợ prompt, hint, phản hồi và bước tiếp; session plan có content revision cố định.",
+      "dependencies": [
+        "NO-014",
+        "NO-015"
+      ],
+      "acceptance_criteria": [
+        "Runner hỗ trợ prompt, hint, phản hồi và bước tiếp; session plan có content revision cố định.",
+        "Nút Chưa nhớ hợp lệ, không trap ở câu sai và không chuyển tiếp trước khi persist thành công."
+      ],
+      "verification": "Widget flow sai→hint→đúng; giả lập persist failure giữ input.",
+      "likely_paths": [
+        "apps/mobile/lib/features/session/"
+      ],
+      "references": [
+        "docs/learning-design.md",
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R02",
+        "R04"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-017",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Ghi attempt cùng tiến độ và outbox atomically",
+      "description": "Một transaction lưu attempt ID, session step, projection delta và pending operation.",
+      "dependencies": [
+        "NO-007",
+        "NO-016"
+      ],
+      "acceptance_criteria": [
+        "Một transaction lưu attempt ID, session step, projection delta và pending operation.",
+        "Double tap/retry không tạo hai attempt; lỗi ghi giữ câu trả lời để retry."
+      ],
+      "verification": "Test transaction rollback/disk error và lặp cùng attempt ID.",
+      "likely_paths": [
+        "apps/mobile/lib/features/session/data/",
+        "apps/mobile/lib/data/local/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R02",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-018",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Khôi phục phiên sau force-kill",
+      "description": "Khôi phục đúng bước và draft đã commit sau process kill.",
+      "dependencies": [
+        "NO-017"
+      ],
+      "acceptance_criteria": [
+        "Khôi phục đúng bước và draft đã commit sau process kill.",
+        "Pin content revision; update gói hoặc đổi ngày không thay prompt đang làm."
+      ],
+      "verification": "Kill trước/sau commit, khởi động lại offline và so lịch sử.",
+      "likely_paths": [
+        "apps/mobile/lib/features/session/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R02"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-019",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "learning",
+      "title": "Tính lịch ôn FSRS trên thiết bị",
+      "description": "Adapter chạy offline cho meaning/pattern target bằng thuật toán đã chốt.",
+      "dependencies": [
+        "NO-004",
+        "NO-017"
+      ],
+      "acceptance_criteria": [
+        "Adapter chạy offline cho meaning/pattern target bằng thuật toán đã chốt.",
+        "Hint mapping và một eligible review/target/session; practice retry không tăng lịch hai lần."
+      ],
+      "verification": "Conformance vectors và ba ngày virtual clock/lapse/assisted.",
+      "likely_paths": [
+        "apps/mobile/lib/features/review/domain/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R05"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-020",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "learning",
+      "title": "Chọn phiên theo due reviews và ngân sách thời gian",
+      "description": "Planner ưu tiên due, giới hạn mới 3/phiên 5/ngày và giãn sibling prompts.",
+      "dependencies": [
+        "NO-019",
+        "NO-013"
+      ],
+      "acceptance_criteria": [
+        "Planner ưu tiên due, giới hạn mới 3/phiên 5/ngày và giãn sibling prompts.",
+        "Phiên quay lại ngắn không sửa due date để che backlog; không yêu cầu đúng hết."
+      ],
+      "verification": "Fixtures backlog lớn, zero-due, 1 item, ngày mới và sibling leakage.",
+      "likely_paths": [
+        "apps/mobile/lib/features/session/domain/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R02",
+        "R05"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-021",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Luyện tự gõ từ với gợi ý tăng dần",
+      "description": "Prompt recall không lộ đáp án trước; semantic/first-letter/answer có lưu hint level.",
+      "dependencies": [
+        "NO-016",
+        "NO-019"
+      ],
+      "acceptance_criteria": [
+        "Prompt recall không lộ đáp án trước; semantic/first-letter/answer có lưu hint level.",
+        "Kết quả phản hồi và lịch ôn phản ánh việc đã gợi ý."
+      ],
+      "verification": "E2E typed recall độc lập và assisted không được cộng giống nhau.",
+      "likely_paths": [
+        "apps/mobile/lib/features/exercises/recall/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R04",
+        "R05"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-022",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Luyện giới từ và cụm trong câu",
+      "description": "Render slot noun/V-ing/preposition theo content; chấm local và giải thích mẫu.",
+      "dependencies": [
+        "NO-016",
+        "NO-019"
+      ],
+      "acceptance_criteria": [
+        "Render slot noun/V-ing/preposition theo content; chấm local và giải thích mẫu.",
+        "Không tạo bài cấu trúc cho mục chỉ có nghĩa; câu mới có thể dùng cùng pattern."
+      ],
+      "verification": "Bài interested in và depend on: đúng, sai, biến thể và hint.",
+      "likely_paths": [
+        "apps/mobile/lib/features/exercises/pattern/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R03",
+        "R04"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-023",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Luyện nghe điền từ bằng audio đã tải",
+      "description": "Nghe lại audio local, nhập phần còn thiếu và nhận phản hồi.",
+      "dependencies": [
+        "NO-016",
+        "NO-012"
+      ],
+      "acceptance_criteria": [
+        "Nghe lại audio local, nhập phần còn thiếu và nhận phản hồi.",
+        "Missing asset được xử lý rõ; không gọi streaming bắt buộc hoặc tự tăng SRS sai mục tiêu."
+      ],
+      "verification": "Airplane-mode nghe trên thiết bị; fixture asset mất/corrupt.",
+      "likely_paths": [
+        "apps/mobile/lib/features/exercises/listening/"
+      ],
+      "references": [
+        "docs/learning-design.md",
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R04"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-024",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Hiển thị kết quả phiên và lựa chọn học tiếp",
+      "description": "Tóm tắt tự nhớ/assisted/cần ôn và session hoàn thành được lưu đúng một lần.",
+      "dependencies": [
+        "NO-018",
+        "NO-020",
+        "NO-021",
+        "NO-022",
+        "NO-023"
+      ],
+      "acceptance_criteria": [
+        "Tóm tắt tự nhớ/assisted/cần ôn và session hoàn thành được lưu đúng một lần.",
+        "Cho nghỉ hoặc tiếp tục, không giả mastery từ một lần đúng."
+      ],
+      "verification": "Hoàn thành/reopen/retry session không tăng summary hai lần.",
+      "likely_paths": [
+        "apps/mobile/lib/features/session_summary/"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R02",
+        "R05"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-025",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "qa",
+      "title": "Checkpoint: hoàn thành buổi học đầu tiên không mạng",
+      "description": "Cài mới airplane mode vẫn học starter, nghe, chấm và thấy summary.",
+      "dependencies": [
+        "NO-024"
+      ],
+      "acceptance_criteria": [
+        "Cài mới airplane mode vẫn học starter, nghe, chấm và thấy summary.",
+        "Force-kill/reopen và ba ngày offline không mất attempt; ghi bằng chứng thiết bị."
+      ],
+      "verification": "Chạy offline walkthrough + targeted tests; báo lỗi thành task trước mốc sau.",
+      "likely_paths": [
+        "docs/evidence/offline-first.md"
+      ],
+      "references": [
+        "docs/offline-sync.md",
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "checkpoint"
+    },
+    {
+      "key": "NO-026",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "backend",
+      "title": "Xác minh danh tính cho API riêng tư",
+      "description": "Spring xác minh provider token, map subject sang internal user và scope dữ liệu.",
+      "dependencies": [
+        "NO-002",
+        "NO-003"
+      ],
+      "acceptance_criteria": [
+        "Spring xác minh provider token, map subject sang internal user và scope dữ liệu.",
+        "401/403 không lộ dữ liệu; provider setup được ghi lại, không có secret trong repo."
+      ],
+      "verification": "Integration tests token invalid/expired và account A truy cập object B.",
+      "likely_paths": [
+        "services/api/identity/"
+      ],
+      "references": [
+        "docs/architecture.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-027",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "mobile",
+      "title": "Đăng nhập tùy chọn để bật backup",
+      "description": "Google sign-in/link UI không chặn guest học; credential ở secure storage.",
+      "dependencies": [
+        "NO-007",
+        "NO-026"
+      ],
+      "acceptance_criteria": [
+        "Google sign-in/link UI không chặn guest học; credential ở secure storage.",
+        "Login thất bại/không mạng giữ nguyên guest và hướng dẫn thử lại."
+      ],
+      "verification": "Thiết bị thật: sign-in, cancel, offline, token refresh.",
+      "likely_paths": [
+        "apps/mobile/lib/features/auth/"
+      ],
+      "references": [
+        "docs/architecture.md",
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-028",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "backend",
+      "title": "Lưu event đồng bộ và change log PostgreSQL",
+      "description": "Migration có event/outbox-ack/change log, unique user+operation ID và per-user cursor.",
+      "dependencies": [
+        "NO-002",
+        "NO-003",
+        "NO-026"
+      ],
+      "acceptance_criteria": [
+        "Migration có event/outbox-ack/change log, unique user+operation ID và per-user cursor.",
+        "Transaction rollback không để event đã ack nhưng chưa lưu; indexes phục vụ replay/pull."
+      ],
+      "verification": "DB integration test duplicate và transaction rollback.",
+      "likely_paths": [
+        "services/api/sync/persistence/",
+        "services/api/src/main/resources/db/migration/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-029",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "backend",
+      "title": "Nhận batch attempt với ack từng operation",
+      "description": "Push kiểm tra ownership/schema và trả accepted/duplicate/rejected/conflict từng item.",
+      "dependencies": [
+        "NO-028"
+      ],
+      "acceptance_criteria": [
+        "Push kiểm tra ownership/schema và trả accepted/duplicate/rejected/conflict từng item.",
+        "Payload/batch giới hạn; replay request sau commit trả kết quả cũ, không append lại."
+      ],
+      "verification": "Tests batch mixed-validity và connection mất sau commit.",
+      "likely_paths": [
+        "services/api/sync/push/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-030",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "backend",
+      "title": "Cung cấp pull cursor gồm tombstone",
+      "description": "Pull phân trang ổn định theo change cursor và chỉ scope account hiện tại.",
+      "dependencies": [
+        "NO-028"
+      ],
+      "acceptance_criteria": [
+        "Pull phân trang ổn định theo change cursor và chỉ scope account hiện tại.",
+        "Có tombstone; cursor hết hạn trả code buộc snapshot, không bỏ qua thay đổi."
+      ],
+      "verification": "Test pagination đồng thời có writes, ownership và expired cursor.",
+      "likely_paths": [
+        "services/api/sync/pull/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-031",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "mobile",
+      "title": "Gửi outbox theo ack và retry an toàn",
+      "description": "Gửi pending batches có dependency order, chỉ mark ack cho item thành công.",
+      "dependencies": [
+        "NO-003",
+        "NO-017",
+        "NO-027",
+        "NO-029"
+      ],
+      "acceptance_criteria": [
+        "Gửi pending batches có dependency order, chỉ mark ack cho item thành công.",
+        "Retry/backoff có giới hạn; auth fail giữ event, không loop vô hạn."
+      ],
+      "verification": "Network stub partial ack/timeout-after-commit/401/429; so count event.",
+      "likely_paths": [
+        "apps/mobile/lib/features/sync/push/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-032",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "mobile",
+      "title": "Áp dụng pull và hiển thị trạng thái sync",
+      "description": "Apply page + cursor trong một SQLite transaction; UI đọc local xuyên suốt.",
+      "dependencies": [
+        "NO-030",
+        "NO-031"
+      ],
+      "acceptance_criteria": [
+        "Apply page + cursor trong một SQLite transaction; UI đọc local xuyên suốt.",
+        "Có pending/last synced/error/manual sync; resume có sync, HTTP mới xác nhận kết nối."
+      ],
+      "verification": "Kill giữa apply; mạng captive portal và offline resume không khóa học.",
+      "likely_paths": [
+        "apps/mobile/lib/features/sync/pull/",
+        "apps/mobile/lib/features/settings/sync/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-033",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "backend",
+      "title": "Replay lịch ôn từ event log canonical",
+      "description": "Server adapter Java đạt parity; order/time normalization theo spec versioned.",
+      "dependencies": [
+        "NO-004",
+        "NO-029"
+      ],
+      "acceptance_criteria": [
+        "Server adapter Java đạt parity; order/time normalization theo spec versioned.",
+        "Late events kích hoạt rebuild đúng đoạn; giữ original time và flags, không bỏ lịch sử."
+      ],
+      "verification": "Shuffle cùng tập events trên hai device; projections hội tụ.",
+      "likely_paths": [
+        "services/api/learning/scheduler/"
+      ],
+      "references": [
+        "docs/offline-sync.md",
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R05",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-034",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "mobile",
+      "title": "Reconcile lịch ôn mà giữ pending events",
+      "description": "Áp dụng canonical projection rồi replay pending local chưa ack.",
+      "dependencies": [
+        "NO-019",
+        "NO-032",
+        "NO-033"
+      ],
+      "acceptance_criteria": [
+        "Áp dụng canonical projection rồi replay pending local chưa ack.",
+        "Không nhân đôi review/credit và không đổi session prompt đang mở."
+      ],
+      "verification": "Two-device offline fixture, trùng event và remote update khi có pending.",
+      "likely_paths": [
+        "apps/mobile/lib/features/sync/reconcile/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R05",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-035",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "backend",
+      "title": "Nhập guest history vào account có idempotency",
+      "description": "Migration ID xác định một lượt merge, giữ UUID attempts và mapping ownership an toàn.",
+      "dependencies": [
+        "NO-026",
+        "NO-029",
+        "NO-033"
+      ],
+      "acceptance_criteria": [
+        "Migration ID xác định một lượt merge, giữ UUID attempts và mapping ownership an toàn.",
+        "Account có dữ liệu giữ union history; import lại không tăng count."
+      ],
+      "verification": "Integration test interrupted/retried migration và account đã có attempts.",
+      "likely_paths": [
+        "services/api/identity/guest_migration/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-036",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "mobile",
+      "title": "Preview và hoàn tất liên kết guest",
+      "description": "Hiện account đích và số mục/lượt sẽ merge trước xác nhận.",
+      "dependencies": [
+        "NO-027",
+        "NO-034",
+        "NO-035"
+      ],
+      "acceptance_criteria": [
+        "Hiện account đích và số mục/lượt sẽ merge trước xác nhận.",
+        "Giữ guest snapshot đến ack hoàn tất; restart tiếp tục cùng migrationId."
+      ],
+      "verification": "Cancel, kill giữa merge, login account có data và retry.",
+      "likely_paths": [
+        "apps/mobile/lib/features/auth/guest_link/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-037",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "mobile",
+      "title": "Bảo vệ dữ liệu khi logout hoặc đổi account",
+      "description": "Không xóa pending âm thầm; chọn sync hoặc giữ profile local tách biệt.",
+      "dependencies": [
+        "NO-036"
+      ],
+      "acceptance_criteria": [
+        "Không xóa pending âm thầm; chọn sync hoặc giữ profile local tách biệt.",
+        "Account B không thấy dữ liệu/queue A; token hết hạn vẫn học local của profile hiện tại."
+      ],
+      "verification": "A offline có pending → logout → B login → A trở lại; kiểm tra isolation.",
+      "likely_paths": [
+        "apps/mobile/lib/features/auth/",
+        "apps/mobile/lib/data/local/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-038",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "backend",
+      "title": "Cung cấp snapshot phục hồi khi cursor hết hạn",
+      "description": "Snapshot có consistent revision/cursor và dữ liệu tối thiểu để restore.",
+      "dependencies": [
+        "NO-030",
+        "NO-033"
+      ],
+      "acceptance_criteria": [
+        "Snapshot có consistent revision/cursor và dữ liệu tối thiểu để restore.",
+        "Pagination snapshot không trộn version; scope user và giới hạn tải."
+      ],
+      "verification": "Writes trong lúc snapshot và expired cursor flow trên fixture lớn.",
+      "likely_paths": [
+        "services/api/sync/snapshot/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-039",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "mobile",
+      "title": "Phục hồi snapshot và rebase outbox",
+      "description": "Expired cursor/full restore thay projection an toàn, giữ pending ops và drafts.",
+      "dependencies": [
+        "NO-032",
+        "NO-034",
+        "NO-038"
+      ],
+      "acceptance_criteria": [
+        "Expired cursor/full restore thay projection an toàn, giữ pending ops và drafts.",
+        "Interruption không làm DB nửa cũ nửa mới; có retry."
+      ],
+      "verification": "Kill giữa restore; pending edits + late attempts vẫn tồn tại sau rebase.",
+      "likely_paths": [
+        "apps/mobile/lib/features/sync/snapshot/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-040",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "qa",
+      "title": "Checkpoint: offline rồi đồng bộ không mất hoặc trùng",
+      "description": "Hai thiết bị học offline, resend, late events và guest merge hội tụ.",
+      "dependencies": [
+        "NO-034",
+        "NO-036",
+        "NO-037",
+        "NO-039"
+      ],
+      "acceptance_criteria": [
+        "Hai thiết bị học offline, resend, late events và guest merge hội tụ.",
+        "Token expiry, cursor expiry và switch account không mất/lộ dữ liệu."
+      ],
+      "verification": "Chạy matrix trên staging/local; attach counts và fixture hashes.",
+      "likely_paths": [
+        "docs/evidence/sync.md"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "checkpoint"
+    },
+    {
+      "key": "NO-041",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "mobile",
+      "title": "Tìm kiếm và xem kho từ local",
+      "description": "Tìm kiếm theo từ/nghĩa/topic chạy local; sense riêng không bị gộp.",
+      "dependencies": [
+        "NO-012",
+        "NO-006"
+      ],
+      "acceptance_criteria": [
+        "Tìm kiếm theo từ/nghĩa/topic chạy local; sense riêng không bị gộp.",
+        "Chi tiết mở được nghĩa/mẫu/notes và trạng thái download."
+      ],
+      "verification": "Offline search có dấu/không dấu, đa nghĩa và empty state.",
+      "likely_paths": [
+        "apps/mobile/lib/features/library/"
+      ],
+      "references": [
+        "docs/product.md",
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R07"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-042",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "mobile",
+      "title": "Thêm sửa mục từ cá nhân offline",
+      "description": "Thêm/sửa nghĩa, example, pattern optional và note qua form local.",
+      "dependencies": [
+        "NO-041",
+        "NO-017"
+      ],
+      "acceptance_criteria": [
+        "Thêm/sửa nghĩa, example, pattern optional và note qua form local.",
+        "Thiếu pattern vẫn học nghĩa; invalid form không tạo bài cấu trúc giả."
+      ],
+      "verification": "Offline create/edit/restart; khác sense không overwrite.",
+      "likely_paths": [
+        "apps/mobile/lib/features/library/editor/"
+      ],
+      "references": [
+        "docs/product.md"
+      ],
+      "requirements": [
+        "R07"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-043",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "mobile",
+      "title": "Parse CSV và văn bản dán an toàn",
+      "description": "Parser hỗ trợ UTF-8/BOM, quoted commas/newlines, mapping term/meaning/example/pattern.",
+      "dependencies": [
+        "NO-005"
+      ],
+      "acceptance_criteria": [
+        "Parser hỗ trợ UTF-8/BOM, quoted commas/newlines, mapping term/meaning/example/pattern.",
+        "Giới hạn 2000 dòng/5MB ban đầu; báo dòng lỗi, không thực thi nội dung ô."
+      ],
+      "verification": "Fixtures quoted multiline, Unicode, empty fields, malformed và oversized.",
+      "likely_paths": [
+        "apps/mobile/lib/features/import/domain/"
+      ],
+      "references": [
+        "docs/product.md"
+      ],
+      "requirements": [
+        "R07"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-044",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "mobile",
+      "title": "Preview và commit import vào kho local",
+      "description": "Preview ghép cột/sửa lỗi/duplicate theo sense; user chọn skip hoặc tạo nghĩa mới.",
+      "dependencies": [
+        "NO-042",
+        "NO-043"
+      ],
+      "acceptance_criteria": [
+        "Preview ghép cột/sửa lỗi/duplicate theo sense; user chọn skip hoặc tạo nghĩa mới.",
+        "Import transaction + batch ID chống lặp, không tự đăng ký tất cả từ vào lịch học."
+      ],
+      "verification": "Import 500 dòng offline, cancel và retry cùng batch không duplicate.",
+      "likely_paths": [
+        "apps/mobile/lib/features/import/"
+      ],
+      "references": [
+        "docs/product.md",
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R07"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-045",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "backend",
+      "title": "Đồng bộ personal items với optimistic revision",
+      "description": "Create/update item/notes/draft dùng base revision và ownership.",
+      "dependencies": [
+        "NO-029",
+        "NO-030"
+      ],
+      "acceptance_criteria": [
+        "Create/update item/notes/draft dùng base revision và ownership.",
+        "Stale revision trả conflict chứa hai phiên bản được phép xem, không silent overwrite."
+      ],
+      "verification": "Hai thiết bị sửa cùng base; unauthorized access và retry.",
+      "likely_paths": [
+        "services/api/library/",
+        "services/api/sync/handlers/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R07",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-046",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "mobile",
+      "title": "Giải quyết conflict mục từ cá nhân",
+      "description": "UI giữ bản local/remote, cho chọn hoặc sửa hợp nhất; gửi operation revision mới.",
+      "dependencies": [
+        "NO-032",
+        "NO-042",
+        "NO-045"
+      ],
+      "acceptance_criteria": [
+        "UI giữ bản local/remote, cho chọn hoặc sửa hợp nhất; gửi operation revision mới.",
+        "Từ/câu chưa resolve vẫn đọc được và không bị mất khi restart."
+      ],
+      "verification": "Conflict edit/edit rồi kill/reopen/chọn merge và sync lại.",
+      "likely_paths": [
+        "apps/mobile/lib/features/sync/conflicts/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R07",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-047",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "backend",
+      "title": "Áp dụng tombstone cho mục từ bị xóa",
+      "description": "Delete lưu tombstone/revision và xuất qua pull.",
+      "dependencies": [
+        "NO-045"
+      ],
+      "acceptance_criteria": [
+        "Delete lưu tombstone/revision và xuất qua pull.",
+        "Update cũ không làm sống lại; repeated delete idempotent; review history vẫn tham chiếu được."
+      ],
+      "verification": "Delete/update race và máy offline lâu gửi lại dữ liệu cũ.",
+      "likely_paths": [
+        "services/api/library/",
+        "services/api/sync/handlers/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R07",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-048",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "mobile",
+      "title": "Xóa mục từ offline với khôi phục có chủ ý",
+      "description": "Delete local bỏ khỏi phiên mới, giữ lịch sử và tạo outbox.",
+      "dependencies": [
+        "NO-042",
+        "NO-046",
+        "NO-047"
+      ],
+      "acceptance_criteria": [
+        "Delete local bỏ khỏi phiên mới, giữ lịch sử và tạo outbox.",
+        "Restore là thao tác mới có xác nhận; sync tombstone không mất pending không liên quan."
+      ],
+      "verification": "Offline delete→restart→sync và conflict deleted-vs-edited.",
+      "likely_paths": [
+        "apps/mobile/lib/features/library/",
+        "apps/mobile/lib/features/sync/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R07",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-049",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "backend",
+      "title": "Phát hành catalog và manifest versioned",
+      "description": "Catalog/manifest API chỉ đưa pack đã publish; immutable revision, hash/size/min schema version.",
+      "dependencies": [
+        "NO-002",
+        "NO-005",
+        "NO-008"
+      ],
+      "acceptance_criteria": [
+        "Catalog/manifest API chỉ đưa pack đã publish; immutable revision, hash/size/min schema version.",
+        "Asset URLs hoạt động theo quyền đã chọn; không có private user content trong public catalog."
+      ],
+      "verification": "Contract tests, missing revision và checksum/asset smoke.",
+      "likely_paths": [
+        "services/api/catalog/"
+      ],
+      "references": [
+        "docs/architecture.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-050",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "mobile",
+      "title": "Tải gói nội dung với retry và checksum",
+      "description": "Tải text/audio vào staging, kiểm tra hash rồi activate atomically.",
+      "dependencies": [
+        "NO-012",
+        "NO-049"
+      ],
+      "acceptance_criteria": [
+        "Tải text/audio vào staging, kiểm tra hash rồi activate atomically.",
+        "Mất mạng/disk full cho retry và không gắn nhãn offline-ready cho gói thiếu."
+      ],
+      "verification": "Ngắt tải 3 lần, corrupt asset và storage full.",
+      "likely_paths": [
+        "apps/mobile/lib/features/content/download/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-051",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "mobile",
+      "title": "Quản lý dung lượng và nâng revision gói",
+      "description": "Hiện size/download state, cho xóa audio/gói khi an toàn; không xóa personal history.",
+      "dependencies": [
+        "NO-050",
+        "NO-018"
+      ],
+      "acceptance_criteria": [
+        "Hiện size/download state, cho xóa audio/gói khi an toàn; không xóa personal history.",
+        "Revision mới không phá session pin revision; giữ bản cũ đến khi session kết thúc."
+      ],
+      "verification": "Update/remove trong khi session dở; kiểm tra audio và lịch sử.",
+      "likely_paths": [
+        "apps/mobile/lib/features/content/storage/"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-052",
+      "phase": "P3 · Kho từ cá nhân và gói tải",
+      "area": "qa",
+      "title": "Checkpoint: import rồi học và sync trọn luồng",
+      "description": "Import offline → học → sửa/xóa → sync hoạt động với duplicate và conflict.",
+      "dependencies": [
+        "NO-044",
+        "NO-046",
+        "NO-048",
+        "NO-051",
+        "NO-040"
+      ],
+      "acceptance_criteria": [
+        "Import offline → học → sửa/xóa → sync hoạt động với duplicate và conflict.",
+        "Gói tải hoàn chỉnh học được airplane mode; gói thiếu không bị nhận nhầm sẵn sàng."
+      ],
+      "verification": "End-to-end trên Android + API integration; lưu evidence.",
+      "likely_paths": [
+        "docs/evidence/library.md"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R07",
+        "R10",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "checkpoint"
+    },
+    {
+      "key": "NO-053",
+      "phase": "P4 · Luyện câu và đo khả năng dùng",
+      "area": "mobile",
+      "title": "Tạo sổ lỗi từ attempts khách quan",
+      "description": "Nhóm lỗi theo sense/pattern/type với câu gốc và giải thích.",
+      "dependencies": [
+        "NO-021",
+        "NO-022",
+        "NO-041"
+      ],
+      "acceptance_criteria": [
+        "Nhóm lỗi theo sense/pattern/type với câu gốc và giải thích.",
+        "Gắn nhãn nguồn objective/self/AI; không hiển thị AI uncertain như lỗi chắc chắn."
+      ],
+      "verification": "Fixtures nhiều lỗi cùng pattern và filter đã luyện/chưa luyện.",
+      "likely_paths": [
+        "apps/mobile/lib/features/mistakes/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R06"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-054",
+      "phase": "P4 · Luyện câu và đo khả năng dùng",
+      "area": "learning",
+      "title": "Sinh phiên luyện lại từ sổ lỗi",
+      "description": "Chọn bài biến thể cùng mục tiêu đang yếu, không chỉ hỏi lại nghĩa.",
+      "dependencies": [
+        "NO-053",
+        "NO-020"
+      ],
+      "acceptance_criteria": [
+        "Chọn bài biến thể cùng mục tiêu đang yếu, không chỉ hỏi lại nghĩa.",
+        "Retry là practice, không tạo thêm eligible SRS event cùng session."
+      ],
+      "verification": "Lỗi interested on tạo bài in; kiểm tra event counts sau retry.",
+      "likely_paths": [
+        "apps/mobile/lib/features/mistakes/practice/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R06",
+        "R05"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-055",
+      "phase": "P4 · Luyện câu và đo khả năng dùng",
+      "area": "mobile",
+      "title": "Lưu câu cá nhân có khung và nháp offline",
+      "description": "Từ khung câu tới free text, autosave draft local và giữ target pattern.",
+      "dependencies": [
+        "NO-022",
+        "NO-042"
+      ],
+      "acceptance_criteria": [
+        "Từ khung câu tới free text, autosave draft local và giữ target pattern.",
+        "Offline có checklist/mẫu và nhãn chưa chấm; không dùng regex làm semantic grade."
+      ],
+      "verification": "Soạn→kill→reopen; câu đúng khác mẫu vẫn giữ nguyên, không tự báo sai.",
+      "likely_paths": [
+        "apps/mobile/lib/features/writing/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R04",
+        "R12"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-056",
+      "phase": "P4 · Luyện câu và đo khả năng dùng",
+      "area": "mobile",
+      "title": "Thu âm và nghe lại câu trên thiết bị",
+      "description": "Xin mic đúng lúc; lưu/ phát/ xóa recording local gắn câu.",
+      "dependencies": [
+        "NO-014",
+        "NO-055"
+      ],
+      "acceptance_criteria": [
+        "Xin mic đúng lúc; lưu/ phát/ xóa recording local gắn câu.",
+        "Mic denied vẫn học được; không tự upload recording và không giả chấm phát âm."
+      ],
+      "verification": "Airplane-mode record/play/delete; denied permission và disk full.",
+      "likely_paths": [
+        "apps/mobile/lib/features/recording/"
+      ],
+      "references": [
+        "docs/product.md",
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R04"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-057",
+      "phase": "P4 · Luyện câu và đo khả năng dùng",
+      "area": "backend",
+      "title": "Tích hợp phản hồi câu qua AI adapter",
+      "description": "Adapter trả schema tách meaning/target/correction và tối đa 2 giải thích chính tiếng Việt.",
+      "dependencies": [
+        "NO-026"
+      ],
+      "acceptance_criteria": [
+        "Adapter trả schema tách meaning/target/correction và tối đa 2 giải thích chính tiếng Việt.",
+        "Timeout/invalid response thành lỗi retryable; input không thể thay system policy hoặc truy cập tool."
+      ],
+      "verification": "Golden set câu yếu nền tảng, paraphrase đúng, injection và provider timeout.",
+      "likely_paths": [
+        "services/api/feedback/provider/",
+        "contracts/fixtures/feedback/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R12"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-058",
+      "phase": "P4 · Luyện câu và đo khả năng dùng",
+      "area": "backend",
+      "title": "Giới hạn chi phí và chống gửi AI trùng",
+      "description": "Quota nguyên tử theo account/request ID, giới hạn input và concurrent requests.",
+      "dependencies": [
+        "NO-057",
+        "NO-028"
+      ],
+      "acceptance_criteria": [
+        "Quota nguyên tử theo account/request ID, giới hạn input và concurrent requests.",
+        "Retry không charge hai lần; timeout có trạng thái rõ, log không có câu riêng tư."
+      ],
+      "verification": "Concurrent quota race, retry-after-timeout và same idempotency key khác payload.",
+      "likely_paths": [
+        "services/api/feedback/requests/"
+      ],
+      "references": [
+        "docs/architecture.md"
+      ],
+      "requirements": [
+        "R12"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-059",
+      "phase": "P4 · Luyện câu và đo khả năng dùng",
+      "area": "mobile",
+      "title": "Nhận sửa câu online mà không chặn học offline",
+      "description": "Consent rõ trước gửi; draft offline có pending state và gửi theo opt-in.",
+      "dependencies": [
+        "NO-055",
+        "NO-058",
+        "NO-032"
+      ],
+      "acceptance_criteria": [
+        "Consent rõ trước gửi; draft offline có pending state và gửi theo opt-in.",
+        "Hiện feedback tách đúng ý/đúng mẫu, retry/quota/report; không sửa lịch SRS từ điểm AI."
+      ],
+      "verification": "Offline draft→online feedback, timeout/quota, cancel và app restart.",
+      "likely_paths": [
+        "apps/mobile/lib/features/writing/feedback/"
+      ],
+      "references": [
+        "docs/learning-design.md",
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R12"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-060",
+      "phase": "P4 · Luyện câu và đo khả năng dùng",
+      "area": "fullstack",
+      "title": "Báo nội dung hoặc phản hồi chấm sai",
+      "description": "User gửi report gắn content revision hoặc feedback ID; offline lưu pending.",
+      "dependencies": [
+        "NO-026",
+        "NO-059"
+      ],
+      "acceptance_criteria": [
+        "User gửi report gắn content revision hoặc feedback ID; offline lưu pending.",
+        "Backend lưu report có ownership, loại và trạng thái; có cách reviewer đọc bằng công cụ nội bộ."
+      ],
+      "verification": "Offline queue→sync và report object của account khác bị chặn.",
+      "likely_paths": [
+        "apps/mobile/lib/features/report/",
+        "services/api/reports/"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R06",
+        "R12"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-061",
+      "phase": "P4 · Luyện câu và đo khả năng dùng",
+      "area": "learning",
+      "title": "Tạo bài kiểm tra trì hoãn có ngữ cảnh mới",
+      "description": "Chọn target đủ điều kiện theo elapsed time và dùng prompt chưa lộ ngay trong session.",
+      "dependencies": [
+        "NO-020",
+        "NO-022",
+        "NO-054"
+      ],
+      "acceptance_criteria": [
+        "Chọn target đủ điều kiện theo elapsed time và dùng prompt chưa lộ ngay trong session.",
+        "Không gợi ý trước câu trả lời; log delayed_probe và thời gian ôn gần nhất."
+      ],
+      "verification": "Virtual day 7/14, insufficient data, sibling leakage; không gọi recognition là recall.",
+      "likely_paths": [
+        "apps/mobile/lib/features/assessment/"
+      ],
+      "references": [
+        "docs/product.md",
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R05"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-062",
+      "phase": "P4 · Luyện câu và đo khả năng dùng",
+      "area": "mobile",
+      "title": "Hiển thị tiến bộ tách nhớ nghĩa và dùng mẫu",
+      "description": "Dashboard phân biệt independent/assisted, pattern và đã thử dùng; có sample size.",
+      "dependencies": [
+        "NO-024",
+        "NO-053",
+        "NO-061"
+      ],
+      "acceptance_criteria": [
+        "Dashboard phân biệt independent/assisted, pattern và đã thử dùng; có sample size.",
+        "Đọc local, không đếm imported items thành learned hay điểm AI thành điểm VSTEP."
+      ],
+      "verification": "Fixture có nhiều import nhưng 0 attempts; sync duplicates không tăng số.",
+      "likely_paths": [
+        "apps/mobile/lib/features/progress/"
+      ],
+      "references": [
+        "docs/product.md"
+      ],
+      "requirements": [
+        "R05"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-063",
+      "phase": "P4 · Luyện câu và đo khả năng dùng",
+      "area": "qa",
+      "title": "Checkpoint: từ biết nghĩa tới tự đặt câu",
+      "description": "Một từ đi hết hiểu→recall→pattern→câu cá nhân→sửa lỗi→kiểm tra sau.",
+      "dependencies": [
+        "NO-054",
+        "NO-056",
+        "NO-059",
+        "NO-060",
+        "NO-062"
+      ],
+      "acceptance_criteria": [
+        "Một từ đi hết hiểu→recall→pattern→câu cá nhân→sửa lỗi→kiểm tra sau.",
+        "Không mạng vẫn hoàn thành phần cốt lõi, AI retry không mất draft hoặc đổi SRS."
+      ],
+      "verification": "Walkthrough với 3 mẫu và lập golden feedback review.",
+      "likely_paths": [
+        "docs/evidence/learning.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R12"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "checkpoint"
+    },
+    {
+      "key": "NO-064",
+      "phase": "P5 · Hoa hồng và thói quen",
+      "area": "mobile",
+      "title": "Lưu lịch học và mục tiêu tuần offline",
+      "description": "Onboarding/settings chọn ngày, giờ, timezone, thời lượng và nghỉ; skip được.",
+      "dependencies": [
+        "NO-007",
+        "NO-006"
+      ],
+      "acceptance_criteria": [
+        "Onboarding/settings chọn ngày, giờ, timezone, thời lượng và nghỉ; skip được.",
+        "Lịch mới hiệu lực ngày sau, không sửa ngược credits/lịch sử; có revision để sync."
+      ],
+      "verification": "Virtual week boundary/timezone/schedule change và offline restart.",
+      "likely_paths": [
+        "apps/mobile/lib/features/preferences/"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R09"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-065",
+      "phase": "P5 · Hoa hồng và thói quen",
+      "area": "learning",
+      "title": "Cấp credit ngày học theo nỗ lực",
+      "description": "Đủ 3 prompt hoặc hết plan 1–2 prompt mới cấp credit; không cần đúng hết.",
+      "dependencies": [
+        "NO-024",
+        "NO-064"
+      ],
+      "acceptance_criteria": [
+        "Đủ 3 prompt hoặc hết plan 1–2 prompt mới cấp credit; không cần đúng hết.",
+        "Unique profile/day, snapshot schedule/rules; retry hoặc replay không cộng lần hai."
+      ],
+      "verification": "Fixtures open-only, all-wrong with effort, short plan, duplicate finish.",
+      "likely_paths": [
+        "apps/mobile/lib/features/habit/domain/"
+      ],
+      "references": [
+        "docs/learning-design.md",
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R08",
+        "R09"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-066",
+      "phase": "P5 · Hoa hồng và thói quen",
+      "area": "design",
+      "title": "Tạo bộ mascot hoa hồng nguyên bản",
+      "description": "Asset vector/animation source cho bud/fresh/blooming/sleepy/wilted/recovering có cùng hình thể.",
+      "dependencies": [
+        "NO-006"
+      ],
+      "acceptance_criteria": [
+        "Asset vector/animation source cho bud/fresh/blooming/sleepy/wilted/recovering có cùng hình thể.",
+        "Có bản tĩnh reduced motion, semantic labels và quyền dùng rõ; không sao chép Duo."
+      ],
+      "verification": "Preview light background ở kích thước nhỏ/lớn; kiểm tra frame và dung lượng.",
+      "likely_paths": [
+        "apps/mobile/assets/rose/",
+        "docs/design/rose.md"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R08"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "design"
+    },
+    {
+      "key": "NO-067",
+      "phase": "P5 · Hoa hồng và thói quen",
+      "area": "learning",
+      "title": "Tính mood và growth của hoa từ lịch local",
+      "description": "Reducer rose-v1 áp dụng precedence, missed scheduled days và milestones 1/3/7/14.",
+      "dependencies": [
+        "NO-065"
+      ],
+      "acceptance_criteria": [
+        "Reducer rose-v1 áp dụng precedence, missed scheduled days và milestones 1/3/7/14.",
+        "Ngày nghỉ không làm héo; credit offline hồi phục ngay, growth không mất."
+      ],
+      "verification": "Clock-controlled tests tuần mới, nghỉ, đổi lịch, hai ngày miss và comeback.",
+      "likely_paths": [
+        "apps/mobile/lib/features/garden/domain/"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R08"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-068",
+      "phase": "P5 · Hoa hồng và thói quen",
+      "area": "mobile",
+      "title": "Hiển thị vườn và animation hoa sau phiên",
+      "description": "Hôm nay/Khu vườn/summary dùng cùng mood; recovering rồi về trạng thái bền.",
+      "dependencies": [
+        "NO-066",
+        "NO-067",
+        "NO-062"
+      ],
+      "acceptance_criteria": [
+        "Hôm nay/Khu vườn/summary dùng cùng mood; recovering rồi về trạng thái bền.",
+        "Reduced motion và TalkBack rõ; không chặn CTA hoặc mất growth khi hoa héo."
+      ],
+      "verification": "Golden/reference review 6 states; process restart và text scale.",
+      "likely_paths": [
+        "apps/mobile/lib/features/garden/",
+        "apps/mobile/lib/features/today/"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R08"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-069",
+      "phase": "P5 · Hoa hồng và thói quen",
+      "area": "mobile",
+      "title": "Xin quyền và đặt local notification",
+      "description": "Giải thích rồi xin quyền đúng API Android; deny không khóa học.",
+      "dependencies": [
+        "NO-001",
+        "NO-064"
+      ],
+      "acceptance_criteria": [
+        "Giải thích rồi xin quyền đúng API Android; deny không khóa học.",
+        "Lưu preferences, tạo channel và lên lịch local không cần Internet/FCM."
+      ],
+      "verification": "Thiết bị Android mới: grant/deny/settings toggle; airplane mode delivery.",
+      "likely_paths": [
+        "apps/mobile/lib/features/reminders/platform/"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R09"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-070",
+      "phase": "P5 · Hoa hồng và thói quen",
+      "area": "mobile",
+      "title": "Điều phối nhắc học theo lịch và credit",
+      "description": "Tối đa 1 mặc định/2 khi opt-in, quiet hours/snooze; hủy sau credit.",
+      "dependencies": [
+        "NO-065",
+        "NO-069"
+      ],
+      "acceptance_criteria": [
+        "Tối đa 1 mặc định/2 khi opt-in, quiet hours/snooze; hủy sau credit.",
+        "Reschedule khi reboot/timezone/đổi lịch; không hứa exact timing và không cần exact-alarm permission."
+      ],
+      "verification": "Fake clock + reboot thật, học offline trước giờ nhắc, snooze nhiều lần.",
+      "likely_paths": [
+        "apps/mobile/lib/features/reminders/domain/"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R09"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-071",
+      "phase": "P5 · Hoa hồng và thói quen",
+      "area": "mobile",
+      "title": "Mở đúng buổi học từ thông báo",
+      "description": "Tap notification mở resume hoặc phiên nhỏ offline; không trùng session.",
+      "dependencies": [
+        "NO-070",
+        "NO-020"
+      ],
+      "acceptance_criteria": [
+        "Tap notification mở resume hoặc phiên nhỏ offline; không trùng session.",
+        "Cold start/foreground đều xử lý, copy tên tùy chọn trên lock screen."
+      ],
+      "verification": "Tap từ terminated app, đang học và không mạng.",
+      "likely_paths": [
+        "apps/mobile/lib/features/reminders/routing/"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R09"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-072",
+      "phase": "P5 · Hoa hồng và thói quen",
+      "area": "qa",
+      "title": "Checkpoint: hoa và nhắc học hoạt động offline",
+      "description": "Lịch tuần, bỏ hai ngày, hoa rũ, notification và quay lại hồi phục chạy bằng clock fixture.",
+      "dependencies": [
+        "NO-068",
+        "NO-071",
+        "NO-120"
+      ],
+      "acceptance_criteria": [
+        "Lịch tuần, bỏ hai ngày, hoa rũ, notification và quay lại hồi phục chạy bằng clock fixture.",
+        "Đã học offline thì không bị nhắc chưa học trên cùng máy; kiểm tra permission denial/reboot."
+      ],
+      "verification": "Device walkthrough và state-machine suite.",
+      "likely_paths": [
+        "docs/evidence/habit.md"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R08",
+        "R09"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "checkpoint"
+    },
+    {
+      "key": "NO-073",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Soạn 20 mục/cụm: Bản thân và giới thiệu",
+      "description": "20 mục mới về bản thân và giới thiệu đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+      "dependencies": [
+        "NO-010"
+      ],
+      "acceptance_criteria": [
+        "20 mục mới về bản thân và giới thiệu đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+        "Nội dung vừa sức, câu nguyên bản, mục tiêu B1 là định hướng chứ không gắn nhãn danh sách thi chính thức."
+      ],
+      "verification": "Chạy content validator và kiểm tra tổng mục/ID/refs.",
+      "likely_paths": [
+        "content/topics/topic-1/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R03",
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-074",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Review và duyệt 20 mục: Bản thân và giới thiệu",
+      "description": "Reviewer kiểm tra toàn bộ 20 mục chủ đề bản thân và giới thiệu, sửa nghĩa/mẫu/đáp án và provenance.",
+      "dependencies": [
+        "NO-073",
+        "NO-008"
+      ],
+      "acceptance_criteria": [
+        "Reviewer kiểm tra toàn bộ 20 mục chủ đề bản thân và giới thiệu, sửa nghĩa/mẫu/đáp án và provenance.",
+        "Ghi reviewer/date; items chỉ chuyển reviewed khi không còn lỗi nội dung mở."
+      ],
+      "verification": "Review từng mục và validator, lưu checklist theo revision.",
+      "likely_paths": [
+        "content/topics/topic-1/",
+        "content/reviews/topic-1.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-075",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Soạn 20 mục/cụm: Gia đình và quan hệ",
+      "description": "20 mục mới về gia đình và quan hệ đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+      "dependencies": [
+        "NO-010"
+      ],
+      "acceptance_criteria": [
+        "20 mục mới về gia đình và quan hệ đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+        "Nội dung vừa sức, câu nguyên bản, mục tiêu B1 là định hướng chứ không gắn nhãn danh sách thi chính thức."
+      ],
+      "verification": "Chạy content validator và kiểm tra tổng mục/ID/refs.",
+      "likely_paths": [
+        "content/topics/topic-2/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R03",
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-076",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Review và duyệt 20 mục: Gia đình và quan hệ",
+      "description": "Reviewer kiểm tra toàn bộ 20 mục chủ đề gia đình và quan hệ, sửa nghĩa/mẫu/đáp án và provenance.",
+      "dependencies": [
+        "NO-075",
+        "NO-008"
+      ],
+      "acceptance_criteria": [
+        "Reviewer kiểm tra toàn bộ 20 mục chủ đề gia đình và quan hệ, sửa nghĩa/mẫu/đáp án và provenance.",
+        "Ghi reviewer/date; items chỉ chuyển reviewed khi không còn lỗi nội dung mở."
+      ],
+      "verification": "Review từng mục và validator, lưu checklist theo revision.",
+      "likely_paths": [
+        "content/topics/topic-2/",
+        "content/reviews/topic-2.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-077",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Soạn 20 mục/cụm: Học tập",
+      "description": "20 mục mới về học tập đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+      "dependencies": [
+        "NO-010"
+      ],
+      "acceptance_criteria": [
+        "20 mục mới về học tập đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+        "Nội dung vừa sức, câu nguyên bản, mục tiêu B1 là định hướng chứ không gắn nhãn danh sách thi chính thức."
+      ],
+      "verification": "Chạy content validator và kiểm tra tổng mục/ID/refs.",
+      "likely_paths": [
+        "content/topics/topic-3/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R03",
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-078",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Review và duyệt 20 mục: Học tập",
+      "description": "Reviewer kiểm tra toàn bộ 20 mục chủ đề học tập, sửa nghĩa/mẫu/đáp án và provenance.",
+      "dependencies": [
+        "NO-077",
+        "NO-008"
+      ],
+      "acceptance_criteria": [
+        "Reviewer kiểm tra toàn bộ 20 mục chủ đề học tập, sửa nghĩa/mẫu/đáp án và provenance.",
+        "Ghi reviewer/date; items chỉ chuyển reviewed khi không còn lỗi nội dung mở."
+      ],
+      "verification": "Review từng mục và validator, lưu checklist theo revision.",
+      "likely_paths": [
+        "content/topics/topic-3/",
+        "content/reviews/topic-3.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-079",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Soạn 20 mục/cụm: Công việc",
+      "description": "20 mục mới về công việc đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+      "dependencies": [
+        "NO-010"
+      ],
+      "acceptance_criteria": [
+        "20 mục mới về công việc đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+        "Nội dung vừa sức, câu nguyên bản, mục tiêu B1 là định hướng chứ không gắn nhãn danh sách thi chính thức."
+      ],
+      "verification": "Chạy content validator và kiểm tra tổng mục/ID/refs.",
+      "likely_paths": [
+        "content/topics/topic-4/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R03",
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-080",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Review và duyệt 20 mục: Công việc",
+      "description": "Reviewer kiểm tra toàn bộ 20 mục chủ đề công việc, sửa nghĩa/mẫu/đáp án và provenance.",
+      "dependencies": [
+        "NO-079",
+        "NO-008"
+      ],
+      "acceptance_criteria": [
+        "Reviewer kiểm tra toàn bộ 20 mục chủ đề công việc, sửa nghĩa/mẫu/đáp án và provenance.",
+        "Ghi reviewer/date; items chỉ chuyển reviewed khi không còn lỗi nội dung mở."
+      ],
+      "verification": "Review từng mục và validator, lưu checklist theo revision.",
+      "likely_paths": [
+        "content/topics/topic-4/",
+        "content/reviews/topic-4.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-081",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Soạn 20 mục/cụm: Ăn uống",
+      "description": "20 mục mới về ăn uống đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+      "dependencies": [
+        "NO-010"
+      ],
+      "acceptance_criteria": [
+        "20 mục mới về ăn uống đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+        "Nội dung vừa sức, câu nguyên bản, mục tiêu B1 là định hướng chứ không gắn nhãn danh sách thi chính thức."
+      ],
+      "verification": "Chạy content validator và kiểm tra tổng mục/ID/refs.",
+      "likely_paths": [
+        "content/topics/topic-5/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R03",
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-082",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Review và duyệt 20 mục: Ăn uống",
+      "description": "Reviewer kiểm tra toàn bộ 20 mục chủ đề ăn uống, sửa nghĩa/mẫu/đáp án và provenance.",
+      "dependencies": [
+        "NO-081",
+        "NO-008"
+      ],
+      "acceptance_criteria": [
+        "Reviewer kiểm tra toàn bộ 20 mục chủ đề ăn uống, sửa nghĩa/mẫu/đáp án và provenance.",
+        "Ghi reviewer/date; items chỉ chuyển reviewed khi không còn lỗi nội dung mở."
+      ],
+      "verification": "Review từng mục và validator, lưu checklist theo revision.",
+      "likely_paths": [
+        "content/topics/topic-5/",
+        "content/reviews/topic-5.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-083",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Soạn 20 mục/cụm: Đi lại",
+      "description": "20 mục mới về đi lại đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+      "dependencies": [
+        "NO-010"
+      ],
+      "acceptance_criteria": [
+        "20 mục mới về đi lại đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+        "Nội dung vừa sức, câu nguyên bản, mục tiêu B1 là định hướng chứ không gắn nhãn danh sách thi chính thức."
+      ],
+      "verification": "Chạy content validator và kiểm tra tổng mục/ID/refs.",
+      "likely_paths": [
+        "content/topics/topic-6/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R03",
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-084",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Review và duyệt 20 mục: Đi lại",
+      "description": "Reviewer kiểm tra toàn bộ 20 mục chủ đề đi lại, sửa nghĩa/mẫu/đáp án và provenance.",
+      "dependencies": [
+        "NO-083",
+        "NO-008"
+      ],
+      "acceptance_criteria": [
+        "Reviewer kiểm tra toàn bộ 20 mục chủ đề đi lại, sửa nghĩa/mẫu/đáp án và provenance.",
+        "Ghi reviewer/date; items chỉ chuyển reviewed khi không còn lỗi nội dung mở."
+      ],
+      "verification": "Review từng mục và validator, lưu checklist theo revision.",
+      "likely_paths": [
+        "content/topics/topic-6/",
+        "content/reviews/topic-6.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-085",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Soạn 20 mục/cụm: Sức khỏe và môi trường",
+      "description": "20 mục mới về sức khỏe và môi trường đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+      "dependencies": [
+        "NO-010"
+      ],
+      "acceptance_criteria": [
+        "20 mục mới về sức khỏe và môi trường đủ sense/pattern/examples/exercises/variants, không trùng starter.",
+        "Nội dung vừa sức, câu nguyên bản, mục tiêu B1 là định hướng chứ không gắn nhãn danh sách thi chính thức."
+      ],
+      "verification": "Chạy content validator và kiểm tra tổng mục/ID/refs.",
+      "likely_paths": [
+        "content/topics/topic-7/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R03",
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-086",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Review và duyệt 20 mục: Sức khỏe và môi trường",
+      "description": "Reviewer kiểm tra toàn bộ 20 mục chủ đề sức khỏe và môi trường, sửa nghĩa/mẫu/đáp án và provenance.",
+      "dependencies": [
+        "NO-085",
+        "NO-008"
+      ],
+      "acceptance_criteria": [
+        "Reviewer kiểm tra toàn bộ 20 mục chủ đề sức khỏe và môi trường, sửa nghĩa/mẫu/đáp án và provenance.",
+        "Ghi reviewer/date; items chỉ chuyển reviewed khi không còn lỗi nội dung mở."
+      ],
+      "verification": "Review từng mục và validator, lưu checklist theo revision.",
+      "likely_paths": [
+        "content/topics/topic-7/",
+        "content/reviews/topic-7.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-087",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Tạo audio cho 20 mục: Bản thân và giới thiệu",
+      "description": "Audio từ/câu cho 20 mục đã duyệt, có manifest/hash/license.",
+      "dependencies": [
+        "NO-011",
+        "NO-074"
+      ],
+      "acceptance_criteria": [
+        "Audio từ/câu cho 20 mục đã duyệt, có manifest/hash/license.",
+        "Pipeline có retry, không ghi đè revision đã phát hành."
+      ],
+      "verification": "Validate assets và giải mã trên Android; review nghe ở NO-088.",
+      "likely_paths": [
+        "content/topics/",
+        "content/tools/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-088",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Duyệt audio cho 20 mục: Bản thân và giới thiệu",
+      "description": "Nghe kiểm tra toàn bộ audio 20 mục về phát âm, tốc độ và khớp text.",
+      "dependencies": [
+        "NO-087"
+      ],
+      "acceptance_criteria": [
+        "Nghe kiểm tra toàn bộ audio 20 mục về phát âm, tốc độ và khớp text.",
+        "Sửa lỗi, ghi reviewer và đóng gói manifest bất biến."
+      ],
+      "verification": "Checklist nghe từng asset và content validator.",
+      "likely_paths": [
+        "content/reviews/audio.md",
+        "content/manifests/"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "review"
+    },
+    {
+      "key": "NO-089",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "devops",
+      "title": "Thiết lập CI Flutter",
+      "description": "CI pin Flutter, chạy analyze/unit/widget và build debug artifact.",
+      "dependencies": [
+        "NO-001"
+      ],
+      "acceptance_criteria": [
+        "CI pin Flutter, chạy analyze/unit/widget và build debug artifact.",
+        "Cache không làm bỏ test; ghi cách chạy tương đương local."
+      ],
+      "verification": "Một PR thử có lỗi analyze/test bị fail, PR sạch build artifact.",
+      "likely_paths": [
+        ".github/workflows/mobile.yml"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-090",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "devops",
+      "title": "Thiết lập CI Spring và migration",
+      "description": "CI chạy tests/API contract và DB integration bằng PostgreSQL.",
+      "dependencies": [
+        "NO-002"
+      ],
+      "acceptance_criteria": [
+        "CI chạy tests/API contract và DB integration bằng PostgreSQL.",
+        "Migration từ baseline và schema mới đều kiểm tra; không chứa credentials thật."
+      ],
+      "verification": "Thử migration sai/test fail phải đỏ; build sạch ra artifact.",
+      "likely_paths": [
+        ".github/workflows/api.yml"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-091",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "devops",
+      "title": "Chuẩn bị staging backend và object storage",
+      "description": "Staging có TLS, PostgreSQL riêng, asset store và cấu hình quota/secrets.",
+      "dependencies": [
+        "NO-026",
+        "NO-049",
+        "NO-058"
+      ],
+      "acceptance_criteria": [
+        "Staging có TLS, PostgreSQL riêng, asset store và cấu hình quota/secrets.",
+        "Có deploy/rollback runbook; chỉ triển khai môi trường được chủ dự án cấp quyền."
+      ],
+      "verification": "Health/API/catalog smoke và rollback thử không mất DB.",
+      "likely_paths": [
+        "infra/staging/",
+        "docs/runbooks/staging.md"
+      ],
+      "references": [
+        "docs/architecture.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-092",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "backend",
+      "title": "Quan sát lỗi sync và AI không log dữ liệu riêng tư",
+      "description": "Có request/operation correlation, metrics lỗi/latency/quota và health signals.",
+      "dependencies": [
+        "NO-029",
+        "NO-033",
+        "NO-058"
+      ],
+      "acceptance_criteria": [
+        "Có request/operation correlation, metrics lỗi/latency/quota và health signals.",
+        "Redact token/raw text; lựa chọn crash reporting client phải ghi Data Safety."
+      ],
+      "verification": "Inject lỗi sync/provider; kiểm tra log không có token/câu test riêng tư.",
+      "likely_paths": [
+        "services/api/observability/",
+        "docs/runbooks/observability.md"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-093",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "devops",
+      "title": "Kiểm chứng backup và restore PostgreSQL",
+      "description": "Có backup retention và thao tác restore vào môi trường tách biệt.",
+      "dependencies": [
+        "NO-091"
+      ],
+      "acceptance_criteria": [
+        "Có backup retention và thao tác restore vào môi trường tách biệt.",
+        "So count/refs/review history sau restore, ghi thời gian và phạm vi mất dữ liệu tối đa dự kiến."
+      ],
+      "verification": "Restore từ backup staging thật và chạy integrity checks.",
+      "likely_paths": [
+        "infra/backup/",
+        "docs/runbooks/restore.md"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-094",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "backend",
+      "title": "Xóa account và vô hiệu hóa sync cũ",
+      "description": "Re-auth deletion request xóa/anonymize dữ liệu theo policy; provider identity và AI retention được xử lý rõ.",
+      "dependencies": [
+        "NO-026",
+        "NO-045",
+        "NO-058"
+      ],
+      "acceptance_criteria": [
+        "Re-auth deletion request xóa/anonymize dữ liệu theo policy; provider identity và AI retention được xử lý rõ.",
+        "Old token/device không tạo lại account đã xóa bằng sync pending; có trạng thái job và retention backup."
+      ],
+      "verification": "Delete account có pending device; retry xóa và replay token cũ bị chặn.",
+      "likely_paths": [
+        "services/api/privacy/"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-095",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "mobile",
+      "title": "Cung cấp quản lý và xóa dữ liệu trong app",
+      "description": "Guest có local wipe với cảnh báo pending; account có delete flow và trạng thái.",
+      "dependencies": [
+        "NO-037",
+        "NO-094"
+      ],
+      "acceptance_criteria": [
+        "Guest có local wipe với cảnh báo pending; account có delete flow và trạng thái.",
+        "Quyền consent AI/recording/privacy dễ tìm, tài khoản khác không thấy data cũ."
+      ],
+      "verification": "Guest wipe và account deletion online/offline request states.",
+      "likely_paths": [
+        "apps/mobile/lib/features/privacy/"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-096",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "release",
+      "title": "Chuẩn bị trang privacy và yêu cầu xóa account",
+      "description": "Trang web công khai tối thiểu có privacy policy đúng dữ liệu thực tế và deletion entry hợp lệ.",
+      "dependencies": [
+        "NO-094",
+        "NO-095"
+      ],
+      "acceptance_criteria": [
+        "Trang web công khai tối thiểu có privacy policy đúng dữ liệu thực tế và deletion entry hợp lệ.",
+        "Không quảng bá thành khóa VSTEP đầy đủ; form không tiết lộ có/không account."
+      ],
+      "verification": "Kiểm tra URL, re-auth/verification flow và đối chiếu SDK inventory.",
+      "likely_paths": [
+        "docs/release/privacy.md",
+        "infra/public-pages/"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-097",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "qa",
+      "title": "Rà accessibility và bố cục trên Android thật",
+      "description": "Các màn chính đọc được bằng TalkBack/text scale 200%, keyboard không che CTA.",
+      "dependencies": [
+        "NO-052",
+        "NO-063",
+        "NO-072"
+      ],
+      "acceptance_criteria": [
+        "Các màn chính đọc được bằng TalkBack/text scale 200%, keyboard không che CTA.",
+        "Contrast/touch target/reduced motion đạt spec; lập và xử lý lỗi phát hiện."
+      ],
+      "verification": "Walkthrough thiết bị màn nhỏ và screenshot evidence theo state.",
+      "likely_paths": [
+        "docs/evidence/accessibility.md"
+      ],
+      "references": [
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "qa"
+    },
+    {
+      "key": "NO-098",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "qa",
+      "title": "Kiểm tra phân quyền và xử lý input",
+      "description": "Kiểm chứng IDOR, CSV bounds, rate limit, AI schema và credential storage.",
+      "dependencies": [
+        "NO-040",
+        "NO-045",
+        "NO-058",
+        "NO-094"
+      ],
+      "acceptance_criteria": [
+        "Kiểm chứng IDOR, CSV bounds, rate limit, AI schema và credential storage.",
+        "Không còn lỗi nghiêm trọng lộ dữ liệu/ownership; findings có evidence và fix verification."
+      ],
+      "verification": "Adversarial API suite hai accounts + oversized/injection fixtures.",
+      "likely_paths": [
+        "docs/evidence/security.md",
+        "services/api/src/test/"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "qa"
+    },
+    {
+      "key": "NO-099",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "qa",
+      "title": "Chạy ma trận offline và phục hồi end-to-end",
+      "description": "Cold install offline, 3 ngày học, restart/reboot, storage full, token/cursor expiry và two-device sync đạt spec.",
+      "dependencies": [
+        "NO-052",
+        "NO-063",
+        "NO-072",
+        "NO-118",
+        "NO-095"
+      ],
+      "acceptance_criteria": [
+        "Cold install offline, 3 ngày học, restart/reboot, storage full, token/cursor expiry và two-device sync đạt spec.",
+        "Mọi lỗi mất/trùng dữ liệu được xử lý; evidence gồm app/backend version và device OS."
+      ],
+      "verification": "Integration suite + real-device matrix trong offline-sync.md.",
+      "likely_paths": [
+        "docs/evidence/offline-release.md"
+      ],
+      "references": [
+        "docs/offline-sync.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "qa"
+    },
+    {
+      "key": "NO-100",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "research",
+      "title": "Pilot với Tâm và đánh giá độ khó",
+      "description": "Tâm tự học một phiên, thử ngày bận và offline; ghi số bước cần trợ giúp.",
+      "dependencies": [
+        "NO-025",
+        "NO-063",
+        "NO-072",
+        "NO-121"
+      ],
+      "acceptance_criteria": [
+        "Tâm tự học một phiên, thử ngày bận và offline; ghi số bước cần trợ giúp.",
+        "Báo cáo hiểu mẫu/tạo câu/quay lại và các thay đổi cần thiết; không suy hiệu quả chung từ một người."
+      ],
+      "verification": "Quan sát có đồng ý và ghi ghi chú không chứa dữ liệu riêng tư không cần thiết.",
+      "likely_paths": [
+        "docs/research/pilot-tam.md"
+      ],
+      "references": [
+        "docs/product.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "pilot"
+    },
+    {
+      "key": "NO-101",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "release",
+      "title": "Chốt định danh phát hành và bộ icon Nở",
+      "description": "Kiểm tra trùng tên và package identity; icon hoa hồng nguyên bản có adaptive/monochrome variants.",
+      "dependencies": [
+        "NO-066"
+      ],
+      "acceptance_criteria": [
+        "Kiểm tra trùng tên và package identity; icon hoa hồng nguyên bản có adaptive/monochrome variants.",
+        "Ghi chủ sở hữu key/app ID, license asset và tên hiển thị; không commit keystore."
+      ],
+      "verification": "Kiểm tra icon các launcher nền sáng/tối và inventory brand.",
+      "likely_paths": [
+        "apps/mobile/android/",
+        "docs/release/identity.md"
+      ],
+      "references": [
+        "docs/decisions.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-102",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "release",
+      "title": "Tạo Android App Bundle ký số cho beta",
+      "description": "AAB release dùng đúng staging/beta config và signing secret ngoài repo.",
+      "dependencies": [
+        "NO-089",
+        "NO-090",
+        "NO-091",
+        "NO-101"
+      ],
+      "acceptance_criteria": [
+        "AAB release dùng đúng staging/beta config và signing secret ngoài repo.",
+        "Cài bản phân phối thử, kiểm tra min/target SDK theo yêu cầu Play lúc phát hành."
+      ],
+      "verification": "Build ký số và smoke trên thiết bị thật; ghi checksum/version.",
+      "likely_paths": [
+        "infra/release/",
+        "docs/release/build.md"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-103",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "release",
+      "title": "Chuẩn bị listing và Data Safety Google Play",
+      "description": "Có mô tả/screenshots/privacy/deletion URLs khớp app và inventory dữ liệu SDK.",
+      "dependencies": [
+        "NO-096",
+        "NO-101",
+        "NO-102"
+      ],
+      "acceptance_criteria": [
+        "Có mô tả/screenshots/privacy/deletion URLs khớp app và inventory dữ liệu SDK.",
+        "Xác minh loại developer account và yêu cầu testing/target API hiện tại; không khai offline AI hoạt động."
+      ],
+      "verification": "Đối chiếu từng field Play với hành vi thực; review listing trước upload.",
+      "likely_paths": [
+        "docs/release/play-listing.md"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-104",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "release",
+      "title": "Thực hiện closed beta với người học phù hợp",
+      "description": "Có kế hoạch tuyển tester và bản release đã kiểm tra; đáp ứng quy định Play áp dụng.",
+      "dependencies": [
+        "NO-093",
+        "NO-097",
+        "NO-098",
+        "NO-099",
+        "NO-100",
+        "NO-103",
+        "NO-092"
+      ],
+      "acceptance_criteria": [
+        "Có kế hoạch tuyển tester và bản release đã kiểm tra; đáp ứng quy định Play áp dụng.",
+        "Thu feedback 2–4 tuần, đo recall/usage/retention với sample size; triage và xác minh fixes trước production."
+      ],
+      "verification": "Lưu kết quả test/Play eligibility và issue triage; mời người/upload theo quyền đã được cấp khi thực hiện.",
+      "likely_paths": [
+        "docs/research/closed-beta.md"
+      ],
+      "references": [
+        "docs/product.md",
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "pilot"
+    },
+    {
+      "key": "NO-105",
+      "phase": "P7 · Chất lượng và beta Android",
+      "area": "release",
+      "title": "Checkpoint: MVP đủ điều kiện xin phát hành",
+      "description": "Mọi release gate và requirements R01–R13 có bằng chứng; không còn blocker dữ liệu/offline.",
+      "dependencies": [
+        "NO-104"
+      ],
+      "acceptance_criteria": [
+        "Mọi release gate và requirements R01–R13 có bằng chứng; không còn blocker dữ liệu/offline.",
+        "Có release notes, rollback plan và bản build cụ thể để chủ dự án quyết định phát hành; không tự publish."
+      ],
+      "verification": "Review traceability matrix và các task phụ thuộc; xác nhận build/version.",
+      "likely_paths": [
+        "docs/release/readiness.md"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R13"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "checkpoint"
+    },
+    {
+      "key": "NO-106",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Tạo audio cho 20 mục: Gia đình và quan hệ",
+      "description": "Audio từ/câu cho 20 mục gia đình và quan hệ đã duyệt, có manifest/hash/license.",
+      "dependencies": [
+        "NO-011",
+        "NO-076"
+      ],
+      "acceptance_criteria": [
+        "Audio từ/câu cho 20 mục gia đình và quan hệ đã duyệt, có manifest/hash/license.",
+        "Pipeline có retry và log riêng cho batch; không ghi đè revision đã publish."
+      ],
+      "verification": "Validate hash và audio decoding; review nghe là task phụ thuộc kế tiếp.",
+      "likely_paths": [
+        "content/topics/topic-2/audio/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-107",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Duyệt audio cho 20 mục: Gia đình và quan hệ",
+      "description": "Nghe kiểm tra toàn bộ audio 20 mục gia đình và quan hệ, sửa phát âm/tốc độ/khớp text.",
+      "dependencies": [
+        "NO-106"
+      ],
+      "acceptance_criteria": [
+        "Nghe kiểm tra toàn bộ audio 20 mục gia đình và quan hệ, sửa phát âm/tốc độ/khớp text.",
+        "Ghi reviewer/date, checksum cuối và checklist trước publish."
+      ],
+      "verification": "Review từng asset và chạy validator.",
+      "likely_paths": [
+        "content/reviews/topic-2-audio.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-108",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Tạo audio cho 20 mục: Học tập",
+      "description": "Audio từ/câu cho 20 mục học tập đã duyệt, có manifest/hash/license.",
+      "dependencies": [
+        "NO-011",
+        "NO-078"
+      ],
+      "acceptance_criteria": [
+        "Audio từ/câu cho 20 mục học tập đã duyệt, có manifest/hash/license.",
+        "Pipeline có retry và log riêng cho batch; không ghi đè revision đã publish."
+      ],
+      "verification": "Validate hash và audio decoding; review nghe là task phụ thuộc kế tiếp.",
+      "likely_paths": [
+        "content/topics/topic-3/audio/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-109",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Duyệt audio cho 20 mục: Học tập",
+      "description": "Nghe kiểm tra toàn bộ audio 20 mục học tập, sửa phát âm/tốc độ/khớp text.",
+      "dependencies": [
+        "NO-108"
+      ],
+      "acceptance_criteria": [
+        "Nghe kiểm tra toàn bộ audio 20 mục học tập, sửa phát âm/tốc độ/khớp text.",
+        "Ghi reviewer/date, checksum cuối và checklist trước publish."
+      ],
+      "verification": "Review từng asset và chạy validator.",
+      "likely_paths": [
+        "content/reviews/topic-3-audio.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-110",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Tạo audio cho 20 mục: Công việc",
+      "description": "Audio từ/câu cho 20 mục công việc đã duyệt, có manifest/hash/license.",
+      "dependencies": [
+        "NO-011",
+        "NO-080"
+      ],
+      "acceptance_criteria": [
+        "Audio từ/câu cho 20 mục công việc đã duyệt, có manifest/hash/license.",
+        "Pipeline có retry và log riêng cho batch; không ghi đè revision đã publish."
+      ],
+      "verification": "Validate hash và audio decoding; review nghe là task phụ thuộc kế tiếp.",
+      "likely_paths": [
+        "content/topics/topic-4/audio/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-111",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Duyệt audio cho 20 mục: Công việc",
+      "description": "Nghe kiểm tra toàn bộ audio 20 mục công việc, sửa phát âm/tốc độ/khớp text.",
+      "dependencies": [
+        "NO-110"
+      ],
+      "acceptance_criteria": [
+        "Nghe kiểm tra toàn bộ audio 20 mục công việc, sửa phát âm/tốc độ/khớp text.",
+        "Ghi reviewer/date, checksum cuối và checklist trước publish."
+      ],
+      "verification": "Review từng asset và chạy validator.",
+      "likely_paths": [
+        "content/reviews/topic-4-audio.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-112",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Tạo audio cho 20 mục: Ăn uống",
+      "description": "Audio từ/câu cho 20 mục ăn uống đã duyệt, có manifest/hash/license.",
+      "dependencies": [
+        "NO-011",
+        "NO-082"
+      ],
+      "acceptance_criteria": [
+        "Audio từ/câu cho 20 mục ăn uống đã duyệt, có manifest/hash/license.",
+        "Pipeline có retry và log riêng cho batch; không ghi đè revision đã publish."
+      ],
+      "verification": "Validate hash và audio decoding; review nghe là task phụ thuộc kế tiếp.",
+      "likely_paths": [
+        "content/topics/topic-5/audio/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-113",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Duyệt audio cho 20 mục: Ăn uống",
+      "description": "Nghe kiểm tra toàn bộ audio 20 mục ăn uống, sửa phát âm/tốc độ/khớp text.",
+      "dependencies": [
+        "NO-112"
+      ],
+      "acceptance_criteria": [
+        "Nghe kiểm tra toàn bộ audio 20 mục ăn uống, sửa phát âm/tốc độ/khớp text.",
+        "Ghi reviewer/date, checksum cuối và checklist trước publish."
+      ],
+      "verification": "Review từng asset và chạy validator.",
+      "likely_paths": [
+        "content/reviews/topic-5-audio.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-114",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Tạo audio cho 20 mục: Đi lại",
+      "description": "Audio từ/câu cho 20 mục đi lại đã duyệt, có manifest/hash/license.",
+      "dependencies": [
+        "NO-011",
+        "NO-084"
+      ],
+      "acceptance_criteria": [
+        "Audio từ/câu cho 20 mục đi lại đã duyệt, có manifest/hash/license.",
+        "Pipeline có retry và log riêng cho batch; không ghi đè revision đã publish."
+      ],
+      "verification": "Validate hash và audio decoding; review nghe là task phụ thuộc kế tiếp.",
+      "likely_paths": [
+        "content/topics/topic-6/audio/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-115",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Duyệt audio cho 20 mục: Đi lại",
+      "description": "Nghe kiểm tra toàn bộ audio 20 mục đi lại, sửa phát âm/tốc độ/khớp text.",
+      "dependencies": [
+        "NO-114"
+      ],
+      "acceptance_criteria": [
+        "Nghe kiểm tra toàn bộ audio 20 mục đi lại, sửa phát âm/tốc độ/khớp text.",
+        "Ghi reviewer/date, checksum cuối và checklist trước publish."
+      ],
+      "verification": "Review từng asset và chạy validator.",
+      "likely_paths": [
+        "content/reviews/topic-6-audio.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-116",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Tạo audio cho 20 mục: Sức khỏe và môi trường",
+      "description": "Audio từ/câu cho 20 mục sức khỏe và môi trường đã duyệt, có manifest/hash/license.",
+      "dependencies": [
+        "NO-011",
+        "NO-086"
+      ],
+      "acceptance_criteria": [
+        "Audio từ/câu cho 20 mục sức khỏe và môi trường đã duyệt, có manifest/hash/license.",
+        "Pipeline có retry và log riêng cho batch; không ghi đè revision đã publish."
+      ],
+      "verification": "Validate hash và audio decoding; review nghe là task phụ thuộc kế tiếp.",
+      "likely_paths": [
+        "content/topics/topic-7/audio/"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "content"
+    },
+    {
+      "key": "NO-117",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Duyệt audio cho 20 mục: Sức khỏe và môi trường",
+      "description": "Nghe kiểm tra toàn bộ audio 20 mục sức khỏe và môi trường, sửa phát âm/tốc độ/khớp text.",
+      "dependencies": [
+        "NO-116"
+      ],
+      "acceptance_criteria": [
+        "Nghe kiểm tra toàn bộ audio 20 mục sức khỏe và môi trường, sửa phát âm/tốc độ/khớp text.",
+        "Ghi reviewer/date, checksum cuối và checklist trước publish."
+      ],
+      "verification": "Review từng asset và chạy validator.",
+      "likely_paths": [
+        "content/reviews/topic-7-audio.md"
+      ],
+      "references": [
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "medium",
+      "kind": "review"
+    },
+    {
+      "key": "NO-118",
+      "phase": "P6 · Nội dung beta được biên tập",
+      "area": "content",
+      "title": "Xuất bản catalog beta 160 mục đã duyệt",
+      "description": "Starter 20 và 140 mục bổ sung xuất bản thành gói versioned với audio đã duyệt.",
+      "dependencies": [
+        "NO-088",
+        "NO-107",
+        "NO-109",
+        "NO-111",
+        "NO-113",
+        "NO-115",
+        "NO-117",
+        "NO-049",
+        "NO-050"
+      ],
+      "acceptance_criteria": [
+        "Starter 20 và 140 mục bổ sung xuất bản thành gói versioned với audio đã duyệt.",
+        "Tổng ID không trùng, đủ topic/variants/provenance và manifest tương thích app."
+      ],
+      "verification": "Chạy validator tất cả và download/offline smoke từng gói.",
+      "likely_paths": [
+        "content/manifests/"
+      ],
+      "references": [
+        "docs/quality-release.md"
+      ],
+      "requirements": [
+        "R10"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "checkpoint"
+    },
+    {
+      "key": "NO-119",
+      "phase": "P2 · Backup và đồng bộ an toàn",
+      "area": "backend",
+      "title": "Đồng bộ lịch học và hợp nhất daily credits",
+      "description": "Nhận preferences revision và session credit có rule version; merge credit theo ngày không cộng trùng.",
+      "dependencies": [
+        "NO-029",
+        "NO-030",
+        "NO-065"
+      ],
+      "acceptance_criteria": [
+        "Nhận preferences revision và session credit có rule version; merge credit theo ngày không cộng trùng.",
+        "Conflict lịch giữ hai phiên bản; học offline có date gốc, không gán receivedAt thành ngày học."
+      ],
+      "verification": "Multi-device prefs conflict, duplicate finish và timezone fixtures.",
+      "likely_paths": [
+        "services/api/habit/",
+        "services/api/sync/handlers/"
+      ],
+      "references": [
+        "docs/offline-sync.md",
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R08",
+        "R09",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-120",
+      "phase": "P5 · Hoa hồng và thói quen",
+      "area": "mobile",
+      "title": "Reconcile lịch học và credit về hoa local",
+      "description": "Sync lịch/credits giữ pending local, giải quyết conflict lịch có lựa chọn.",
+      "dependencies": [
+        "NO-119",
+        "NO-034",
+        "NO-067",
+        "NO-070"
+      ],
+      "acceptance_criteria": [
+        "Sync lịch/credits giữ pending local, giải quyết conflict lịch có lựa chọn.",
+        "Rose/notifications tính lại sau merge, không hồi sinh notification đã hủy hoặc nhân growth."
+      ],
+      "verification": "Offline credit A rồi sync B; conflict schedule và notification cancel regression.",
+      "likely_paths": [
+        "apps/mobile/lib/features/habit/sync/"
+      ],
+      "references": [
+        "docs/offline-sync.md",
+        "docs/ux.md"
+      ],
+      "requirements": [
+        "R08",
+        "R09",
+        "R11"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    },
+    {
+      "key": "NO-121",
+      "phase": "P1 · Buổi học offline đầu tiên",
+      "area": "mobile",
+      "title": "Đánh giá nền tảng nhẹ và chọn mức hỗ trợ",
+      "description": "Onboarding có 6 prompt meaning/pattern dễ, cho skip và không suy chứng chỉ/band.",
+      "dependencies": [
+        "NO-012",
+        "NO-015",
+        "NO-064"
+      ],
+      "acceptance_criteria": [
+        "Onboarding có 6 prompt meaning/pattern dễ, cho skip và không suy chứng chỉ/band.",
+        "Kết quả chọn mức hint/độ khó ban đầu local; người dùng đổi được, không tạo lịch SRS từ baseline."
+      ],
+      "verification": "Offline skip/complete/all-wrong; bài đầu vẫn vừa sức và có hướng dẫn.",
+      "likely_paths": [
+        "apps/mobile/lib/features/onboarding/assessment/"
+      ],
+      "references": [
+        "docs/product.md",
+        "docs/learning-design.md"
+      ],
+      "requirements": [
+        "R01",
+        "R02"
+      ],
+      "size": "M",
+      "priority": "high",
+      "kind": "implementation"
+    }
+  ]
+}

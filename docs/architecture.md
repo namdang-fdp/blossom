@@ -1,0 +1,77 @@
+# Kiến trúc dự kiến
+
+## Stack
+
+- Android-first: Flutter/Dart, Riverpod, SQLite qua Drift, HTTP client; secure storage cho credential, file app-private cho audio/recording.
+- Backend: Java + Spring Boot, REST/OpenAPI, Spring Security, PostgreSQL, Flyway. Modular monolith, một deployable ban đầu.
+- Audio/gói: object storage tương thích S3; manifest và hash để tải/kiểm tra; local cache có quản lý dung lượng.
+- AI: adapter backend, quota + idempotency + timeout; provider/model sẽ chọn sau thử câu tiếng Việt, không khóa vào nhà cung cấp trong domain.
+- Auth beta: đề xuất Firebase Authentication Google sign-in; Spring xác minh ID token qua SDK chính thức, ánh xạ external subject → user ID nội bộ. Guest offline không cần Firebase. Chốt cấu hình/region trước khi bật. Không tự viết password/OTP server cho MVP.
+- Notifications: local Android trước; chưa triển khai FCM cho lời nhắc thường ngày.
+- Chọn/pin phiên bản stable và compatibility trong task setup; không coi version từ tài liệu này là lockfile.
+
+```mermaid
+flowchart LR
+  UI[Flutter UI] --> Repo[Repositories]
+  Repo --> DB[(SQLite / Drift)]
+  Repo --> Files[Audio và bài đã tải]
+  DB --> Sync[Outbox / Sync worker]
+  Sync --> API[Spring REST API]
+  API --> PG[(PostgreSQL)]
+  API --> Store[Object storage]
+  API --> AI[AI provider]
+  UI --> Local[Local notifications]
+```
+
+PostgreSQL không public cho mobile. Lượt học ghi local trước. Background sync là tối ưu thêm, không phải điều kiện an toàn dữ liệu; luôn có resume/manual sync.
+
+## Cấu trúc dự kiến
+
+```text
+apps/mobile/           Flutter, chia theo feature
+services/api/          Spring Boot, module theo domain
+contracts/             OpenAPI, fixtures, JSON schema gói và sync
+content/               Bài tự biên soạn, metadata quyền dùng, gói mẫu
+infra/                 Docker/dev, deployment configuration
+docs/                  Đặc tả, quyết định, tracker mapping
+tasks/plan.md          Kế hoạch và chỉ mục
+```
+
+Module backend: identity, catalog, learner-library, learning, sync, feedback, privacy. Mỗi task migration có người sở hữu, tránh hai nhánh dùng cùng số phiên bản.
+
+## Mô hình dữ liệu
+
+| Nhóm | Thực thể chính | Quy tắc |
+|---|---|---|
+| Identity | guest_profile, user, linked_identity, device | Dữ liệu local được scope theo profile; không nhập nhằng hai account |
+| Catalog | topic, lexeme, sense, usage_pattern, example, exercise, content_revision | UUID ổn định; revision nội dung bất biến |
+| Packaging | pack, pack_revision, asset, download_state | Hash, byte size, content schema version, license |
+| Personal | learner_item, personal_note, import_batch | Dữ liệu của người dùng có revision và tombstone |
+| Learning | session, session_step, attempt, review_event, review_target, review_state | Attempt append-only; event ID chống trùng; state có thể rebuild |
+| Habit | schedule_revision, daily_credit, preferences | Timezone + ngày local + snapshot rule; không ghi cứng Tâm |
+| Sync | outbox_operation, inbox_cursor, server_change, conflict | Push theo item ack; pull cursor; atomic apply |
+| Feedback | writing_draft, feedback_request, feedback_result, content_report | AI tách khỏi deterministic grade; không tự tăng SRS |
+
+Audio bytes nằm file/object storage, DB lưu metadata/path/hash. Recording tự nghe chỉ local mặc định, không backup/upload nếu chưa có opt-in riêng.
+
+## Hợp đồng API cần định nghĩa trong task NO-003
+
+Namespace `/api/v1`; OpenAPI là nguồn sinh client. Tên endpoint dưới đây là thiết kế, chưa có implementation.
+
+- `GET /catalog/packs`, `GET /catalog/packs/{id}/manifest`: public curated metadata; manifest versioned.
+- `GET /me`, `PATCH /me/preferences`: authenticated; private mutation khi offline đi qua sync operations cùng revision contract.
+- `POST /sync/push`, `GET /sync/pull?cursor=...`, `GET /sync/snapshot`: auth; payload có schemaVersion, deviceId, operationId.
+- `POST /guest-migrations`: yêu cầu xác nhận guest → đúng account; nhận migrationId và mapping, không gửi toàn DB thiếu kiểm soát.
+- `POST /feedback/requests`, `GET /feedback/requests/{id}`: private; idempotency key và quota.
+- `POST /content-reports`: nội dung/bài hoặc grade bị sai, kèm revision.
+- `POST /account-deletion-requests`, `GET /account-deletion-requests/{id}`: re-auth, trạng thái rõ ràng; có web entry cho yêu cầu xóa.
+
+Lỗi dùng problem JSON với code ổn định, field errors và retryability; 401/403/409/422/429 được phân biệt. Giới hạn batch, file size, body size; ownership lấy từ verified subject, không tin userId trong body. Authorization tests phải bao gồm IDOR giữa hai account.
+
+## Quyết định về lịch ôn
+
+Dart tính local để học dài ngày không mạng. Spring giữ event log và replay projection sau sync. Hai bên cùng scheduler/rules version và fixtures; chưa chọn thư viện cụ thể trước NO-004. Không dựa vào AI để quyết định nhớ/quên; không có service ML riêng trong MVP.
+
+## Vận hành
+
+Dev dùng Docker Compose cho PostgreSQL/API; staging và production tách DB, bucket, AI quota. Log requestId/operationId không log token, câu riêng tư hay recording. Metrics: lỗi lưu local, sync conflict/duplicate, latency, AI cost/quota. Backup PostgreSQL và bài test restore; secrets ở môi trường triển khai, không trong repo.

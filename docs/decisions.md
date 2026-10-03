@@ -1,0 +1,40 @@
+# Quyết định và điểm cần xác minh
+
+## Đã được chủ dự án chốt
+
+| Quyết định | Kết quả |
+|---|---|
+| Tên sản phẩm | Nở; project tracker tên Bloom |
+| Đối tượng đầu | Tâm, nền tảng yếu, giao tiếp + VSTEP B1 khoảng giữa 2027 |
+| Client | Flutter, Android trước |
+| Backend | Spring Boot, PostgreSQL |
+| Offline | Bắt buộc; SQLite/Drift trên máy. Thay thế hoàn toàn đề xuất online-first trước đó |
+| Nhận diện | Màu hồng, mascot hoa hồng; học đều thì nở, nghỉ lâu thì rũ và có nhắc |
+| Nội dung | Từ, giới từ/cụm, mẫu câu, hoàn cảnh, active recall, nhớ lâu, import |
+| Công việc hiện tại | Tạo docs và chia task đầy đủ MVP trong Kaneo/Bloom; chưa viết ứng dụng |
+
+## Quyết định triển khai đề xuất để lập kế hoạch
+
+- Guest-first, starter pack/audio đi kèm; AI không phải dependency của buổi học.
+- Modular monolith; local database là nơi UI đọc/ghi; outbox và event replay cho sync.
+- FSRS có adapter Dart/Java cùng version và conformance test; xác minh thư viện trước.
+- Firebase Auth Google sign-in cho backup beta; nhà cung cấp và cấu hình có thể đổi qua ADR trước khi code auth.
+- Local notifications cho thói quen; chưa dùng FCM nhắc dựa trên tiến độ server.
+- 160 mục/cụm được biên tập cho beta, gồm starter 20; không gọi là giáo trình VSTEP đầy đủ.
+- Mascot động trong app, launcher cố định trong MVP. Launcher icon/Android widget động ghi nhận là mở rộng, chưa hứa cùng behavior trên mọi launcher.
+
+## Cần xác minh nhưng không chặn viết docs
+
+| Câu hỏi | Task xử lý |
+|---|---|
+| Máy Android/phiên bản/dung lượng của Tâm; thời gian offline thường gặp | Thiết bị pilot và offline acceptance |
+| Cơ sở nội dung và người review tiếng Anh | Content authoring/review trước beta |
+| Tên Nở/package ID có trùng và quyền sử dụng asset/audio | Brand + release checks |
+| Dart/Java FSRS parity và license | Feasibility scheduler sớm |
+| Nhà cung cấp AI, TTS, ngân sách/region | Adapter/quota và audio pipeline trước tích hợp |
+| Play account loại nào, yêu cầu closed test hiện tại | Release preparation |
+| Ngày thi cụ thể | Cài đặt mục tiêu; không hard-code tháng thi |
+
+## Cập nhật
+
+2026-10-04: offline-first là yêu cầu bắt buộc theo chỉnh sửa cuối của người dùng; PostgreSQL vẫn giữ phía server. Không còn kế hoạch bỏ SQLite.
