@@ -1,8 +1,9 @@
 openapi: 3.0.3
 info:
   title: Nở API
-  version: 0.0.1
-  description: Scaffold contract. Sync và private APIs được định nghĩa trong NO-003.
+  version: 0.1.0
+  description: Contract đồng bộ v1. Sync endpoints là thiết kế, chưa được implement.
+    Xem contracts/README.md.
 paths:
   /api/v1/health:
     get:
@@ -16,11 +17,606 @@ paths:
             application/json:
               schema:
                 type: object
-                required: [service, status]
+                additionalProperties: false
+                required:
+                - service
+                - status
                 properties:
                   service:
                     type: string
-                    enum: [no-api]
+                    enum:
+                    - no-api
                   status:
                     type: string
-                    enum: [UP]
+                    enum:
+                    - UP
+  /api/v1/sync/push:
+    post:
+      operationId: pushSync
+      summary: Đồng bộ các operation đã lưu local
+      description: Ownership từ bearer subject đã xác minh. Không nhận userId. Toàn
+        request invalid bị từ chối trước xử lý; lỗi domain từng item nằm trong ack.
+        Idempotency theo (account, operationId), ack và mutation cùng PostgreSQL transaction.
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PushRequest'
+      responses:
+        '200':
+          description: Ack riêng từng operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PushResponse'
+        '400':
+          description: Cursor/query/JSON không hợp lệ
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Token thiếu hoặc hết hạn; giữ outbox
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+          headers:
+            WWW-Authenticate:
+              schema:
+                type: string
+              description: Bearer challenge; không echo token.
+        '403':
+          description: Không có quyền trên account/resource
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Cursor/snapshot hết hạn; full resync giữ pending
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '413':
+          description: Body vượt 256 KiB
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '422':
+          description: Schema/version/batch không hợp lệ
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: Rate limit; giữ dữ liệu và backoff
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+          headers:
+            Retry-After:
+              description: Số giây chờ trước retry, không đổi operationId.
+              schema:
+                type: integer
+                minimum: 1
+        '503':
+          description: Tạm không phục vụ; retry an toàn
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Provider token được NO-026 xác minh; không có token trong fixtures.
+  schemas:
+    FieldError:
+      type: object
+      additionalProperties: false
+      required:
+      - path
+      - code
+      properties:
+        path:
+          type: string
+          minLength: 1
+        code:
+          type: string
+          minLength: 1
+    Problem:
+      type: object
+      additionalProperties: false
+      required:
+      - type
+      - title
+      - status
+      - detail
+      - code
+      - requestId
+      - retryable
+      - fieldErrors
+      properties:
+        type:
+          type: string
+          format: uri
+        title:
+          type: string
+          minLength: 1
+        status:
+          type: integer
+          minimum: 400
+          maximum: 599
+        detail:
+          type: string
+          minLength: 1
+        code:
+          type: string
+          enum:
+          - UNAUTHENTICATED
+          - TOKEN_EXPIRED
+          - FORBIDDEN
+          - CURSOR_ACCOUNT_MISMATCH
+          - INVALID_CURSOR
+          - CURSOR_EXPIRED
+          - SNAPSHOT_EXPIRED
+          - VALIDATION_FAILED
+          - UNSUPPORTED_SCHEMA_VERSION
+          - UNSUPPORTED_OPERATION
+          - OPERATION_ID_REUSED
+          - OPERATION_IN_PROGRESS
+          - ENTITY_DELETED
+          - RATE_LIMITED
+          - PAYLOAD_TOO_LARGE
+          - TEMPORARILY_UNAVAILABLE
+        requestId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        retryable:
+          type: boolean
+        fieldErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldError'
+      description: Problem Details; fieldErrors chứa path/code, không echo giá trị
+        riêng tư.
+    AttemptPayload:
+      type: object
+      additionalProperties: false
+      required:
+      - attemptId
+      - sessionId
+      - targetId
+      - contentRevision
+      - targetType
+      - attemptKind
+      - outcome
+      - hintCount
+      - rulesVersion
+      properties:
+        attemptId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        sessionId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        targetId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        contentRevision:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[A-Za-z0-9_-]+$
+        targetType:
+          type: string
+          enum:
+          - meaning_recall
+          - pattern_recall
+        attemptKind:
+          type: string
+          enum:
+          - review
+          - practice
+          - delayed_probe
+        outcome:
+          type: string
+          enum:
+          - correct
+          - incorrect
+          - assisted
+        hintCount:
+          type: integer
+          minimum: 0
+          maximum: 100
+        rulesVersion:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[A-Za-z0-9_-]+$
+      description: Bằng chứng chấm deterministic; grade SRS được ánh xạ theo rulesVersion
+        ở NO-004, không nhận AI grade hay dueAt từ client.
+    LibraryPayload:
+      type: object
+      additionalProperties: false
+      required:
+      - entryId
+      - sense
+      - usagePattern
+      - note
+      properties:
+        entryId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        sense:
+          type: string
+          minLength: 1
+          maxLength: 1000
+        usagePattern:
+          type: string
+          minLength: 1
+          maxLength: 500
+        note:
+          type: string
+          maxLength: 2000
+          nullable: true
+      description: Mục cá nhân dạy nghĩa và mẫu dùng; null note là xóa ghi chú, không
+        phải thiếu trường.
+    DeletePayload:
+      type: object
+      additionalProperties: false
+      required:
+      - entryId
+      properties:
+        entryId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+    AttemptOperation:
+      type: object
+      additionalProperties: false
+      required:
+      - operationId
+      - deviceId
+      - deviceSequence
+      - schemaVersion
+      - occurredAt
+      - timezone
+      - learningDate
+      - baseRevision
+      - operationType
+      - payload
+      properties:
+        operationId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        deviceId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        deviceSequence:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        schemaVersion:
+          type: integer
+          enum:
+          - 1
+        occurredAt:
+          type: string
+          format: date-time
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?(Z|[+-]\d{2}:\d{2})$
+        timezone:
+          type: string
+          minLength: 1
+          maxLength: 64
+        learningDate:
+          type: string
+          format: date
+        baseRevision:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[A-Za-z0-9_-]+$
+          nullable: true
+        operationType:
+          type: string
+          enum:
+          - attempt.record
+        payload:
+          $ref: '#/components/schemas/AttemptPayload'
+    LibraryOperation:
+      type: object
+      additionalProperties: false
+      required:
+      - operationId
+      - deviceId
+      - deviceSequence
+      - schemaVersion
+      - occurredAt
+      - timezone
+      - learningDate
+      - baseRevision
+      - operationType
+      - payload
+      properties:
+        operationId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        deviceId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        deviceSequence:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        schemaVersion:
+          type: integer
+          enum:
+          - 1
+        occurredAt:
+          type: string
+          format: date-time
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?(Z|[+-]\d{2}:\d{2})$
+        timezone:
+          type: string
+          minLength: 1
+          maxLength: 64
+        learningDate:
+          type: string
+          format: date
+        baseRevision:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[A-Za-z0-9_-]+$
+          nullable: true
+        operationType:
+          type: string
+          enum:
+          - library.upsert
+        payload:
+          $ref: '#/components/schemas/LibraryPayload'
+    DeleteOperation:
+      type: object
+      additionalProperties: false
+      required:
+      - operationId
+      - deviceId
+      - deviceSequence
+      - schemaVersion
+      - occurredAt
+      - timezone
+      - learningDate
+      - baseRevision
+      - operationType
+      - payload
+      properties:
+        operationId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        deviceId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        deviceSequence:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        schemaVersion:
+          type: integer
+          enum:
+          - 1
+        occurredAt:
+          type: string
+          format: date-time
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?(Z|[+-]\d{2}:\d{2})$
+        timezone:
+          type: string
+          minLength: 1
+          maxLength: 64
+        learningDate:
+          type: string
+          format: date
+        baseRevision:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[A-Za-z0-9_-]+$
+        operationType:
+          type: string
+          enum:
+          - library.delete
+        payload:
+          $ref: '#/components/schemas/DeletePayload'
+    Operation:
+      oneOf:
+      - $ref: '#/components/schemas/AttemptOperation'
+      - $ref: '#/components/schemas/LibraryOperation'
+      - $ref: '#/components/schemas/DeleteOperation'
+      discriminator:
+        propertyName: operationType
+    PushRequest:
+      type: object
+      additionalProperties: false
+      required:
+      - schemaVersion
+      - operations
+      properties:
+        schemaVersion:
+          type: integer
+          enum:
+          - 1
+        operations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Operation'
+          minItems: 1
+          maxItems: 100
+      description: Tối đa 100 operations và 256 KiB UTF-8 toàn body. operationId không
+        lặp trong cùng batch.
+    LibraryState:
+      type: object
+      additionalProperties: false
+      required:
+      - entityType
+      - revision
+      - value
+      properties:
+        entityType:
+          type: string
+          enum:
+          - library_entry
+        revision:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[A-Za-z0-9_-]+$
+        value:
+          $ref: '#/components/schemas/LibraryPayload'
+    Tombstone:
+      type: object
+      additionalProperties: false
+      required:
+      - entityType
+      - entryId
+      - revision
+      - deletedAt
+      properties:
+        entityType:
+          type: string
+          enum:
+          - tombstone
+        entryId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        revision:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[A-Za-z0-9_-]+$
+        deletedAt:
+          type: string
+          format: date-time
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?(Z|[+-]\d{2}:\d{2})$
+    ConflictState:
+      oneOf:
+      - $ref: '#/components/schemas/LibraryState'
+      - $ref: '#/components/schemas/Tombstone'
+      discriminator:
+        propertyName: entityType
+    AppliedAck:
+      type: object
+      additionalProperties: false
+      required:
+      - operationId
+      - status
+      - revision
+      - effectiveReviewAt
+      - clockAdjusted
+      properties:
+        operationId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        status:
+          type: string
+          enum:
+          - applied
+        revision:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[A-Za-z0-9_-]+$
+        effectiveReviewAt:
+          type: string
+          format: date-time
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,6})?(Z|[+-]\d{2}:\d{2})$
+          nullable: true
+        clockAdjusted:
+          type: boolean
+    ConflictAck:
+      type: object
+      additionalProperties: false
+      required:
+      - operationId
+      - status
+      - serverState
+      properties:
+        operationId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        status:
+          type: string
+          enum:
+          - conflict
+        serverState:
+          $ref: '#/components/schemas/ConflictState'
+    RejectedAck:
+      type: object
+      additionalProperties: false
+      required:
+      - operationId
+      - status
+      - problem
+      properties:
+        operationId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        status:
+          type: string
+          enum:
+          - rejected
+        problem:
+          $ref: '#/components/schemas/Problem'
+    Ack:
+      oneOf:
+      - $ref: '#/components/schemas/AppliedAck'
+      - $ref: '#/components/schemas/ConflictAck'
+      - $ref: '#/components/schemas/RejectedAck'
+      discriminator:
+        propertyName: status
+    PushResponse:
+      type: object
+      additionalProperties: false
+      required:
+      - schemaVersion
+      - requestId
+      - results
+      properties:
+        schemaVersion:
+          type: integer
+          enum:
+          - 1
+        requestId:
+          type: string
+          format: uuid
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ack'
+          minItems: 1
+          maxItems: 100
+      description: HTTP 200 cho mixed batch; results giữ thứ tự request và đủ một
+        result mỗi operation. Retry trả nguyên result đã lưu, không đổi status sang
+        duplicate.

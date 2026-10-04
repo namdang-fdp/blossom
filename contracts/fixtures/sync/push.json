@@ -1,0 +1,442 @@
+[
+  {
+    "name": "mixed-request",
+    "schema": "PushRequest",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 1,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": null,
+          "operationType": "attempt.record",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "mixed-response",
+    "schema": "PushResponse",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "results": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "status": "applied",
+          "revision": "rev_2",
+          "effectiveReviewAt": "2026-10-04T07:00:00.123456Z",
+          "clockAdjusted": false
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "status": "conflict",
+          "serverState": {
+            "entityType": "library_entry",
+            "revision": "rev_2",
+            "value": {
+              "entryId": "30000000-0000-4000-8000-000000000020",
+              "sense": "quan tâm đến một hoạt động",
+              "usagePattern": "be interested in + noun/V-ing",
+              "note": "ghi chú tổng hợp từ thiết bị khác"
+            }
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "status": "rejected",
+          "problem": {
+            "type": "urn:no:problem:operation-in-progress",
+            "title": "Không thể đồng bộ",
+            "status": 409,
+            "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+            "code": "OPERATION_IN_PROGRESS",
+            "requestId": "20000000-0000-4000-8000-000000000001",
+            "retryable": true,
+            "fieldErrors": []
+          }
+        }
+      ]
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    "requestCase": "mixed-request",
+    "acknowledged": [
+      "30000000-0000-4000-8000-000000000001"
+    ],
+    "pending": [
+      "30000000-0000-4000-8000-000000000002",
+      "30000000-0000-4000-8000-000000000003"
+    ]
+  },
+  {
+    "name": "duplicate-request",
+    "schema": "PushRequest",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 1,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": null,
+          "operationType": "attempt.record",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "duplicate-response",
+    "schema": "PushResponse",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "results": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "status": "applied",
+          "revision": "rev_2",
+          "effectiveReviewAt": "2026-10-04T07:00:00.123456Z",
+          "clockAdjusted": false
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "status": "conflict",
+          "serverState": {
+            "entityType": "library_entry",
+            "revision": "rev_2",
+            "value": {
+              "entryId": "30000000-0000-4000-8000-000000000020",
+              "sense": "quan tâm đến một hoạt động",
+              "usagePattern": "be interested in + noun/V-ing",
+              "note": "ghi chú tổng hợp từ thiết bị khác"
+            }
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "status": "rejected",
+          "problem": {
+            "type": "urn:no:problem:operation-in-progress",
+            "title": "Không thể đồng bộ",
+            "status": 409,
+            "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+            "code": "OPERATION_IN_PROGRESS",
+            "requestId": "20000000-0000-4000-8000-000000000001",
+            "retryable": true,
+            "fieldErrors": []
+          }
+        }
+      ]
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    "requestCase": "duplicate-request",
+    "replayOf": "mixed-response",
+    "acknowledged": [
+      "30000000-0000-4000-8000-000000000001"
+    ],
+    "pending": [
+      "30000000-0000-4000-8000-000000000002",
+      "30000000-0000-4000-8000-000000000003"
+    ]
+  },
+  {
+    "name": "create-entry-request",
+    "schema": "PushRequest",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": null,
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "create-entry-response",
+    "schema": "PushResponse",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "results": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "status": "applied",
+          "revision": "rev_1",
+          "effectiveReviewAt": null,
+          "clockAdjusted": false
+        }
+      ]
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    "requestCase": "create-entry-request",
+    "acknowledged": [
+      "30000000-0000-4000-8000-000000000002"
+    ],
+    "pending": []
+  },
+  {
+    "name": "id-reused-request",
+    "schema": "PushRequest",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 1,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": null,
+          "operationType": "attempt.record",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "incorrect",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "id-reused-response",
+    "schema": "PushResponse",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "results": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "status": "rejected",
+          "problem": {
+            "type": "urn:no:problem:operation-id-reused",
+            "title": "Không thể đồng bộ",
+            "status": 422,
+            "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+            "code": "OPERATION_ID_REUSED",
+            "requestId": "20000000-0000-4000-8000-000000000001",
+            "retryable": false,
+            "fieldErrors": []
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "status": "conflict",
+          "serverState": {
+            "entityType": "library_entry",
+            "revision": "rev_2",
+            "value": {
+              "entryId": "30000000-0000-4000-8000-000000000020",
+              "sense": "quan tâm đến một hoạt động",
+              "usagePattern": "be interested in + noun/V-ing",
+              "note": "ghi chú tổng hợp từ thiết bị khác"
+            }
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "status": "rejected",
+          "problem": {
+            "type": "urn:no:problem:operation-in-progress",
+            "title": "Không thể đồng bộ",
+            "status": 409,
+            "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+            "code": "OPERATION_IN_PROGRESS",
+            "requestId": "20000000-0000-4000-8000-000000000001",
+            "retryable": true,
+            "fieldErrors": []
+          }
+        }
+      ]
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    "requestCase": "id-reused-request",
+    "acknowledged": [],
+    "pending": [
+      "30000000-0000-4000-8000-000000000001",
+      "30000000-0000-4000-8000-000000000002",
+      "30000000-0000-4000-8000-000000000003"
+    ]
+  }
+]

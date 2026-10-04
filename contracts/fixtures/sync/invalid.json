@@ -1,0 +1,578 @@
+[
+  {
+    "name": "spoofed-user",
+    "schema": "PushRequest",
+    "valid": false,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 1,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": null,
+          "operationType": "attempt.record",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ],
+      "userId": "30000000-0000-4000-8000-000000000099"
+    },
+    "errorPath": "userId"
+  },
+  {
+    "name": "unknown-version",
+    "schema": "PushRequest",
+    "valid": false,
+    "body": {
+      "schemaVersion": 2,
+      "operations": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 1,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": null,
+          "operationType": "attempt.record",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ]
+    },
+    "errorPath": "schemaVersion"
+  },
+  {
+    "name": "invalid-uuid",
+    "schema": "PushRequest",
+    "valid": false,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "operationId": "bad-id",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 1,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": null,
+          "operationType": "attempt.record",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ]
+    },
+    "errorPath": "operations/0/operationId"
+  },
+  {
+    "name": "unknown-operation",
+    "schema": "PushRequest",
+    "valid": false,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 1,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": null,
+          "operationType": "ai.grade",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ]
+    },
+    "errorPath": "operations/0"
+  },
+  {
+    "name": "missing-operation-id",
+    "schema": "PushRequest",
+    "valid": false,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 1,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": null,
+          "operationType": "attempt.record",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ]
+    },
+    "errorPath": "operations/0"
+  },
+  {
+    "name": "missing-base-revision",
+    "schema": "PushRequest",
+    "valid": false,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 1,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "operationType": "attempt.record",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ]
+    },
+    "errorPath": "operations/0"
+  },
+  {
+    "name": "invalid-date",
+    "schema": "PushRequest",
+    "valid": false,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 1,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-02-30",
+          "baseRevision": null,
+          "operationType": "attempt.record",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ]
+    },
+    "errorPath": "operations/0/learningDate"
+  },
+  {
+    "name": "unsafe-sequence",
+    "schema": "PushRequest",
+    "valid": false,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 9007199254740992,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": null,
+          "operationType": "attempt.record",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ]
+    },
+    "errorPath": "operations/0"
+  },
+  {
+    "name": "unknown-payload-field",
+    "schema": "PushRequest",
+    "valid": false,
+    "body": {
+      "schemaVersion": 1,
+      "operations": [
+        {
+          "operationId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 1,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": null,
+          "operationType": "attempt.record",
+          "payload": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1",
+            "userId": "30000000-0000-4000-8000-000000000099"
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000002",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 2,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.upsert",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        },
+        {
+          "operationId": "30000000-0000-4000-8000-000000000003",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 3,
+          "schemaVersion": 1,
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "baseRevision": "rev_1",
+          "operationType": "library.delete",
+          "payload": {
+            "entryId": "30000000-0000-4000-8000-000000000020"
+          }
+        }
+      ]
+    },
+    "errorPath": "operations/0"
+  }
+]
