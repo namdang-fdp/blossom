@@ -36,11 +36,13 @@ PostgreSQL không public cho mobile. Lượt học ghi local trước. Backgroun
 ## Cấu trúc dự kiến
 
 ```text
-apps/mobile/           Flutter, chia theo feature
-services/api/          Spring Boot, module theo domain
+apps/mobile/           Flutter/Drift, chia theo feature
+frontend/              Web trong tương lai, chưa scaffold
+api/                   Spring Boot/Maven, package theo domain (layout như Vey)
 contracts/             OpenAPI, fixtures, JSON schema gói và sync
 content/               Bài tự biên soạn, metadata quyền dùng, gói mẫu
-infra/                 Docker/dev, deployment configuration
+compose.yml            Hạ tầng local như Vey
+infra/                 Script và deployment configuration
 docs/                  Đặc tả, quyết định, tracker mapping
 tasks/plan.md          Kế hoạch và chỉ mục
 ```
@@ -82,4 +84,10 @@ Dart tính local để học dài ngày không mạng. Spring giữ event log v�
 
 ## Vận hành
 
-Dev dùng Docker Compose cho PostgreSQL/API; staging và production tách DB, bucket, AI quota. Log requestId/operationId không log token, câu riêng tư hay recording. Metrics: lỗi lưu local, sync conflict/duplicate, latency, AI cost/quota. Backup PostgreSQL và bài test restore; secrets ở môi trường triển khai, không trong repo.
+Dev dùng Docker Compose ở root cho API/PostgreSQL, Redis, Kafka, MinIO và công cụ local; staging và production tách DB, bucket, AI quota. Log requestId/operationId không log token, câu riêng tư hay recording. Metrics: lỗi lưu local, sync conflict/duplicate, latency, AI cost/quota. Backup PostgreSQL và bài test restore; secrets ở môi trường triển khai, không trong repo.
+
+## Reference Vey — cập nhật 2026-10-04
+
+Chủ dự án yêu cầu layout tương tự Vey và bật toàn bộ hạ tầng ngay: Redis, Kafka, MinIO, JobRunr, cùng Kafka UI/Dozzle ở local. Maven, JPA, Flyway, AWS SDK S3, Lombok/MapStruct, springdoc và quality tooling lấy Vey làm reference. Flutter/Drift và các bảo đảm offline vẫn giữ nguyên. Scope init mở rộng được mô tả trong `tasks/plan.md`; scaffold backend và evidence ở `docs/backend-scaffold.md`.
+
+Đề xuất cụ thể: modular monolith bằng `common`, `infrastructure`, `modules` trong một Maven project/một JAR. ArchUnit kiểm tra dependency boundaries. Gọi qua interface công khai cho thao tác synchronous; không import internals module khác. Đề xuất khác với Vey: side effects dùng Kafka qua transactional outbox, còn ghi sync operation + dedupe + ack phải atomic trên PostgreSQL. Không để broker/cache quyết định dữ liệu học đã được lưu an toàn. JobRunr dành cho durable backend jobs; nhắc học offline vẫn local Android.

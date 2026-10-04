@@ -75,4 +75,8 @@ Cổng pairing khác cổng connection. IP/cổng có thể đổi; không hard-
 
 UI dùng locale tiếng Việt; không có tên pilot hard-code. Kiến trúc tiếp theo vẫn Flutter + Riverpod + Drift local-first, Spring Boot + PostgreSQL server. Theo dõi công việc ở Kaneo/Bloom, không tạo `tasks/todo.md` song song.
 
+Theme shell theo [UX hiện hành](../../docs/ux.md): nền, AppBar và thanh điều hướng trắng; primary rose #C43D68, điểm chọn #FFF0F4, chữ tối trung tính. Đây là baseline sau khi tích hợp main vào nhánh thiết kế, chưa phải bộ component hoàn chỉnh NO-006 hoặc mockup đã được duyệt trên điện thoại.
+
+Kiểm chứng tích hợp ngày 2026-10-04, Flutter 3.44.8 / Dart 3.12.2: format sạch, `fvm flutter analyze` không có vấn đề, `fvm flutter test --no-pub` đạt 6 tests (config, bốn tab, stack/Back, màn nhỏ với chữ 200%). Chưa build APK hoặc chạy lại trên điện thoại cho thay đổi palette này; evidence thiết bị NO-001 bên dưới thuộc bản scaffold trước.
+
 Bằng chứng NO-001: [commands và smoke đã chạy](../../docs/evidence/NO-001.md).

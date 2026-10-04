@@ -2,18 +2,53 @@
 
 ## Hướng nhìn
 
-Hồng, dịu, rõ, có cảm giác sổ học và vườn nhỏ. Mascot là **hoa hồng có biểu cảm nguyên bản**, lấy cảm hứng cơ chế đồng hành của Duolingo; không sao chép hình/âm thanh/nội dung của họ. Tên gợi ý: "bé Hồng" trong copy, chưa phải tên thương hiệu phụ đã chốt.
+**Nền trắng sáng, nội dung học rõ, hồng rose làm điểm nhấn.** Người dùng phải nhìn ra ngay cần học gì và bấm gì tiếp theo. Giao diện nổi bật nhờ hệ thống chữ, khoảng trắng, hoa hồng nguyên bản và điểm nhấn nhất quán. Cảm giác là một sổ học sáng sủa có vườn nhỏ đồng hành.
 
-| Token ban đầu | Giá trị | Công dụng |
+Chủ dự án chốt hướng này ngày 2026-10-04 sau phản hồi thử trên điện thoại. Bảng màu dưới đây là baseline để làm mockup; sắc độ và component còn cần kiểm chứng trên thiết bị thật. Thay thế palette nền hồng nhạt trước đó.
+
+Mascot là **hoa hồng có biểu cảm nguyên bản**, lấy cảm hứng cơ chế đồng hành của Duolingo; không sao chép hình/âm thanh/nội dung của họ. Tên gợi ý: "bé Hồng" trong copy, chưa phải tên thương hiệu phụ đã chốt.
+
+## Màu và vai trò
+
+| Token | Giá trị | Công dụng |
 |---|---|---|
-| background | #FFF8FA | Nền |
+| background | #FFFFFF | Nền chính, gồm màn học và thanh điều hướng |
 | surface | #FFFFFF | Nội dung |
-| primary | #BE185D | CTA |
-| primary-soft | #FCE7F3 | Mảng trang trí |
-| text | #352331 | Chữ chính |
+| surface-subtle | #F7F8FA | Vùng phụ, ô nhập, nhóm nội dung cần tách nhẹ |
+| primary | #C43D68 | CTA chính có chữ trắng, chữ/icon nhấn, trạng thái được chọn |
+| on-primary | #FFFFFF | Chữ/icon trên primary |
+| rose | #E85D86 | Cánh hoa và điểm nhấn nhận diện |
+| primary-soft | #FFF0F4 | Mảng hồng nhẹ cục bộ |
+| text | #1F2937 | Chữ chính trung tính |
+| text-secondary | #667085 | Giải thích, nhãn phụ |
 | leaf | #527A5B | Lá, hỗ trợ trạng thái |
 
-Đây là đề xuất cần đo contrast ở component thực tế. Không dùng màu làm dấu hiệu đúng/sai duy nhất. Font có dấu tiếng Việt rõ; nội dung hỗ trợ text scale 200%, touch target tối thiểu 48dp. Motion ngắn; có reduced motion, không đặt animation trước khi được trả lời câu tiếp theo.
+Chữ trắng trên primary có contrast khoảng 4,98:1; text-secondary trên trắng khoảng 4,97:1. Chữ trắng trên rose chỉ khoảng 3,31:1, nên không dùng cặp này cho chữ thường. Mỗi component vẫn phải đo contrast trên nền thực tế, gồm selected/pressed/focus và các mảng hồng nhẹ; chữ thường tối thiểu 4,5:1, icon/chỉ dấu điều khiển mang thông tin tối thiểu 3:1. Surface-subtle chỉ giúp nhóm nội dung, không thay cho đường biên/focus cần thiết để nhận ra ô nhập hoặc điều khiển.
+
+Không phủ hồng toàn màn học hoặc mọi card/tiêu đề. Màu đúng/sai/cảnh báo tách vai trò với màu thương hiệu; phản hồi phải có chữ và dấu hiệu bổ sung, không dùng màu làm dấu hiệu duy nhất. Khi triển khai Flutter, ánh xạ các vai trò qua theme/token dùng chung thay vì hard-code màu ở từng màn.
+
+## Bố cục giúp dễ học
+
+- Một nhiệm vụ và một CTA chính mỗi màn học. Thứ tự đọc: yêu cầu ngắn → câu/ngữ cảnh → vùng trả lời → hành động → phản hồi khi có. Giữ vị trí CTA ổn định, tách các thao tác phụ như nghe lại, gợi ý và thoát.
+- Câu tiếng Anh, nghĩa đang học và mẫu dùng là trọng tâm. Phân biệt bằng cỡ/độ đậm và nhãn; chỉ tô điểm phần mẫu mục tiêu khi đang dạy. Bài tự nhớ phải che mẫu và mọi điểm nhấn làm lộ đáp án; chỉ mở theo cơ chế gợi ý đã quy định trong learning-design.
+- Chi tiết mục học trình bày nghĩa + mẫu dùng + câu ví dụ + hoàn cảnh; phần giải thích dài có thể mở thêm. Giữ nút audio rõ và gần câu tương ứng, không rút nội dung thành cặp từ/dịch.
+- Dùng một họ font sans-serif đọc rõ dấu tiếng Việt; baseline nội dung 16–18sp, tiêu đề 24–28sp, giãn dòng khoảng 1,4–1,6. Dùng ít cấp chữ; tránh font trang trí trong bài tập và tránh chữ phụ quá nhỏ.
+- Dùng nhịp khoảng cách 4/8dp, lề ngang baseline 20dp, khoảng cách giữa nhóm 24–32dp; điều chỉnh theo màn nhỏ và text scale. Card bo nhẹ 12–16dp khi thực sự cần nhóm; ưu tiên khoảng trắng, hạn chế khung lồng nhau và bóng đổ.
+- Icon cùng một bộ và độ nét nhất quán; tab có nhãn tiếng Việt. Hoa hồng tạo nhận diện ở Hôm nay/Khu vườn/Kết quả; không chiếm vùng trả lời hoặc gây phân tâm trong bài.
+- Nội dung hỗ trợ text scale 200%, touch target tối thiểu 48dp, safe area và bàn phím. Màn phải cuộn được khi cần; câu, lỗi và nút tiếp tục không bị che. Motion ngắn; có reduced motion, không đặt animation trước khi được trả lời câu tiếp theo.
+
+## Tham khảo thiết kế
+
+Khảo sát ngày 2026-10-04 dựa trên ảnh giao diện chính thức/ảnh giới thiệu của nhà phát triển, chưa phải kiểm thử trực tiếp các app. Những nhận xét dưới đây là định hướng áp dụng cho Nở, không phải bằng chứng hiệu quả học tập.
+
+| Tham khảo | Học điều gì | Áp dụng |
+|---|---|---|
+| [Busuu](https://www.busuu.com/) | Vùng bài tập sáng, chữ tối rõ, màu tập trung vào lựa chọn và phản hồi | Tham khảo chính cho Học/Luyện câu |
+| [Babbel](https://apps.apple.com/us/app/babbel-language-learning/id829587759) | Câu, nghe/nói và hành động chính nổi bật trên nền sáng | Câu mẫu, audio, thứ bậc nội dung |
+| [Quizlet](https://apps.apple.com/us/app/quizlet-more-than-flashcards/id546473125) | Nội dung học ưu tiên trên vùng trắng/xám nhạt | Kho từ và chi tiết mục học |
+| [Duolingo — core tabs redesign](https://blog.duolingo.com/core-tabs-redesign/) | Mascot có cá tính, chữ/khoảng cách nhất quán, giảm khung chứa thừa | Hoa hồng, kết quả và tính nhất quán giữa tab |
+
+Giữ nhận diện và nội dung nguyên bản của Nở. Không sao chép màn hình, mascot hoặc kéo leaderboard/tính năng xã hội vào MVP chỉ vì app tham khảo có chúng.
 
 ## Điều hướng
 
@@ -29,6 +64,24 @@ Hồng, dịu, rõ, có cảm giác sổ học và vườn nhỏ. Mascot là **h
 6. Luyện câu/Sổ lỗi: câu có khung, tự viết, bản nháp offline, trạng thái chờ AI rõ ràng, thử lại lỗi.
 7. Khu vườn: trạng thái hoa, lịch tuần, bằng chứng tiến bộ; không hiển thị dữ liệu AI như điểm thi.
 8. Cài đặt: nhắc/giờ yên lặng/múi giờ, tải dữ liệu, đồng bộ, liên kết tài khoản, dữ liệu cá nhân/xóa.
+
+### Áp dụng thị giác theo màn
+
+| Màn | Ưu tiên |
+|---|---|
+| Hôm nay | Nền trắng; hoa nhỏ tạo điểm nhận diện; CTA “Bắt đầu học” hoặc “Tiếp tục học” nổi bật; 5/15/30 phút là lựa chọn phụ. Tránh banner lớn đẩy CTA khỏi màn đầu. |
+| Học / Luyện câu | Nền trắng, câu và vùng trả lời chiếm ưu tiên; màu rose ít, phản hồi ngắn chỉ rõ phần cần sửa và cách dùng. |
+| Kho từ | Tìm kiếm dễ thấy, danh sách gọn với nghĩa/mẫu phân biệt được; tránh mỗi mục một card trang trí lớn. |
+| Kết quả | Báo rõ tự nhớ/nhờ gợi ý/cần ôn; hoa và màu tạo niềm vui sau nỗ lực, CTA học tiếp rõ. |
+| Khu vườn | Có thể dùng mảng hồng nhẹ và minh họa nhiều hơn; lịch, trạng thái hoa và bằng chứng tiến bộ vẫn đọc rõ. |
+
+### Checklist cho mockup tiếp theo
+
+- Có Hôm nay, một màn giới thiệu nghĩa/mẫu, một màn tự nhớ, phản hồi sai/có gợi ý, Kết quả, Kho từ và Khu vườn; dùng nội dung tiếng Việt thực tế.
+- Nhìn vào màn học thấy ngay yêu cầu, chỗ trả lời và hành động tiếp theo; CTA không cạnh tranh với mascot hoặc nhiều nút cùng độ nổi bật.
+- So sánh nền trắng và các vai trò màu trên cùng nội dung; kiểm tra màn Android nhỏ, text scale 200% và bàn phím mở. Đo contrast từng cặp chữ/nền thực tế.
+- Có trạng thái offline, đang lưu, lỗi lưu và AI đang chờ; tiến độ và câu hiện tại được giữ đúng hợp đồng offline. Chỉ hiện “Đã lưu” sau commit local thành công.
+- Khi có prototype, kiểm chứng với người học mục tiêu: họ hiểu yêu cầu, tìm được audio/gợi ý, trả lời và sửa lỗi mà không cần hướng dẫn. Mockup chưa phải bằng chứng các tiêu chí này đã đạt.
 
 ## Hoa hồng: quy tắc v1
 

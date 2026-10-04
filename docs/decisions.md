@@ -9,9 +9,9 @@
 | Client | Flutter, Android trước |
 | Backend | Spring Boot, PostgreSQL |
 | Offline | Bắt buộc; SQLite/Drift trên máy. Thay thế hoàn toàn đề xuất online-first trước đó |
-| Nhận diện | Màu hồng, mascot hoa hồng; học đều thì nở, nghỉ lâu thì rũ và có nhắc |
+| Nhận diện | Nền trắng sáng, hồng rose làm điểm nhấn, chữ tối trung tính; nội dung học và CTA nổi bật. Mascot hoa hồng; học đều thì nở, nghỉ lâu thì rũ và có nhắc. Palette baseline và quy tắc mockup ở [ux.md](ux.md) |
 | Nội dung | Từ, giới từ/cụm, mẫu câu, hoàn cảnh, active recall, nhớ lâu, import |
-| Công việc hiện tại | Tạo docs và chia task đầy đủ MVP trong Kaneo/Bloom; chưa viết ứng dụng |
+| Công việc hiện tại | Docs/backlog MVP đã có; scaffold Flutter Android và Spring Boot đã tích hợp. Các tính năng học/offline/sync tiếp tục theo từng task trong Kaneo/Bloom |
 
 ## Quyết định triển khai đề xuất để lập kế hoạch
 
@@ -38,3 +38,13 @@
 ## Cập nhật
 
 2026-10-04: offline-first là yêu cầu bắt buộc theo chỉnh sửa cuối của người dùng; PostgreSQL vẫn giữ phía server. Không còn kế hoạch bỏ SQLite.
+
+2026-10-04: sau phản hồi thử trên điện thoại, chủ dự án chốt cập nhật docs sang nền trắng sáng, đổi hồng theo hướng rose và ưu tiên dễ học. Palette baseline: primary #C43D68, rose #E85D86, primary-soft #FFF0F4. Mockup do chủ dự án làm sau; chưa coi palette/component đã được kiểm chứng trên thiết bị và chưa thay đổi ứng dụng.
+
+2026-10-04 (backend planning): chủ dự án yêu cầu tham khảo Vey, folder tương tự và bật toàn bộ hạ tầng ngay. Layout đích là `api/`, `frontend/` (Flutter), `compose.yml` ở root. Redis/Kafka/MinIO/JobRunr được thêm vào scope setup; đây là mở rộng so với NO-002 gốc. Modular monolith bằng package, một Maven project/JAR và transaction/outbox boundary là đề xuất trong plan; chưa triển khai, chưa cập nhật task live.
+
+2026-10-04 (backend scaffold): chủ dự án duyệt thực thi. Scaffold một Maven project/package modular monolith theo Vey được tạo ở `api/`, cùng stack Compose đầy đủ. Transactional outbox vẫn là boundary cho side effects trong các task domain sau. Xem `docs/backend-scaffold.md` cho evidence; Kaneo đọc bị 403, chưa cập nhật board.
+
+2026-10-04 (chốt lại layout sau merge): chủ dự án giữ Flutter tại `apps/mobile/` cho app Android; `frontend/` dành cho web trong tương lai, chưa chọn stack hay scaffold web. Backend vẫn tại `api/`. Quyết định này thay thế vị trí Flutter trong kế hoạch backend ban đầu.
+
+2026-10-04 (tích hợp nhánh thiết kế): nhập hai PR scaffold từ main, giữ quyết định nền trắng/hồng rose. Theme shell Flutter được chỉnh theo palette baseline ở ux.md; bộ component NO-006 và kiểm chứng mockup trên điện thoại vẫn là công việc tiếp theo.

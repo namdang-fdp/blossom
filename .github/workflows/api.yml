@@ -1,0 +1,41 @@
+name: Backend quality
+on:
+  pull_request:
+    paths: ['api/**', 'contracts/**', 'infra/minio/**', 'compose.yml', '.github/workflows/api.yml']
+  push:
+    branches: [main]
+    paths: ['api/**', 'contracts/**', 'infra/minio/**', 'compose.yml', '.github/workflows/api.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          cache-dependency-path: api/pom.xml
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate scaffold API contract
+        run: |
+          python -m pip install openapi-spec-validator==0.7.2
+          openapi-spec-validator contracts/openapi.yaml
+      - name: Quality and real infrastructure integration tests
+        working-directory: api
+        run: ./mvnw -B -ntp verify
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-test-reports
+          path: |
+            api/target/surefire-reports/
+            api/target/failsafe-reports/
+            api/target/site/jacoco/
+      - name: Build runtime image without publishing
+        run: docker build -t no-api:ci api
