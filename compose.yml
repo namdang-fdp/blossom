@@ -1,0 +1,186 @@
+name: no-dev
+
+services:
+  postgres:
+    image: postgres:18.6
+    environment:
+      POSTGRES_DB: no_db
+      POSTGRES_USER: no
+      POSTGRES_PASSWORD: ${NO_POSTGRES_PASSWORD:-no_local_password}
+    ports:
+      - "127.0.0.1:${NO_POSTGRES_PORT:-56432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U no -d no_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  api:
+    restart: unless-stopped
+    build: ./api
+    profiles: [app]
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/no_db
+      SPRING_DATASOURCE_USERNAME: no
+      SPRING_DATASOURCE_PASSWORD: ${NO_POSTGRES_PASSWORD:-no_local_password}
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      NO_STORAGE_ENDPOINT: http://minio:9000
+      NO_STORAGE_ACCESS_KEY: ${NO_MINIO_ACCESS_KEY:-no-local}
+      NO_STORAGE_SECRET_KEY: ${NO_MINIO_SECRET_KEY:-no-local-password}
+      NO_STORAGE_BUCKET: no-media
+      SERVER_PORT: 8082
+    ports:
+      - "127.0.0.1:${NO_API_PORT:-8082}:8082"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8082/actuator/health/readiness"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 30s
+
+  minio-init:
+    profiles: [app]
+    image: no-minio:RELEASE.2025-09-07T16-13-09Z
+    build: ./infra/minio
+    pull_policy: build
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      MINIO_USER: ${NO_MINIO_ACCESS_KEY:-no-local}
+      MINIO_PASSWORD: ${NO_MINIO_SECRET_KEY:-no-local-password}
+    entrypoint: /bin/sh
+    command:
+      - -ec
+      - |
+        mc alias set local http://minio:9000 "$$MINIO_USER" "$$MINIO_PASSWORD" >/dev/null
+        mc mb --ignore-existing local/no-media
+
+  redis:
+    image: redis:7.4.6
+    ports:
+      - "127.0.0.1:${NO_REDIS_PORT:-57379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    restart: unless-stopped
+
+  kafka:
+    image: apache/kafka:3.9.1
+    ports:
+      - "127.0.0.1:${NO_KAFKA_PORT:-60092}:9092"
+    environment:
+      CLUSTER_ID: "4L6g3nShT-eMCtK--X86sw"
+
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+
+      KAFKA_LISTENERS: >-
+        INTERNAL://0.0.0.0:29092,
+        EXTERNAL://0.0.0.0:9092,
+        CONTROLLER://0.0.0.0:9093
+
+      KAFKA_ADVERTISED_LISTENERS: >-
+        INTERNAL://kafka:29092,
+        EXTERNAL://localhost:${NO_KAFKA_PORT:-60092}
+
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: >-
+        INTERNAL:PLAINTEXT,
+        EXTERNAL:PLAINTEXT,
+        CONTROLLER:PLAINTEXT
+
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 18
+      start_period: 20s
+
+    restart: unless-stopped
+
+  kafka-ui:
+    image: ghcr.io/kafbat/kafka-ui:v1.5.0
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      KAFKA_CLUSTERS_0_NAME: no-local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      DYNAMIC_CONFIG_ENABLED: "false"
+    ports:
+      - "127.0.0.1:${NO_KAFKA_UI_PORT:-61080}:8080"
+    restart: unless-stopped
+
+  minio:
+    image: no-minio:RELEASE.2025-09-07T16-13-09Z
+    build: ./infra/minio
+    pull_policy: build
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${NO_MINIO_ACCESS_KEY:-no-local}
+      MINIO_ROOT_PASSWORD: ${NO_MINIO_SECRET_KEY:-no-local-password}
+    ports:
+      - "127.0.0.1:${NO_MINIO_PORT:-60000}:9000"
+      - "127.0.0.1:${NO_MINIO_CONSOLE_PORT:-60001}:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9000/minio/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  dozzle:
+    image: amir20/dozzle:v11.1.1
+    environment:
+      DOZZLE_HOSTNAME: no-local
+      DOZZLE_NO_ANALYTICS: "true"
+      DOZZLE_FILTER: label=com.docker.compose.project=no-dev
+    ports:
+      - "127.0.0.1:${NO_DOZZLE_PORT:-61081}:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - dozzle_data:/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  kafka_data:
+  minio_data:
+  dozzle_data:

@@ -38,3 +38,9 @@
 ## Cập nhật
 
 2026-10-04: offline-first là yêu cầu bắt buộc theo chỉnh sửa cuối của người dùng; PostgreSQL vẫn giữ phía server. Không còn kế hoạch bỏ SQLite.
+
+2026-10-04 (backend planning): chủ dự án yêu cầu tham khảo Vey, folder tương tự và bật toàn bộ hạ tầng ngay. Layout đích là `api/`, `frontend/` (Flutter), `compose.yml` ở root. Redis/Kafka/MinIO/JobRunr được thêm vào scope setup; đây là mở rộng so với NO-002 gốc. Modular monolith bằng package, một Maven project/JAR và transaction/outbox boundary là đề xuất trong plan; chưa triển khai, chưa cập nhật task live.
+
+2026-10-04 (backend scaffold): chủ dự án duyệt thực thi. Scaffold một Maven project/package modular monolith theo Vey được tạo ở `api/`, cùng stack Compose đầy đủ. Transactional outbox vẫn là boundary cho side effects trong các task domain sau. Xem `docs/backend-scaffold.md` cho evidence; Kaneo đọc bị 403, chưa cập nhật board.
+
+2026-10-04 (chốt lại layout sau merge): chủ dự án giữ Flutter tại `apps/mobile/` cho app Android; `frontend/` dành cho web trong tương lai, chưa chọn stack hay scaffold web. Backend vẫn tại `api/`. Quyết định này thay thế vị trí Flutter trong kế hoạch backend ban đầu.

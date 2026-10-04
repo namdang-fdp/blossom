@@ -10,9 +10,11 @@
 
 ## Kết nối đã xác minh
 
-Ngày 2026-10-04: phiên agent không expose tool Kaneo. Cấu hình có endpoint `https://kaneo.dorriss.com/api/mcp`, nhưng gửi API key dạng Bearer tới endpoint này nhận 401. Cùng credential trong cấu hình sử dụng header `x-api-key` với REST API của **chính instance Kaneo này** đã đọc được Bloom và tạo task thành công. Không sửa cấu hình MCP toàn cục.
+Đầu ngày 2026-10-04: phiên agent chưa expose tool Kaneo. Cấu hình có endpoint `https://kaneo.dorriss.com/api/mcp`, nhưng gửi API key dạng Bearer tới endpoint này nhận 401. Cùng credential trong cấu hình sử dụng header `x-api-key` với REST API của **chính instance Kaneo này** đã đọc được Bloom và tạo task thành công. Không sửa cấu hình MCP toàn cục.
 
-Ưu tiên MCP nếu phiên sau đã có tool và xác thực đúng. Nếu cần REST fallback, đọc credential từ biến môi trường được cấu hình, chỉ gửi tới host Kaneo đích, không in/lưu vào repo. Không yêu cầu người dùng paste key vào chat. Credential có thể được rotate; không giả định key của phiên lập kế hoạch còn dùng được.
+Sau khi người dùng đăng nhập lại ngày 2026-10-04, MCP đã expose tools và đọc thành công `get_project` (Bloom), `get_task` (NO-002) và `get_task_relations`. Đọc thêm NO-001 xác nhận trạng thái `done`; NO-002 đang `in-progress`. Không thay đổi task/status trong lượt kiểm tra. Server không hỗ trợ `resources/list` (method not found); việc này không phải lỗi đăng nhập.
+
+Ưu tiên MCP khi đã có tool và xác thực đúng. Nếu cần REST fallback, đọc credential từ biến môi trường được cấu hình, chỉ gửi tới host Kaneo đích, không in/lưu vào repo. Không yêu cầu người dùng paste key vào chat. Credential có thể được rotate; không giả định key của phiên lập kế hoạch còn dùng được.
 
 ## Quy tắc tránh trùng
 
