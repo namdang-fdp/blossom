@@ -2,7 +2,7 @@
 
 Ngày lập: 2026-10-04. Tên sản phẩm: **Nở**. Tên project trên Kaneo: **Bloom**.
 
-Đây là đặc tả và kế hoạch triển khai, không phải mô tả toàn bộ chức năng đã được xây dựng. NO-001 đã tạo scaffold Flutter Android tại `frontend/`; xem [hướng dẫn chạy](../frontend/README.md). Các tính năng học/SQLite/starter/sync trong đặc tả vẫn chưa được triển khai. Nội dung sản phẩm viết bằng tiếng Việt; mã nguồn dùng định danh tiếng Anh.
+Đây là đặc tả và kế hoạch triển khai, không phải mô tả toàn bộ chức năng đã được xây dựng. NO-001 đã tạo scaffold Flutter Android tại `apps/mobile/`; xem [hướng dẫn chạy](../apps/mobile/README.md). Các tính năng học/SQLite/starter/sync trong đặc tả vẫn chưa được triển khai. Nội dung sản phẩm viết bằng tiếng Việt; mã nguồn dùng định danh tiếng Anh.
 
 ## Đọc theo thứ tự
 

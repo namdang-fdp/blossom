@@ -11,7 +11,7 @@ Ngày kiểm chứng: 2026-10-04, worktree Init-Spring-Backend. Chủ dự án d
 - Flyway V1 tạo schema `jobs`; JobRunr 8.4.2 sở hữu table migrations bên trong schema. JPA chỉ validate schema.
 - Makefile, optional pre-commit, Spotless/Checkstyle/JaCoCo, GitHub workflow kiểm tra/build; không có bước publish/deploy.
 - `contracts/openapi.yaml`: health scaffold. Swagger local dùng operation/schema tương ứng. Sync/error/private contract thuộc NO-003.
-- `frontend/README.md` chỉ xác định vị trí Flutter/Drift theo layout; chưa có mobile app.
+- Tại thời điểm scaffold backend ban đầu, `frontend/README.md` là placeholder Flutter/Drift; mobile được hợp nhất sau đó.
 
 ## Commands và kết quả đã chạy
 
@@ -55,6 +55,10 @@ Stack Docker local được giữ đang chạy để tiếp tục phát triển;
 
 ## Hợp nhất với Flutter scaffold
 
-Sau merge main, code Flutter NO-001 được chuyển từ `apps/mobile/` sang `frontend/` theo layout đã chốt. `frontend/README.md` hiện là hướng dẫn chạy thật, thay cho placeholder ở thời điểm kiểm chứng backend ban đầu. Source Flutter và các yêu cầu dùng điện thoại thật được giữ nguyên.
+Sau merge main, code Flutter NO-001 được chuyển từ `apps/mobile/` sang `frontend/` theo layout đã chốt. Ở thời điểm merge, `frontend/README.md` là hướng dẫn chạy thật, thay cho placeholder ở thời điểm kiểm chứng backend ban đầu. Source Flutter và các yêu cầu dùng điện thoại thật được giữ nguyên.
 
 Backend sau hợp nhất: `cd api && ./mvnw -B -ntp verify` đạt BUILD SUCCESS, 9 tests không fail/error/skip, Spotless/Checkstyle đạt (45.292 giây). Flutter format/analyze, 6 tests và hai APK ARM64 debug dev/staging cũng đạt tại `frontend/`; xem evidence NO-001 cho giới hạn device testing của lượt merge.
+
+## Chốt lại layout
+
+Ngày 2026-10-04, theo yêu cầu mới nhất của chủ dự án, Flutter trở về `apps/mobile/`; `frontend/` dành cho web tương lai. Các lệnh tại `frontend/` ở mục merge phía trên là bằng chứng lịch sử.

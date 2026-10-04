@@ -4,7 +4,7 @@ Ngày lập: 2026-10-04. Task tracker: **Kaneo / Bloom**. Đặc tả sản ph�
 
 ## Đầu ra được yêu cầu hiện tại
 
-Backlog MVP đã xuất bản. Chủ dự án duyệt NO-001 Flutter Android và scaffold backend NO-002 theo Vey; cả hai có đầu ra để review. Sau merge, mobile ở `frontend/`, backend ở `api/`. Bằng chứng: [NO-001](../docs/evidence/NO-001.md) và [backend](../docs/backend-scaffold.md). Kaneo giữ trạng thái task; các task còn lại theo DAG, không suy toàn bộ tính năng đã hoạt động từ scaffold. Các đường dẫn `apps/mobile/` trong kế hoạch NO-001 bên dưới là lịch sử trước khi hợp nhất layout thành `frontend/`.
+Backlog MVP đã xuất bản. Chủ dự án duyệt NO-001 Flutter Android và scaffold backend NO-002 theo Vey; cả hai có đầu ra để review. Theo quyết định mới nhất, mobile ở `apps/mobile/`, backend ở `api/`; `frontend/` dành cho web sau này. Bằng chứng: [NO-001](../docs/evidence/NO-001.md) và [backend](../docs/backend-scaffold.md). Kaneo giữ trạng thái task; các task còn lại theo DAG, không suy toàn bộ tính năng đã hoạt động từ scaffold.
 
 ## Cách đọc backlog
 
@@ -150,7 +150,8 @@ api/
     db/migration/
   src/test/java/com/dorriss/no/
     arch/
-frontend/                   # Flutter + Drift khi NO-001 triển khai
+apps/mobile/                # Flutter Android + Drift
+frontend/                   # dành cho web tương lai, chưa scaffold
 contracts/
 content/
 infra/                      # script/cấu hình vận hành bổ sung
@@ -163,7 +164,7 @@ docs/
 tasks/plan.md
 ```
 
-`frontend/` giữ vai trò client giống Vey nhưng là Flutter, không chuyển thành Next.js. `docs/` tiếp tục là bộ nhớ Nở; không tạo vault Brain thứ hai. Package `com.dorriss.no` là tên kỹ thuật đề xuất cho backend.
+Theo chốt lại của chủ dự án ngày 2026-10-04, `apps/mobile/` giữ app Flutter; `frontend/` dành cho web tương lai, chưa chọn stack web. `docs/` tiếp tục là bộ nhớ Nở; không tạo vault Brain thứ hai. Package `com.dorriss.no` là tên kỹ thuật đề xuất cho backend.
 
 Stack từ Vey:
 

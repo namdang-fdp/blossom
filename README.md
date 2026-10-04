@@ -4,16 +4,18 @@ App học tiếng Anh Android, Flutter + SQLite/Drift để học offline. Backe
 
 ## Chạy Flutter Android
 
-Flutter 3.44.8 được pin bằng FVM. Build mobile dùng JDK 21; backend dùng JDK 25. Đọc [mobile README](frontend/README.md) trước khi chạy.
+Flutter 3.44.8 được pin bằng FVM. Build mobile dùng JDK 21; backend dùng JDK 25. Đọc [mobile README](apps/mobile/README.md) trước khi chạy.
 
 ```sh
-cd frontend
+cd apps/mobile
 fvm use 3.44.8
 fvm flutter pub get
 fvm flutter run --flavor dev -d <device-id>
 ```
 
 Mobile hiện có scaffold 4 tab và config dev/staging. SQLite/Drift, starter pack/audio và luồng học offline thuộc task tiếp theo. Thiết bị test dùng điện thoại thật qua ADB; không launch emulator.
+
+`frontend/` dành cho web trong tương lai; chưa scaffold web.
 
 ## Chạy backend local
 
