@@ -6,7 +6,17 @@ Code ở `apps/mobile/`; lệnh setup/build/test và runtime thực tế tại [
 
 Shell dùng `go_router` 18.0.2 với bốn StatefulShellBranch, locale tiếng Việt và hai product flavors dev/staging. Tab: Hôm nay, Kho từ, Luyện câu, Khu vườn. Giữ stack trong process khi đổi tab; Android Back pop child route trước, từ tab root khác về Hôm nay, từ root Hôm nay để OS thoát. Chưa có khôi phục stack bền sau process kill.
 
-`app/` giữ app root/router; `core/config/` giữ immutable config từ `appFlavor`; `features/scaffold/` giữ placeholder dùng chung. Không gọi mạng khi bootstrap, không có login wall. Riverpod, Drift, starter/audio, study và sync là kiến trúc đích ở các task sau, chưa được thực hiện bởi scaffold. Tách feature thật khi bắt đầu task tương ứng.
+`app/` giữ app root/router; `core/config/` giữ immutable config từ `appFlavor`; `features/scaffold/` giữ placeholder dùng chung. Không gọi mạng khi bootstrap, không có login wall. Scaffold ban đầu chưa có persistence; NO-007 bổ sung Riverpod/Drift như bên dưới. Starter/audio, study và sync thuộc các task sau. Tách feature thật khi bắt đầu task tương ứng.
+
+## Guest persistence hiện tại — NO-007
+
+`data/local/` chứa Drift schema/versioned migration; `features/profile/` chứa repository, explicit profile transaction scope và Riverpod bootstrap. DB `no_local.sqlite` ở app-private application support directory, drift_flutter mở trên background isolate. Singleton installation chứa device UUID và FK tới active profile; local_profiles giữ profile UUID, createdAt và displayName nullable. Flavor dev/staging có sandbox riêng.
+
+Transaction khởi tạo trả identity sau commit; gọi đồng thời trên cùng connection không tạo trùng. Lỗi ghi rollback và không reset DB. DB có profiles nhưng thiếu installation/active reference thành lỗi phục hồi, không thay identity ngầm. `withProfile(id, callback)` giới hạn writes vào profile được chỉ định và hết hiệu lực scope sau transaction; không cung cấp account authorization hoặc guest merge trong NO-007.
+
+Schema v1 là fixture phát triển chưa phát hành; v2 thêm tên tùy chọn. Snapshot versioned và tests kiểm tra fresh schema, populated upgrade, reopen, isolation, rollback và retry. Riverpod sở hữu DB/repository; loading/error/retry dùng theme nền trắng/rose từ main, shell hiển thị sau commit. Không HTTP/Firebase khi bootstrap.
+
+Android `allowBackup=false`/`fullBackupContent=false`; Android 12+ extraction rules loại file DB và sidecars khỏi cloud/device transfer. Installation identity không được clone qua backup hệ thống; backup Nở có opt-in ở P2. Nguồn cấu hình: [Android Auto Backup](https://developer.android.com/identity/data/autobackup). Bằng chứng và giới hạn: [NO-007](evidence/NO-007.md).
 
 ## Stack
 

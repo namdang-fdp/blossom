@@ -4,7 +4,7 @@ Ngày lập: 2026-10-04. Task tracker: **Kaneo / Bloom**. Đặc tả sản ph�
 
 ## Đầu ra được yêu cầu hiện tại
 
-Yêu cầu mới ngày 2026-10-04: kiểm tra readiness và lập kế hoạch NO-007. Đã đọc task/relations/comments live qua MCP Kaneo: NO-007 `in-progress`, dependency duy nhất NO-001 `done`; không có comment bổ sung. Kế hoạch chi tiết và chỉ mục task con ở cuối file. Phiên này chỉ lập kế hoạch, chưa triển khai NO-007; nội dung NO-001 bên dưới là lịch sử.
+Yêu cầu mới ngày 2026-10-04: kiểm tra readiness và lập kế hoạch NO-007. Đã đọc task/relations/comments live qua MCP Kaneo: NO-007 `in-progress`, dependency duy nhất NO-001 `done`; không có comment bổ sung. Kế hoạch chi tiết và chỉ mục task con ở cuối file. Chủ dự án đã duyệt triển khai NO-007 và yêu cầu fetch/merge main trước code; nội dung NO-001 bên dưới là lịch sử.
 
 Backlog MVP đã xuất bản. Chủ dự án duyệt NO-001 Flutter Android và scaffold backend NO-002 theo Vey; cả hai có đầu ra để review. Theo quyết định mới nhất, mobile ở `apps/mobile/`, backend ở `api/`; `frontend/` dành cho web sau này. Bằng chứng: [NO-001](../docs/evidence/NO-001.md) và [backend](../docs/backend-scaffold.md). Kaneo giữ trạng thái task; các task còn lại theo DAG, không suy toàn bộ tính năng đã hoạt động từ scaffold.
 
@@ -322,9 +322,9 @@ Kiểm chứng bổ sung sau khi chủ dự án yêu cầu commit: OPPO Reno8, A
 
 Kiểm tra trực tiếp ngày 2026-10-04: [NO-007 / BLO-7](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/xc1vmwt6xhgzvirgqyd81r62) đang `in-progress`, high, chưa có assignee. Incoming `blocks` duy nhất là NO-001, đã `done`/`isCompleted=true`; không có comment. **Có thể bắt đầu triển khai**, không có dependency mở. NO-007 đang chặn NO-012, NO-017, NO-027 và NO-064. Các quan hệ cũ được giữ nguyên.
 
-Đã đối chiếu docs/README, product R01/R11, architecture, UX, offline-sync, quality-release và code. Repo có Flutter shell/config/router và tests; chưa có Riverpod/Drift/SQLite, chưa có contracts hoặc backend. NO-007 không phụ thuộc backend, NO-003, theme NO-006, auth provider hay AI.
+Đã đối chiếu docs/README, product R01/R11, architecture, UX, offline-sync, quality-release và code. Ở lúc lập kế hoạch repo chỉ có Flutter shell/config/router/tests. Trước implementation đã merge origin/main 957b2a1, nhận backend/contracts và design nền trắng/rose ở docs/ux.md; giữ theme trên main. NO-007 không phụ thuộc backend, NO-003, theme NO-006, auth provider hay AI.
 
-`adb devices -l` chưa thấy thiết bị ở lúc lập kế hoạch. Đây là điều kiện còn thiếu để hoàn tất device acceptance, không chặn code/unit/widget/migration tests. Không chạy emulator. Thiết bị cần được kết nối lại; device ID phải được khám phá ở lần test.
+`adb devices -l` chưa thấy thiết bị ở lúc lập kế hoạch. Sau khi chủ dự án kết nối và khôi phục quyền workstation, đã thấy OPPO CPH2461 / Android 14 qua wireless ADB. Không chạy emulator; ID được khám phá ở lần test. Chủ dự án chọn APK Dev không có INTERNET làm phép thử offline thay airplane mode.
 
 **Đầu ra:** lần mở đầu không mạng tạo guest UUID, device UUID và profile local; lần mở sau giữ identity; migrations có version, profile scoping và transaction API; test nâng DB không mất dữ liệu. NO-007 chỉ hoàn thành phần guest persistence của R01/R11. Starter/audio ở NO-012; lưu attempt/outbox ở NO-017; login/merge/sync ở các task P2.
 
@@ -348,25 +348,25 @@ Kiểm tra trực tiếp ngày 2026-10-04: [NO-007 / BLO-7](https://kaneo.dorris
 | 2 | [NO-007/B · BLO-123 — Bootstrap app từ guest local với retry](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/o2pukry6j0wraw984wklr8g9) | A | M: main.dart, app.dart, profile_bootstrap.dart, bootstrap widget test, scaffold integration harness |
 | 3 | [NO-007/C · BLO-124 — Kiểm chứng guest offline trên Android thật](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/iq6feh8o2mxknm91u1jsq9s4) | B | M: guest integration test, NO-007 evidence, mobile README, architecture, quality-release |
 
-Native graph: NO-001 → A → B → C (`blocks`); NO-007 là parent qua `subtask` cho A/B/C. Task con đang To Do; không đổi trạng thái/assignee/deadline parent. Acceptance chi tiết, verification, path và phạm vi nằm trong body từng task. Config/lockfiles/build.yaml/generated Drift/schema snapshots của A phải được liệt kê và review riêng; nếu logic vượt khoảng 5 files hoặc thêm đầu ra độc lập thì tách tiếp trước code.
+Native graph: NO-001 → A → B → C (`blocks`); NO-007 là parent qua `subtask` cho A/B/C. Đây là graph được tạo lúc lập kế hoạch; trạng thái thực thi hiện tại lấy trực tiếp từ Kaneo, không dùng bảng này thay tracker. Acceptance chi tiết, verification, path và phạm vi nằm trong body từng task. Config/lockfiles/build.yaml/generated Drift/schema snapshots của A phải được liệt kê và review riêng; nếu logic vượt khoảng 5 files hoặc thêm đầu ra độc lập thì tách tiếp trước code.
 
 ### Checkpoints
 
 Sau A/B:
 
-- [ ] SQLite file reopen giữ IDs; concurrent bootstrap không tạo trùng; injected failure rollback toàn bộ.
-- [ ] Profile A/B không truy cập chéo; migration fixture có dữ liệu v1→v2 giữ IDs/fields và schema validation đạt.
-- [ ] Widget delayed/failing/retry startup đạt; bốn tab/Back vẫn hoạt động; analyze và dev build sạch.
+- [x] SQLite file reopen giữ IDs; concurrent bootstrap không tạo trùng; injected failure rollback toàn bộ.
+- [x] Profile A/B không truy cập chéo; migration fixture có dữ liệu v1→v2 giữ IDs/fields và schema validation đạt.
+- [x] Widget delayed/failing/retry startup đạt; bốn tab/Back vẫn hoạt động; analyze và dev build sạch.
 
 Sau C, trước chuyển NO-007 In Review/Done:
 
-- [ ] Fresh sandbox offline trên Android thật tạo identity; force-stop/cold launch giữ đúng identity.
-- [ ] Dev/staging tách sandbox, cả hai build/smoke đạt; toàn bộ local tests và format/analyze đạt.
-- [ ] Evidence ghi rõ commands, runtime, flavor, cách chứng minh offline, upgrade results và giới hạn; không suy build pass thành acceptance pass.
+- [x] Fresh sandbox offline trên Android thật tạo identity; force-stop/cold launch giữ đúng identity.
+- [x] Dev/staging tách sandbox, cả hai build/smoke đạt; toàn bộ local tests và format/analyze đạt.
+- [x] Evidence ghi rõ commands, runtime, flavor, cách chứng minh offline, upgrade results và giới hạn; không suy build pass thành acceptance pass.
 
 ### Lệnh verification dự kiến
 
-Chạy tại apps/mobile/; tên file test mới là đường dẫn dự kiến, chưa tồn tại/chưa chạy trong phiên lập kế hoạch. Analyze/build hiện có được pin từ scaffold.
+Chạy tại apps/mobile/; các lệnh ban đầu của plan được giữ để đối chiếu; commands và kết quả cuối tại evidence. Analyze/build hiện có được pin từ scaffold.
 
 ```sh
 fvm flutter pub get
@@ -386,7 +386,7 @@ fvm flutter test integration_test/guest_profile_test.dart --flavor staging -d <d
 
 Migration tooling chạy lúc tạo/chỉnh schema, không tự regenerate lịch sử bất biến mỗi lần test. Test persistence dùng SQLite thật trên file tạm thay vì mock DB; unit/widget fixture không đọc dữ liệu điện thoại riêng tư. Device smoke dùng fresh test sandbox/harness, kiểm tra identity qua repository trong test, tránh lộ UUID/dữ liệu người dùng trong UI/log. Manual force-stop rồi cold launch bằng harness không xóa DB để so sánh identity trước/sau.
 
-Acceptance body gốc yêu cầu fresh install airplane mode. Đường ưu tiên là USB ADB với thao tác offline được phối hợp; nếu chỉ có wireless ADB, giữ Wi-Fi và chưa tuyên bố đạt airplane-mode acceptance. Có thể bổ sung test-app network isolation được chứng minh để kiểm tra sớm, nhưng cần ghi phương pháp rõ và thống nhất thay thế gate gốc trước khi dùng nó làm evidence hoàn tất. Không tự clear-data/uninstall app đang dùng, không tắt Wi-Fi phone khi wireless ADB.
+Acceptance body gốc yêu cầu fresh install airplane mode. Chủ dự án đã chọn thay phép thử này bằng APK Dev release không có quyền INTERNET: kiểm tra aapt + manifest trên máy, cài mới Dev (chưa có package), mở vào shell, force-stop/cold launch và so sánh identity trong SQLite trước/sau. Giữ Wi-Fi cho wireless ADB; không clear-data/uninstall app đang dùng. Integration debug chạy online để giữ kết nối runner, ghi evidence riêng.
 
 ### Rủi ro và câu hỏi mở
 
@@ -398,7 +398,11 @@ Acceptance body gốc yêu cầu fresh install airplane mode. Đường ưu tiê
 | Active profile và queries dùng mặc định ngầm | Trộn dữ liệu tài khoản sau này | Explicit profile context + FK + A/B negative tests |
 | Phone chưa kết nối hoặc wireless mất khi airplane mode | Thiếu acceptance thiết bị | Kết nối phone, ưu tiên USB; giữ Wi-Fi wireless; không emulator |
 
-Không có câu hỏi sản phẩm chặn A/B. Chưa kiểm chứng tương thích package/runtime mới; giải quyết sớm ở A. Điều kiện test offline thật còn phụ thuộc phone/USB hoặc phương pháp tương đương được thống nhất. Plan đã được viết để review; chưa được chủ dự án duyệt triển khai, chưa viết code hoặc chạy application checks NO-007. Không spawn agents.
+Không có câu hỏi sản phẩm chặn A/B. Packages/runtime đã kiểm chứng bằng local tests, builds và phone integrations; xem evidence. Chủ dự án đã duyệt plan/triển khai và phương pháp offline không có INTERNET; điện thoại đã kết nối. Triển khai và evidence ở docs/evidence/NO-007.md. Không spawn agents.
 ## Sửa blocker CI NO-002 — 2026-10-04
 
 PR #2 không pull được MinIO trên runner mới; local trước dùng cached image. Giữ nguyên release MinIO/mc, build image từ official GitHub binaries + pinned checksums, dùng chung Dockerfile cho Compose/Testcontainers và mở rộng CI path filters. Evidence và giới hạn tại `docs/backend-scaffold.md`; chưa thay đổi trạng thái Kaneo hoặc bắt đầu NO-003/090.
+
+### Bổ sung implementation NO-007
+
+Đã merge main 957b2a1 trước code, giải quyết conflict plan bằng cách giữ cả nội dung backend/main và NO-007. Theme trắng/rose giữ nguyên từ main. Bổ sung Android backup exclusions cho DB/sidecars và tắt cloud backup để installation/device UUID không bị clone bởi restore/transfer hệ thống; không mở rộng sang backup tài khoản. Chủ dự án xác nhận phép thử offline bằng APK Dev không có INTERNET. Chi tiết commands, failures/recovery và evidence ở [NO-007](../docs/evidence/NO-007.md).
