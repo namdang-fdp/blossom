@@ -1,5 +1,13 @@
 # Kiến trúc dự kiến
 
+## Scaffold Android hiện tại — NO-001
+
+Code ở `apps/mobile/`; lệnh setup/build/test và runtime thực tế tại [mobile README](../apps/mobile/README.md). Flutter 3.44.8/Dart 3.12.2 được pin bằng FVM; JDK 21, Gradle wrapper 9.1.0, AGP 9.0.1, Kotlin plugin 2.3.20. Compile/target SDK 36, min SDK 24 theo Flutter template. App ID dev tạm `com.dorriss.noapp` với suffix `.dev`/`.staging`; chưa chốt identity phát hành.
+
+Shell dùng `go_router` 18.0.2 với bốn StatefulShellBranch, locale tiếng Việt và hai product flavors dev/staging. Tab: Hôm nay, Kho từ, Luyện câu, Khu vườn. Giữ stack trong process khi đổi tab; Android Back pop child route trước, từ tab root khác về Hôm nay, từ root Hôm nay để OS thoát. Chưa có khôi phục stack bền sau process kill.
+
+`app/` giữ app root/router; `core/config/` giữ immutable config từ `appFlavor`; `features/scaffold/` giữ placeholder dùng chung. Không gọi mạng khi bootstrap, không có login wall. Riverpod, Drift, starter/audio, study và sync là kiến trúc đích ở các task sau, chưa được thực hiện bởi scaffold. Tách feature thật khi bắt đầu task tương ứng.
+
 ## Stack
 
 - Android-first: Flutter/Dart, Riverpod, SQLite qua Drift, HTTP client; secure storage cho credential, file app-private cho audio/recording.
@@ -28,11 +36,13 @@ PostgreSQL không public cho mobile. Lượt học ghi local trước. Backgroun
 ## Cấu trúc dự kiến
 
 ```text
-apps/mobile/           Flutter, chia theo feature
-services/api/          Spring Boot, module theo domain
+apps/mobile/           Flutter/Drift, chia theo feature
+frontend/              Web trong tương lai, chưa scaffold
+api/                   Spring Boot/Maven, package theo domain (layout như Vey)
 contracts/             OpenAPI, fixtures, JSON schema gói và sync
 content/               Bài tự biên soạn, metadata quyền dùng, gói mẫu
-infra/                 Docker/dev, deployment configuration
+compose.yml            Hạ tầng local như Vey
+infra/                 Script và deployment configuration
 docs/                  Đặc tả, quyết định, tracker mapping
 tasks/plan.md          Kế hoạch và chỉ mục
 ```
@@ -74,4 +84,10 @@ Dart tính local để học dài ngày không mạng. Spring giữ event log v�
 
 ## Vận hành
 
-Dev dùng Docker Compose cho PostgreSQL/API; staging và production tách DB, bucket, AI quota. Log requestId/operationId không log token, câu riêng tư hay recording. Metrics: lỗi lưu local, sync conflict/duplicate, latency, AI cost/quota. Backup PostgreSQL và bài test restore; secrets ở môi trường triển khai, không trong repo.
+Dev dùng Docker Compose ở root cho API/PostgreSQL, Redis, Kafka, MinIO và công cụ local; staging và production tách DB, bucket, AI quota. Log requestId/operationId không log token, câu riêng tư hay recording. Metrics: lỗi lưu local, sync conflict/duplicate, latency, AI cost/quota. Backup PostgreSQL và bài test restore; secrets ở môi trường triển khai, không trong repo.
+
+## Reference Vey — cập nhật 2026-10-04
+
+Chủ dự án yêu cầu layout tương tự Vey và bật toàn bộ hạ tầng ngay: Redis, Kafka, MinIO, JobRunr, cùng Kafka UI/Dozzle ở local. Maven, JPA, Flyway, AWS SDK S3, Lombok/MapStruct, springdoc và quality tooling lấy Vey làm reference. Flutter/Drift và các bảo đảm offline vẫn giữ nguyên. Scope init mở rộng được mô tả trong `tasks/plan.md`; scaffold backend và evidence ở `docs/backend-scaffold.md`.
+
+Đề xuất cụ thể: modular monolith bằng `common`, `infrastructure`, `modules` trong một Maven project/một JAR. ArchUnit kiểm tra dependency boundaries. Gọi qua interface công khai cho thao tác synchronous; không import internals module khác. Đề xuất khác với Vey: side effects dùng Kafka qua transactional outbox, còn ghi sync operation + dedupe + ack phải atomic trên PostgreSQL. Không để broker/cache quyết định dữ liệu học đã được lưu an toàn. JobRunr dành cho durable backend jobs; nhắc học offline vẫn local Android.

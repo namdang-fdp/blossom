@@ -2,7 +2,7 @@
 
 Ngày lập: 2026-10-04. Tên sản phẩm: **Nở**. Tên project trên Kaneo: **Bloom**.
 
-Đây là đặc tả và kế hoạch triển khai, không phải mô tả chức năng đã được xây dựng. Repo chưa có ứng dụng tại thời điểm lập tài liệu. Nội dung sản phẩm viết bằng tiếng Việt; mã nguồn dùng định danh tiếng Anh.
+Đây là đặc tả và kế hoạch triển khai, không phải mô tả toàn bộ chức năng đã được xây dựng. NO-001 đã tạo scaffold Flutter Android tại `apps/mobile/`; xem [hướng dẫn chạy](../apps/mobile/README.md). Các tính năng học/SQLite/starter/sync trong đặc tả vẫn chưa được triển khai. Nội dung sản phẩm viết bằng tiếng Việt; mã nguồn dùng định danh tiếng Anh.
 
 ## Đọc theo thứ tự
 
@@ -29,4 +29,8 @@ Ngày lập: 2026-10-04. Tên sản phẩm: **Nở**. Tên project trên Kaneo: 
 
 **Flutter + SQLite/Drift trên thiết bị; Spring Boot + PostgreSQL phía server. Học offline là bắt buộc.** SQLite là kho dữ liệu vận hành cho buổi học, không chỉ là cache màn hình. Không yêu cầu đăng nhập hoặc AI để hoàn thành bài học cốt lõi. Có gói bài/audio mẫu đi kèm app để lần mở đầu tiên không có mạng vẫn học được.
 
-Không bắt đầu triển khai toàn bộ backlog chỉ vì tài liệu tồn tại. Yêu cầu hiện tại là lập tài liệu và tạo task; lấy từng task được chọn cho lần triển khai tiếp theo.
+Không bắt đầu triển khai toàn bộ backlog chỉ vì tài liệu tồn tại. Chủ dự án đã duyệt triển khai NO-001 và scaffold backend; lấy từng task được chọn cho lần triển khai tiếp theo.
+
+## Backend scaffold
+
+Scaffold Spring Boot đã tạo theo layout/stack Vey. Xem [root README](../README.md), [API README](../api/README.md) và [bằng chứng backend](backend-scaffold.md). Mobile shell đã có; domain APIs và các tính năng học offline trong đặc tả chưa triển khai.

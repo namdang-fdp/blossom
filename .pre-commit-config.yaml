@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: backend-format
+        name: Backend format and style
+        entry: bash scripts/precommit-backend.sh
+        language: system
+        files: ^api/.*\.(java|xml)$
+        pass_filenames: false

@@ -4,7 +4,7 @@ Ngày lập: 2026-10-04. Task tracker: **Kaneo / Bloom**. Đặc tả sản ph�
 
 ## Đầu ra được yêu cầu hiện tại
 
-Tạo tài liệu và backlog đầy đủ, chưa triển khai app. Mọi task implementation mới tạo ở To Do. Không lấy việc lập kế hoạch làm bằng chứng tính năng đã hoạt động. Repo ban đầu trống, chưa có build/test ứng dụng.
+Backlog MVP đã xuất bản. Chủ dự án duyệt NO-001 Flutter Android và scaffold backend NO-002 theo Vey; cả hai có đầu ra để review. Theo quyết định mới nhất, mobile ở `apps/mobile/`, backend ở `api/`; `frontend/` dành cho web sau này. Bằng chứng: [NO-001](../docs/evidence/NO-001.md) và [backend](../docs/backend-scaffold.md). Kaneo giữ trạng thái task; các task còn lại theo DAG, không suy toàn bộ tính năng đã hoạt động từ scaffold.
 
 ## Cách đọc backlog
 
@@ -75,3 +75,245 @@ Không spawn tự động trong lượt lập kế hoạch này. Nếu chủ d�
 ## Definition of full MVP
 
 Mọi R01–R13 có traceability trong backlog; NO-105 phụ thuộc trực tiếp hoặc gián tiếp toàn bộ task. Full MVP bao gồm offline, nội dung đủ pilot, đồng bộ và các việc cần để có bản Android beta review được. Public production publication chỉ thực hiện khi chủ dự án phê duyệt bản build cụ thể; kế hoạch không tự động cấp quyền publish.
+
+## Plan worktree Init-Spring-Backend — 2026-10-04
+
+Yêu cầu hiện tại: lập kế hoạch init backend Nở và đề xuất Maven/Gradle. Phần này bổ sung kế hoạch MVP, chưa thực hiện scaffold. Task thực thi vẫn theo Kaneo/Bloom; các bước dưới đây là breakdown của NO-002, không phải bảng trạng thái mới. ID/link lấy từ mapping đã xuất bản; chưa đọc lại trạng thái live trong lượt lập kế hoạch này.
+
+### Quyết định đề xuất
+
+- Maven + Maven Wrapper cho một ứng dụng Spring Boot trong `api/`. Maven có lifecycle chuẩn, phù hợp build/test/package thông thường và giảm nhu cầu viết build logic riêng. Pin Maven và plugin; dùng dependency management của Spring Boot.
+- Gradle có incremental build/build cache hữu ích khi build lớn hoặc nhiều module. Backend hiện có một deployable nên chưa có nhu cầu đó; Android dùng Gradle không buộc server dùng cùng công cụ. Đây là lựa chọn phù hợp phạm vi, chưa có benchmark tốc độ để kết luận Maven nhanh hơn.
+- Java 25 như Vey làm runtime đề xuất; chọn bản Spring Boot stable tương thích và pin patch cụ thể khi scaffold, sau khi kiểm tra dependencies. Lấy Spring Boot 3.5.16 / Java 25 trong Vey làm bộ phiên bản tham chiếu, cùng PostgreSQL, Flyway và Testcontainers; kiểm tra compatibility khi scaffold. Không dùng SNAPSHOT hoặc tag Docker `latest`.
+- Modular monolith, package theo feature khi feature xuất hiện: identity, catalog, learner-library, learning, sync, feedback, privacy. Chưa tạo hàng loạt module rỗng hoặc schema domain trong scaffold.
+- Dependencies ban đầu: Spring MVC, Validation, Spring Data JPA, PostgreSQL driver, Flyway hỗ trợ PostgreSQL, Actuator; test dùng Spring Boot Test + Testcontainers PostgreSQL. Dùng JPA như Vey, `open-in-view=false`, `ddl-auto=validate`; Flyway sở hữu schema.
+- Auth theo NO-026; scaffold chỉ expose health tối thiểu, không cấu hình `permitAll` cho toàn bộ API tương lai. Health không trả chi tiết DB cho caller công khai. API errors/DTO contract nằm trong NO-003.
+
+Nguồn kiểm tra: [Spring Boot compatibility](https://docs.spring.io/spring-boot/system-requirements.html), [Maven lifecycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html), [Maven Wrapper](https://maven.apache.org/tools/wrapper/), [Gradle build cache](https://docs.gradle.org/current/userguide/build_cache.html). Phiên bản patch phải xác minh lại lúc implementation.
+
+### Thứ tự thực thi NO-002
+
+Task [BLO-2 / NO-002](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/kwc73d9ip5ecvkvhuqwrpzn7), không có dependency. Thực hiện tuần tự trong một task; checkpoint cuối mới là bằng chứng nghiệm thu.
+
+| Bước | Đầu ra | Tiêu chí kiểm chứng | Phụ thuộc |
+|---|---|---|---|
+| 1. Scaffold | `api/`: pom, wrapper, application, cấu hình runtime/version | Wrapper dùng đúng Maven/Java đã pin; package thành executable JAR | Không |
+| 2. PostgreSQL dev | `compose.yml`, mẫu env, volume, DB healthcheck, profile dev | DB chỉ bind localhost ở dev; dữ liệu còn sau restart; credential thật không nằm trong repo | 1 |
+| 3. Migration | Flyway version đầu trên DB trống, schema nền tối thiểu, Hibernate không tự tạo schema nếu thêm JPA sau này | Flyway apply thành công; restart không chạy lại migration; không dùng baseline-on-migrate để che DB sai lịch sử | 2 |
+| 4. API chạy cùng DB | API service trong Compose và Actuator health/readiness tối thiểu | API+DB khởi động; DB down khiến readiness không ready; liveness vẫn phản ánh tiến trình | 3 |
+| 5. Integration evidence | Testcontainers dùng PostgreSQL thật, README backend và command đã chạy | Test context+Flyway trên DB mới; kiểm tra history/checksum và startup lại; `verify` thực sự chạy integration tests | 4 |
+
+Đường dẫn dự kiến: `api/pom.xml`, `api/.mvn/`, `api/src/`, `api/README.md`, `compose.yml`, mẫu env dev và `.gitignore`. Generated wrapper/scaffold là phần cơ học; scope logic giới hạn ở cấu hình, migration nền và health/integration test.
+
+Lệnh **dự kiến**, chạy từ root trừ khi ghi khác; chỉ ghi là đã kiểm chứng sau khi scaffold tồn tại:
+
+```sh
+make app
+cd api
+./mvnw test
+./mvnw verify
+SPRING_PROFILES_ACTIVE=local ./mvnw spring-boot:run
+```
+
+Phải cấu hình Surefire/Failsafe phù hợp để `verify` không bỏ sót integration tests. README chỉ rõ cách cấp env cho host run; Compose `.env` không tự trở thành biến môi trường của JVM chạy trên host. Nếu thiếu Docker hoặc không chạy được Testcontainers, báo blocker và phần chưa kiểm chứng, không coi build JAR là đủ để Done.
+
+Checkpoint NO-002: từ DB trống chạy API+PostgreSQL, migration đúng một lần, readiness phản ánh DB, restart giữ dữ liệu, integration tests pass và build ra JAR. Ghi versions/commands/kết quả vào task khi có quyền cập nhật; không chuyển Done trong lượt chỉ lập kế hoạch.
+
+### Task tiếp theo và giới hạn phạm vi
+
+1. [BLO-90 / NO-090](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/zkynlgonql3oupmr217lxzld), phụ thuộc NO-002: CI chạy wrapper verify + PostgreSQL integration; test/migration sai phải đỏ, build sạch ra artifact. Kiểm tra contract được bổ sung khi NO-003 có đầu ra.
+2. [BLO-3 / NO-003](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/vc6ayvbzrm6urudrfoij7pjx), phụ thuộc NO-002: chốt OpenAPI `/api/v1`, problem response và sync envelope; validate schema/round-trip fixtures duplicate, conflict, partial ack, expired token.
+3. NO-026, phụ thuộc NO-002 + NO-003: xác minh provider token, map internal identity và kiểm thử ownership/account A-B trước private endpoints.
+
+NO-004 FSRS spike chỉ bắt đầu khi NO-001 và NO-002 sẵn sàng. Guest merge, sync handlers, content domain schema, AI, tính năng upload/download object storage và deployment thuộc task riêng. Redis, Kafka, MinIO và JobRunr được bổ sung vào phạm vi init theo xác nhận của chủ dự án; microservices, password/OTP server và public deployment vẫn ngoài scope.
+
+Nền này phục vụ backup/catalog/sync cho app offline: việc học, chấm và lưu progress vẫn chạy trong Flutter + SQLite/Drift. Schema/domain tiếp theo phải giữ content revision bất biến, operation dedupe theo account và event append-only theo `docs/offline-sync.md`; không biến scaffold thành API bắt buộc cho mỗi lượt trả lời.
+
+### Điều chỉnh theo Vey và xác nhận bật toàn bộ hạ tầng
+
+Đã đọc reference `/home/dorriss/Projects/work/vey`: `api/pom.xml`, wrapper, Dockerfile, Compose, application profiles, CI, ArchUnit tests và ADR modular monolith. Chủ dự án yêu cầu folder tương tự Vey và bật toàn bộ hạ tầng ngay. Điều này thay thế đề xuất init tối giản phía trên; chưa triển khai code hoặc cập nhật trạng thái Kaneo.
+
+Cấu trúc đích:
+
+```text
+api/
+  pom.xml
+  mvnw, mvnw.cmd, .mvn/wrapper/
+  Dockerfile, .dockerignore
+  checkstyle/checkstyle.xml
+  src/main/java/com/dorriss/no/
+    NoApplication.java
+    common/                 # lỗi, cấu hình và kiểu dùng chung
+    infrastructure/         # persistence, Redis, Kafka, S3, jobs
+    modules/                # tạo module khi triển khai feature thật
+  src/main/resources/
+    application.yaml
+    application-local.yaml
+    db/migration/
+  src/test/java/com/dorriss/no/
+    arch/
+apps/mobile/                # Flutter Android + Drift
+frontend/                   # dành cho web tương lai, chưa scaffold
+contracts/
+content/
+infra/                      # script/cấu hình vận hành bổ sung
+scripts/
+.github/workflows/
+compose.yml
+.env.example
+Makefile
+docs/
+tasks/plan.md
+```
+
+Theo chốt lại của chủ dự án ngày 2026-10-04, `apps/mobile/` giữ app Flutter; `frontend/` dành cho web tương lai, chưa chọn stack web. `docs/` tiếp tục là bộ nhớ Nở; không tạo vault Brain thứ hai. Package `com.dorriss.no` là tên kỹ thuật đề xuất cho backend.
+
+Stack từ Vey:
+
+| Thành phần | Phạm vi init / vai trò |
+|---|---|
+| Maven Wrapper, Java 25, Spring Boot 3.5.x | Một Maven project, một executable JAR; bộ patch trong Vey làm tham chiếu |
+| JPA, PostgreSQL, Flyway | Persistence, migration; pin cùng image PostgreSQL cho dev và tests |
+| Lombok, MapStruct, uuid-creator | Cùng công cụ Vey; UUID từ client vẫn được giữ, không đổi ID event khi sync |
+| springdoc / Swagger UI, Actuator | Docs và health; OpenAPI trong `contracts/` vẫn là contract canonical |
+| Redis | Khởi tạo connection/config; cache có thể rebuild, không giữ ack/idempotency authoritative |
+| Kafka + Kafka UI | Broker local, event publisher abstraction; consumer/business event thuộc feature sau |
+| MinIO + AWS SDK S3 | Bucket dev và adapter; smoke put/get/delete bằng fixture, không upload recording riêng tư |
+| JobRunr trên PostgreSQL | Durable jobs; dashboard chỉ local; smoke job hoàn tất và retry, không gắn nhắc học vào server |
+| Dozzle | Công cụ đọc log local, bind localhost; không log token/private writing |
+| Spotless, Checkstyle, JaCoCo, ArchUnit, Testcontainers | Quality gates như Vey; enforcement boundaries và integration hạ tầng |
+| Docker multi-stage, Makefile, pre-commit scripts | Developer workflow; JRE runtime non-root, local setup rõ ràng |
+
+Đề xuất kiến trúc: modular monolith bằng package, chưa tách Maven modules và chưa cần Spring Modulith. `common`/`infrastructure` không phụ thuộc business modules; module chỉ truy cập module khác qua interface công khai, không import repository/entity nội bộ. ArchUnit enforce rule này khi modules có code thật; tránh test boundary pass chỉ vì chưa có class.
+
+Điểm khác Vey được đề xuất có chủ đích: không bắt buộc mọi giao tiếp liên module qua Kafka. Transaction nhận sync operation phải ghi thay đổi, dedupe và kết quả ack cùng PostgreSQL transaction. Event cho side effects đi qua server transactional outbox rồi publish Kafka, consumer idempotent. Outbox server này khác outbox SQLite của mobile; implementation thuộc sync/event task sau. JobRunr xử lý jobs, không thay thế event bus hoặc event log học tập.
+
+Đây là mở rộng đáng kể so với AC gốc NO-002 chỉ yêu cầu Spring/PostgreSQL. Giữ checkpoint nền NO-002, rồi thực hiện các slice mở rộng tuần tự; cần phản ánh scope/AC này vào Kaneo trước khi triển khai, không coi snapshot hiện tại đã chứa các yêu cầu mới:
+
+| Slice sau nền | Acceptance / verification | Dependency |
+|---|---|---|
+| Compose đầy đủ | PostgreSQL, Redis, Kafka, Kafka UI, MinIO, Dozzle lên được; local ports không trùng Vey; Kafka advertised listeners đúng host/container; volumes giữ dữ liệu sau restart | NO-002 nền |
+| Adapter hạ tầng | Redis set/get, Kafka publish/consume fixture, S3 put/get/hash/delete fixture; mỗi bài có timeout và cleanup | Compose đầy đủ |
+| JobRunr | Schema jobs được tạo theo một cơ chế có owner rõ; job chạy, retry sau lỗi; restart không mất pending job | PostgreSQL + config jobs |
+| Quality + Docker | Spotless/Checkstyle/ArchUnit/tests qua; Java 25 ở compiler/CI/runtime đồng nhất; build image non-root và smoke health | Adapter + jobs |
+
+Tách smoke tests mở rộng khỏi test chỉ PostgreSQL để tìm lỗi rõ; nếu thiếu hạ tầng thì báo skipped/blocked, không báo đã kiểm chứng toàn stack. Schema domain vẫn do task feature quản lý. JobRunr cần ghi rõ schema lifecycle riêng, không ngầm cho Hibernate tạo bảng.
+
+CI NO-090 học theo Vey nhưng không copy bước tự push image lên GHCR: chỉ chạy checks/build, chưa publish. Không copy credential, IAM tables, sample account, Clerk, Next.js hoặc prefix Vey sang Nở. Các đường dẫn trong backlog snapshot cũ sẽ được sửa có lịch sử cùng tracker khi cập nhật task; không dùng chúng để scaffold nhầm vào `services/api/`.
+
+### Thực thi scaffold
+
+Chủ dự án đã duyệt triển khai trong lượt tiếp theo. Layout `api/`, Compose root và stack Vey đang được scaffold. Các command canonical là `make infra`, `make app`, `cd api && ./mvnw -B -ntp verify`; evidence và giới hạn kiểm chứng ở `docs/backend-scaffold.md`. Kaneo REST trả 403 ngày 2026-10-04 nên chưa cập nhật scope/status task live; không đánh dấu Done trong snapshot/mapping. CI được tạo trong repo, chưa có bằng chứng workflow GitHub đã chạy.
+
+## Kế hoạch chi tiết NO-001 — Flutter Android scaffold
+
+### Task List và dependency
+
+Task duy nhất của phiên: [NO-001 / BLO-1](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/s7jc4lmn6wdpv6sc8pjklbt1). Kaneo là nơi ghi trạng thái; không tạo checklist task cạnh tranh trong `tasks/todo.md`. Các bước dưới đây là thứ tự triển khai bên trong task này, không phải task mới hoặc trạng thái Done.
+
+Đã đọc live project Bloom, body và native relations ngày 2026-10-04 qua REST với credential từ môi trường, `x-api-key` và User-Agent. NO-001 đang `in-progress`, priority high; không có incoming dependency. Task chặn NO-004, NO-006, NO-007, NO-015, NO-069 và NO-089. MCP Kaneo không được expose trong phiên này. Request mặc định bị HTTP 403; thêm User-Agent đọc được HTTP 200, không thay credential hay cấu hình toàn cục.
+
+**Đầu ra:** app Android scaffold chạy từ repo, toolchain được pin, hai môi trường dev/staging và router 4 tab tiếng Việt. Scope M: tối đa khoảng 5 file Dart triển khai cốt lõi; Android config, lockfiles, test và tài liệu là phần scaffold bắt buộc, được liệt kê rõ bên dưới.
+
+**Acceptance criteria của task:**
+
+- App Android chạy từ `apps/mobile/` bằng Flutter được pin, có bằng chứng build và khởi chạy emulator.
+- Dev/staging phân biệt được khi cài; điều hướng đủ Hôm nay, Kho từ, Luyện câu, Khu vườn; không cần mạng/đăng nhập để mở shell.
+- Analyze sạch, test hành vi router/config đạt; README và architecture ghi lệnh/runtime thực tế sau khi chạy.
+
+### Bằng chứng môi trường trước scaffold
+
+| Thành phần | Kết quả kiểm tra trên máy |
+|---|---|
+| Flutter / Dart | `flutter --version`: stable 3.44.8, Dart 3.12.2; framework `058e0af2c2b57e369d905a03ac9748b0ebf543c6` |
+| FVM | `fvm --version`: 4.3.1; Flutter hiện trỏ tới alias `stable`, chưa có pin riêng trong repo |
+| Android SDK | `/home/dorriss/Android/Sdk`; platform 35/36/36.1, build-tools 36.0.0, NDK 28.2.13676358 |
+| JDK cho Flutter | Doctor chọn JBR Android Studio 21.0.10; Java shell là 25.0.4.1, không dùng thay thế ngầm |
+| Template Flutter đang cài | Gradle 9.1.0, AGP 9.0.1, Kotlin plugin 2.3.20; compile/target SDK 36, min SDK 24; đọc từ `flutter_tools/lib/src/android/gradle_utils.dart` |
+| Android licenses / network | `flutter doctor -v`: Android toolchain và network đạt, licenses đã chấp nhận |
+| ADB / emulator | ADB 37.0.1; emulator 37.1.11; AVD `LiftPing_Phone_ADR`, x86_64, image API 37.1 Play Store 16 KB |
+| KVM | `emulator -accel-check`: installed and usable; `/dev/kvm` có quyền đọc/ghi |
+
+Khi kiểm tra ban đầu không có thiết bị kết nối. Lệnh launch AVD qua Flutter trả exit 0 nhưng device chỉ xuất hiện `offline` rồi biến mất. Cold boot với `emulator -avd LiftPing_Phone_ADR -no-window -no-audio -no-snapshot -gpu swiftshader_indirect` thành công: ADB báo `sys.boot_completed=1`, Android 17/API 37 trên `emulator-5554`. KVM hoạt động; đường launch GUI mặc định chưa được xác nhận ổn định. Emulator kiểm tra được tắt sau khi thu bằng chứng để trả tài nguyên máy. Chưa có app nên chưa chạy analyze/test/build ứng dụng. Java/Maven/Docker có trên PATH; PostgreSQL CLI không có trên PATH. Backend thuộc NO-002, chưa kiểm chứng runtime/container ở task này.
+
+### Quyết định triển khai
+
+- Tạo Android-only app Dart package `no_mobile` tại `apps/mobile/`, Kotlin Android, namespace dev tạm `com.dorriss.noapp`; chưa chốt package phát hành. Dùng suffix `.dev` và `.staging`, nhãn `Nở Dev` / `Nở Staging` để cài song song và tách sandbox dữ liệu.
+- Pin FVM numeric `3.44.8` tại app, commit `.fvmrc`, `pubspec.lock` và Gradle wrapper/config; ignore `.fvm/`, SDK paths, build artifacts. Không chạy upgrade Flutter hay thay default SDK toàn máy.
+- Dùng JBR 21 cho build mobile; Gradle wrapper của app thay cho `gradle` trên PATH. Ghi version Gradle/AGP/Kotlin thực tế sau generate; nếu template khác số đã đọc thì kiểm chứng và cập nhật tài liệu trước tiếp tục. Min SDK dự kiến 24 từ template; khả năng hỗ trợ máy pilot cần kiểm chứng ở task thiết bị.
+- Android product flavors `dev`/`staging`, một entrypoint, config immutable đọc `appFlavor`. API endpoint chỉ nhận qua cấu hình khi cần, không bịa staging URL và không gọi API lúc bootstrap. Không chứa secret trong Dart defines. Tên app dùng resource `strings.xml`, tránh custom resource value mặc định bị tắt trên AGP 9 theo [Flutter flavors](https://docs.flutter.dev/deployment/flavors).
+- Router chọn `go_router` theo [Flutter navigation](https://docs.flutter.dev/ui/navigation); shell 4 nhánh giữ navigation stack từng tab, Android Back có hành vi xác định. Pin package tương thích Dart 3.12.2 khi resolve ở implementation; chưa khẳng định package version trước khi kiểm tra.
+- Chia `app/`, `core/config/`, `features/`; placeholder 4 tab ghi rõ tính năng đang xây dựng, không giả dữ liệu tiến độ. Chưa thêm Riverpod/Drift/HTTP nếu không có use case ở scaffold. Giữ hướng Riverpod + Drift của kiến trúc để NO-007 và các task tiếp theo triển khai.
+- NO-001 không hoàn tất R01: guest persistence NO-007, content/audio NO-009–012, học/grade/save là các task tiếp theo. Shell không có login wall; không hiển thị “Đã lưu” khi chưa có SQLite transaction. Theme/component hoàn chỉnh thuộc NO-006; CI thuộc NO-089.
+
+### Thứ tự thực hiện bên trong NO-001
+
+**Bước 1 — Khởi chạy scaffold dev (M).** Dependency: không có. Tạo Android template, pin toolchain, dev flavor và shell tối thiểu để phát hiện lỗi Gradle/JDK sớm.
+
+- Điều kiện: FVM dùng đúng Flutter 3.44.8; APK dev build được; emulator chạy app vào shell khi không mạng.
+- Kiểm chứng: doctor, `fvm flutter build apk --debug --flavor dev`, `fvm flutter run --flavor dev -d <device-id>`; lưu phiên bản JDK/wrapper và kết quả boot/install thực tế.
+- Files: `.fvmrc`, `.gitignore`, `pubspec.yaml`, `pubspec.lock`, `lib/main.dart`, Android scaffold + wrapper. Chỉ một file Dart logic ở bước này; generated Android files được review.
+
+**Bước 2 — Shell 4 tab với hai môi trường (M).** Dependency: bước 1. Hoàn thiện staging flavor, typed config, feature shell và router.
+
+- Điều kiện: dev/staging có app ID/nhãn riêng; vào đúng 4 route `/today`, `/library`, `/practice`, `/garden`; chuyển tab/quay lại không mất navigation stack hay mắc vòng lặp Back.
+- Kiểm chứng: widget test chuyển tab, stack và Back; config test cho dev/staging/thiếu hoặc sai flavor; build staging debug; manual smoke hai app không mạng, text scale 200%.
+- Files Dart dự kiến toàn task: `lib/main.dart`, `lib/app/app.dart`, `lib/app/router.dart`, `lib/core/config/app_config.dart`, `lib/features/scaffold/scaffold_page.dart`. Placeholder dùng chung trong feature scaffold; tách feature thật khi task tương ứng bắt đầu. Thêm Android flavor config/resources, `test/app_config_test.dart`, `test/navigation_test.dart`.
+
+**Checkpoint sau bước 1–2:**
+
+- [x] Numeric Flutter pin, wrapper và JDK đã xác nhận; dev/staging APK build thành công.
+- [x] Hai bản cài chạy được trên emulator; bốn tab, Back và khởi chạy không mạng hoạt động qua integration smoke.
+- [x] Analyze sạch; tests config/router đạt; giới hạn scaffold không lấn guest/study/theme/CI.
+
+**Bước 3 — Ghi bằng chứng để review (S).** Dependency: checkpoint trên. Cập nhật `apps/mobile/README.md`, `docs/architecture.md`, `docs/quality-release.md` với lệnh thực tế và giới hạn của scaffold; review diff, secrets/artifacts và coherence offline. Chuyển In Review trên Kaneo khi có đầy đủ đầu ra theo quy tắc task, chỉ Done khi acceptance có bằng chứng. Không dùng build thành công thay cho smoke router/emulator.
+
+- Điều kiện: fresh checkout có hướng dẫn pin/restore/build; evidence chứa commands, runtime, emulator và kết quả; chưa chạy hoặc thất bại phải ghi rõ.
+- Kiểm chứng: chạy chuỗi bên dưới trên scaffold, `git diff --check` và review file tracked trước bàn giao.
+- Files: `apps/mobile/README.md`, `docs/architecture.md`, `docs/quality-release.md`.
+
+### Lệnh kiểm chứng theo plan — kết quả thực tế ở evidence
+
+Chạy tại `apps/mobile/` sau scaffold, `<device-id>` lấy từ `flutter devices`, không giả định cố định. Bootstrap `fvm use 3.44.8` trước các lệnh FVM. JDK ở máy hiện tại: `/home/dorriss/.local/share/JetBrains/Toolbox/apps/android-studio/jbr`; hướng dẫn fresh checkout dùng JDK 21 tương đương, không commit đường dẫn riêng.
+
+```sh
+fvm flutter --version
+fvm flutter doctor -v
+fvm flutter pub get
+fvm dart format --output=none --set-exit-if-changed lib test
+fvm flutter analyze
+fvm flutter test
+fvm flutter build apk --debug --flavor dev
+fvm flutter build apk --debug --flavor staging
+fvm flutter run --flavor dev -d <device-id>
+fvm flutter run --flavor staging -d <device-id>
+```
+
+Manual: cài hai flavor song song, bật airplane mode trước mở app, đi đủ bốn tab, thử chuyển tab/back, đóng/mở lại, kiểm tra tiếng Việt và text scale. Đây là smoke scaffold, chưa là offline acceptance của buổi học/starter. Không cần build AAB hay ký release để đạt NO-001.
+
+### Rủi ro và câu hỏi còn mở
+
+| Rủi ro | Ảnh hưởng | Cách xử lý |
+|---|---|---|
+| Alias FVM stable thay đổi | Build không tái lập | Numeric pin trước scaffold; ghi lockfiles/wrapper |
+| JDK shell 25 khác Flutter JBR 21 | Build CLI khác IDE/CI | Ghi và kiểm tra JVM của wrapper, dùng JDK 21 nhất quán |
+| AVD hiện có launch rồi biến mất | Không thể chứng minh run acceptance | Kiểm tra cold boot/software rendering; nếu vẫn lỗi tạo AVD dev riêng, giữ AVD hiện có |
+| System image 37.1 và cảnh báo RAM | Smoke dev nặng, chưa đại diện pilot | Dùng AVD API 36 riêng nếu cần; không thay minSdk để né verification |
+| AGP 9/template mới | Flavor/resources hoặc plugin không tương thích | Build dev sớm, dựa template pin và docs chính thức, không downgrade âm thầm |
+| Package dev tạm chưa được kiểm tra quyền sở hữu | Không phù hợp release identity | Ghi rõ tạm thời, giải quyết ở task brand/release trước ký beta |
+
+Không có câu hỏi sản phẩm chặn kế hoạch scaffold. Chủ dự án đã review và duyệt plan trước code ngày 2026-10-04; vẫn giữ toàn bộ kế hoạch MVP và task tracker hiện có. Không spawn agent hoặc bắt đầu task khác trong phiên này.
+
+### Kết quả triển khai NO-001
+
+Plan đã được duyệt và scaffold được tạo ngay trong repo tại `apps/mobile/`. Bằng chứng: [NO-001](../docs/evidence/NO-001.md). Format/analyze sạch, 6 tests đạt, dev/staging debug APK build và run thành công, mỗi flavor đạt 1 integration smoke trong airplane mode. Đã xem screenshot chữ 200%, cold launch và phím Back thật trên emulator. Các bước task đã có đầu ra để review; trạng thái thực thi vẫn lấy từ Kaneo.
+
+### Thiết bị kiểm chứng từ phiên tiếp theo
+
+Chủ dự án yêu cầu ngừng dùng emulator vì gây lag máy. Không khởi chạy AVD nữa; dùng điện thoại Android thật qua ADB (USB hoặc Wireless debugging). Bằng chứng emulator NO-001 là lịch sử, không phải chỉ dẫn launch cho các phiên sau. Lấy device ID bằng `adb devices -l`; chỉ chạy app/integration khi điện thoại đã cấp quyền và có trạng thái `device`. Giữ nguyên các acceptance offline, kiểm chứng trên điện thoại thật thay cho emulator.
+
+Kiểm chứng bổ sung sau khi chủ dự án yêu cầu commit: OPPO Reno8, Android 14/API 34, ARM64 qua wireless ADB; 6 tests local và 1 integration smoke cho mỗi flavor đạt. Staging có lượt bị chặn cài/runner timeout trước khi fresh build chạy đạt; xem evidence. Smoke điện thoại chạy online, không làm mất wireless ADB. Không khởi chạy emulator. Chia history thành 4 atomic Conventional Commits: plan, scaffold, tests, tài liệu/evidence.
+
+## Sửa blocker CI NO-002 — 2026-10-04
+
+PR #2 không pull được MinIO trên runner mới; local trước dùng cached image. Giữ nguyên release MinIO/mc, build image từ official GitHub binaries + pinned checksums, dùng chung Dockerfile cho Compose/Testcontainers và mở rộng CI path filters. Evidence và giới hạn tại `docs/backend-scaffold.md`; chưa thay đổi trạng thái Kaneo hoặc bắt đầu NO-003/090.

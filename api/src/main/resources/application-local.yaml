@@ -1,0 +1,22 @@
+# Development-only values. Production requires explicit environment configuration.
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:56432/no_db}
+    username: ${SPRING_DATASOURCE_USERNAME:no}
+    password: ${SPRING_DATASOURCE_PASSWORD:no_local_password}
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:57379}
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:60092}
+"no":
+  storage:
+    endpoint: ${NO_STORAGE_ENDPOINT:http://localhost:60000}
+    access-key: ${NO_STORAGE_ACCESS_KEY:no-local}
+    secret-key: ${NO_STORAGE_SECRET_KEY:no-local-password}
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
