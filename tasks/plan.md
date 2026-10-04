@@ -4,6 +4,8 @@ Ngày lập: 2026-10-04. Task tracker: **Kaneo / Bloom**. Đặc tả sản ph�
 
 ## Đầu ra được yêu cầu hiện tại
 
+Yêu cầu mới ngày 2026-10-04: kiểm tra readiness và lập kế hoạch NO-007. Đã đọc task/relations/comments live qua MCP Kaneo: NO-007 `in-progress`, dependency duy nhất NO-001 `done`; không có comment bổ sung. Kế hoạch chi tiết và chỉ mục task con ở cuối file. Phiên này chỉ lập kế hoạch, chưa triển khai NO-007; nội dung NO-001 bên dưới là lịch sử.
+
 Backlog MVP đã xuất bản. Yêu cầu ngày 2026-10-04: bắt đầu NO-001 bằng việc đọc task Kaneo, kiểm chứng toolchain trên máy và lập kế hoạch scaffold Android. Chủ dự án đã duyệt plan và yêu cầu init trong repo này; scaffold NO-001 đã có đầu ra để review. Những task còn lại tiếp tục theo DAG hiện có; không lấy việc lập kế hoạch làm bằng chứng tính năng đã hoạt động. Mobile scaffold có build/test tại `apps/mobile/`; backend chưa có scaffold.
 
 ## Cách đọc backlog
@@ -182,3 +184,87 @@ Plan đã được duyệt và scaffold được tạo ngay trong repo tại `ap
 Chủ dự án yêu cầu ngừng dùng emulator vì gây lag máy. Không khởi chạy AVD nữa; dùng điện thoại Android thật qua ADB (USB hoặc Wireless debugging). Bằng chứng emulator NO-001 là lịch sử, không phải chỉ dẫn launch cho các phiên sau. Lấy device ID bằng `adb devices -l`; chỉ chạy app/integration khi điện thoại đã cấp quyền và có trạng thái `device`. Giữ nguyên các acceptance offline, kiểm chứng trên điện thoại thật thay cho emulator.
 
 Kiểm chứng bổ sung sau khi chủ dự án yêu cầu commit: OPPO Reno8, Android 14/API 34, ARM64 qua wireless ADB; 6 tests local và 1 integration smoke cho mỗi flavor đạt. Staging có lượt bị chặn cài/runner timeout trước khi fresh build chạy đạt; xem evidence. Smoke điện thoại chạy online, không làm mất wireless ADB. Không khởi chạy emulator. Chia history thành 4 atomic Conventional Commits: plan, scaffold, tests, tài liệu/evidence.
+
+## Kế hoạch chi tiết NO-007 — Guest profile offline
+
+### Readiness và phạm vi
+
+Kiểm tra trực tiếp ngày 2026-10-04: [NO-007 / BLO-7](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/xc1vmwt6xhgzvirgqyd81r62) đang `in-progress`, high, chưa có assignee. Incoming `blocks` duy nhất là NO-001, đã `done`/`isCompleted=true`; không có comment. **Có thể bắt đầu triển khai**, không có dependency mở. NO-007 đang chặn NO-012, NO-017, NO-027 và NO-064. Các quan hệ cũ được giữ nguyên.
+
+Đã đối chiếu docs/README, product R01/R11, architecture, UX, offline-sync, quality-release và code. Repo có Flutter shell/config/router và tests; chưa có Riverpod/Drift/SQLite, chưa có contracts hoặc backend. NO-007 không phụ thuộc backend, NO-003, theme NO-006, auth provider hay AI.
+
+`adb devices -l` chưa thấy thiết bị ở lúc lập kế hoạch. Đây là điều kiện còn thiếu để hoàn tất device acceptance, không chặn code/unit/widget/migration tests. Không chạy emulator. Thiết bị cần được kết nối lại; device ID phải được khám phá ở lần test.
+
+**Đầu ra:** lần mở đầu không mạng tạo guest UUID, device UUID và profile local; lần mở sau giữ identity; migrations có version, profile scoping và transaction API; test nâng DB không mất dữ liệu. NO-007 chỉ hoàn thành phần guest persistence của R01/R11. Starter/audio ở NO-012; lưu attempt/outbox ở NO-017; login/merge/sync ở các task P2.
+
+### Quyết định kiến trúc
+
+- Một DB app-private trong sandbox mỗi flavor. Guest/device UUID ngẫu nhiên tạo local, không lấy hardware ID. Device identity thuộc installation/sandbox và không thay khi đổi profile. Profile UUID độc lập, không thay khi mở lại app.
+- Schema tối thiểu: profiles, installation/device identity và active-profile reference có foreign key. Mọi truy cập dữ liệu profile cần explicit profile ID; bootstrap không thay một active profile đã tồn tại bằng guest mới. Unknown/missing reference phải thành lỗi phục hồi, không tự xóa DB.
+- Repository `ensureGuestProfile` chạy trong transaction, trả committed identity; constraint singleton/uniqueness và serialized initialization ngăn tạo trùng khi nhiều caller cùng gọi. API transaction cho future writes yêu cầu profile context; test A/B scope dùng profile fixtures, chưa triển khai account switching.
+- Drift versioned schema: baseline phát triển v1 có identity/active profile; v2 thêm tên hiển thị nullable theo UX tên tùy chọn. Xuất snapshot v1 trước khi thay schema, viết migration v1→v2 và fixture có dữ liệu thực. v1 chưa từng phát hành; không mô tả fixture này như người dùng đang có DB cũ. Fresh v2 và migrated v2 phải cùng schema, IDs/dữ liệu cũ phải giữ nguyên.
+- Dùng hướng dẫn chính thức [Drift migrations](https://drift.simonbinder.eu/migrations/) cho schema snapshots/test integrity và [transactions](https://drift.simonbinder.eu/dart_api/transactions/) cho atomic writes. Pin phiên bản packages phù hợp Flutter 3.44.8/Dart 3.12.2 tại implementation, kiểm tra setup Android/native SQLite chính thức lúc chọn package; không tự nâng Flutter/AGP.
+- Riverpod quản lý/inject DB và repository theo kiến trúc đích; DB mở lazy, không block UI thread. Bootstrap hiển thị loading/error/retry tiếng Việt; shell chỉ được dùng sau commit. Không fallback profile trong RAM, không chạy HTTP/auth khi bootstrap. Lỗi lưu giữ dữ liệu và cho retry; không log nội dung cá nhân.
+- Tên mặc định nullable, copy dùng lời chào trung tính; không hard-code Tâm. Chưa thêm UI chỉnh profile hoặc toàn bộ onboarding. Không cần API/server contract mới cho task local này.
+
+### Task List — tracker Kaneo / Bloom
+
+Đã đọc đủ 2 trang/121 task và metadata liên quan trước tạo; không có task con NO-007 trùng. Ba task con dưới đây đã được tạo, đọc lại body và xác minh quan hệ. Kaneo giữ checklist acceptance/verification và trạng thái; không tạo tasks/todo.md hay ghi trạng thái vào backlog.json.
+
+| Thứ tự | Task | Dependency | Scope và files dự kiến |
+|---|---|---|---|
+| 1 | [NO-007/A · BLO-122 — Lưu guest identity bền bằng Drift](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/q3u6vynfx3sravivsjw5jjh3) | NO-001 Done | M: app_database.dart, identity_tables.dart, guest_profile_repository.dart, repository test, migration test |
+| 2 | [NO-007/B · BLO-123 — Bootstrap app từ guest local với retry](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/o2pukry6j0wraw984wklr8g9) | A | M: main.dart, app.dart, profile_bootstrap.dart, bootstrap widget test, scaffold integration harness |
+| 3 | [NO-007/C · BLO-124 — Kiểm chứng guest offline trên Android thật](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/iq6feh8o2mxknm91u1jsq9s4) | B | M: guest integration test, NO-007 evidence, mobile README, architecture, quality-release |
+
+Native graph: NO-001 → A → B → C (`blocks`); NO-007 là parent qua `subtask` cho A/B/C. Task con đang To Do; không đổi trạng thái/assignee/deadline parent. Acceptance chi tiết, verification, path và phạm vi nằm trong body từng task. Config/lockfiles/build.yaml/generated Drift/schema snapshots của A phải được liệt kê và review riêng; nếu logic vượt khoảng 5 files hoặc thêm đầu ra độc lập thì tách tiếp trước code.
+
+### Checkpoints
+
+Sau A/B:
+
+- [ ] SQLite file reopen giữ IDs; concurrent bootstrap không tạo trùng; injected failure rollback toàn bộ.
+- [ ] Profile A/B không truy cập chéo; migration fixture có dữ liệu v1→v2 giữ IDs/fields và schema validation đạt.
+- [ ] Widget delayed/failing/retry startup đạt; bốn tab/Back vẫn hoạt động; analyze và dev build sạch.
+
+Sau C, trước chuyển NO-007 In Review/Done:
+
+- [ ] Fresh sandbox offline trên Android thật tạo identity; force-stop/cold launch giữ đúng identity.
+- [ ] Dev/staging tách sandbox, cả hai build/smoke đạt; toàn bộ local tests và format/analyze đạt.
+- [ ] Evidence ghi rõ commands, runtime, flavor, cách chứng minh offline, upgrade results và giới hạn; không suy build pass thành acceptance pass.
+
+### Lệnh verification dự kiến
+
+Chạy tại apps/mobile/; tên file test mới là đường dẫn dự kiến, chưa tồn tại/chưa chạy trong phiên lập kế hoạch. Analyze/build hiện có được pin từ scaffold.
+
+```sh
+fvm flutter pub get
+fvm dart run build_runner build --delete-conflicting-outputs
+fvm dart run drift_dev make-migrations
+fvm flutter test test/data/local/
+fvm flutter test test/profile_bootstrap_test.dart test/navigation_test.dart test/app_config_test.dart
+fvm dart format --output=none --set-exit-if-changed lib test integration_test
+fvm flutter analyze
+fvm flutter test
+fvm flutter build apk --debug --flavor dev
+fvm flutter build apk --debug --flavor staging
+adb devices -l
+fvm flutter test integration_test/guest_profile_test.dart --flavor dev -d <device-id>
+fvm flutter test integration_test/guest_profile_test.dart --flavor staging -d <device-id>
+```
+
+Migration tooling chạy lúc tạo/chỉnh schema, không tự regenerate lịch sử bất biến mỗi lần test. Test persistence dùng SQLite thật trên file tạm thay vì mock DB; unit/widget fixture không đọc dữ liệu điện thoại riêng tư. Device smoke dùng fresh test sandbox/harness, kiểm tra identity qua repository trong test, tránh lộ UUID/dữ liệu người dùng trong UI/log. Manual force-stop rồi cold launch bằng harness không xóa DB để so sánh identity trước/sau.
+
+Acceptance body gốc yêu cầu fresh install airplane mode. Đường ưu tiên là USB ADB với thao tác offline được phối hợp; nếu chỉ có wireless ADB, giữ Wi-Fi và chưa tuyên bố đạt airplane-mode acceptance. Có thể bổ sung test-app network isolation được chứng minh để kiểm tra sớm, nhưng cần ghi phương pháp rõ và thống nhất thay thế gate gốc trước khi dùng nó làm evidence hoàn tất. Không tự clear-data/uninstall app đang dùng, không tắt Wi-Fi phone khi wireless ADB.
+
+### Rủi ro và câu hỏi mở
+
+| Rủi ro | Ảnh hưởng | Giảm thiểu |
+|---|---|---|
+| SQLite/native plugin không tương thích toolchain pin | Build/test bị chặn | Resolve/pin packages và dev build ở A trước UI |
+| Concurrent bootstrap hoặc retry sau lỗi tạo identity mới | Mất scope dữ liệu | Transaction + constraints + reopen/concurrency/rollback tests |
+| Migration phá dữ liệu hoặc code dùng schema mới khi upgrade | Mất profile | Snapshots versioned + fixture có dữ liệu + validation fresh/upgraded |
+| Active profile và queries dùng mặc định ngầm | Trộn dữ liệu tài khoản sau này | Explicit profile context + FK + A/B negative tests |
+| Phone chưa kết nối hoặc wireless mất khi airplane mode | Thiếu acceptance thiết bị | Kết nối phone, ưu tiên USB; giữ Wi-Fi wireless; không emulator |
+
+Không có câu hỏi sản phẩm chặn A/B. Chưa kiểm chứng tương thích package/runtime mới; giải quyết sớm ở A. Điều kiện test offline thật còn phụ thuộc phone/USB hoặc phương pháp tương đương được thống nhất. Plan đã được viết để review; chưa được chủ dự án duyệt triển khai, chưa viết code hoặc chạy application checks NO-007. Không spawn agents.
