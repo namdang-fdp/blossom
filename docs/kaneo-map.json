@@ -2332,5 +2332,70 @@
   },
   "verified_at": "2026-10-04",
   "verified_task_count": 121,
-  "verified_dependency_count": 260
+  "verified_dependency_count": 260,
+  "planning_subtasks": {
+    "NO-007": {
+      "publication_state": "verified",
+      "verified_at": "2026-10-04",
+      "note": "Implementation slices of existing NO-007; not new MVP requirements. Original 121-task export counts above remain historical. Kaneo owns live status.",
+      "tasks": {
+        "NO-007/A": {
+          "id": "q3u6vynfx3sravivsjw5jjh3",
+          "number": 122,
+          "title": "[NO-007/A] [P1] Lưu guest identity bền bằng Drift",
+          "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/q3u6vynfx3sravivsjw5jjh3"
+        },
+        "NO-007/B": {
+          "id": "o2pukry6j0wraw984wklr8g9",
+          "number": 123,
+          "title": "[NO-007/B] [P1] Bootstrap app từ guest local với retry",
+          "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/o2pukry6j0wraw984wklr8g9"
+        },
+        "NO-007/C": {
+          "id": "iq6feh8o2mxknm91u1jsq9s4",
+          "number": 124,
+          "title": "[NO-007/C] [P1] Kiểm chứng guest offline trên Android thật",
+          "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/iq6feh8o2mxknm91u1jsq9s4"
+        }
+      },
+      "relations": [
+        {
+          "id": "pxao6hnuzcpuxhaosred3a1n",
+          "type": "subtask",
+          "source": "NO-007",
+          "target": "NO-007/A"
+        },
+        {
+          "id": "ml00a7rkxrx9du89jzn9v26z",
+          "type": "subtask",
+          "source": "NO-007",
+          "target": "NO-007/B"
+        },
+        {
+          "id": "wgvtg3w79lcdmnvgkiw2jtn6",
+          "type": "subtask",
+          "source": "NO-007",
+          "target": "NO-007/C"
+        },
+        {
+          "id": "izezvhz8rlde9dnk14zkyt1w",
+          "type": "blocks",
+          "source": "NO-001",
+          "target": "NO-007/A"
+        },
+        {
+          "id": "yqwn2qv1ezb4ro63enmjggvj",
+          "type": "blocks",
+          "source": "NO-007/A",
+          "target": "NO-007/B"
+        },
+        {
+          "id": "pj8yy4ioebbhve0zx0ygpp62",
+          "type": "blocks",
+          "source": "NO-007/B",
+          "target": "NO-007/C"
+        }
+      ]
+    }
+  }
 }

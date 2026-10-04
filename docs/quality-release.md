@@ -8,6 +8,8 @@ Lệnh mobile: `fvm flutter analyze`, `fvm flutter test`, `fvm flutter test inte
 
 ## Các lớp kiểm chứng
 
+NO-007 thêm `fvm flutter test test/data/local/`, bootstrap widget tests và `fvm flutter test integration_test/guest_profile_test.dart --flavor <dev|staging> -d <device-id>`. Offline gate NO-007 được chủ dự án chọn kiểm chứng bằng APK Dev không có INTERNET thay airplane mode để giữ wireless ADB; integration smoke online được ghi riêng. Test upgrade sử dụng baseline phát triển v1 chưa phát hành và có dữ liệu profile/device thật. Xem [evidence](evidence/NO-007.md). Dev router smoke dùng `fvm flutter drive --driver=test_driver/integration_test.dart --target=integration_test/scaffold_test.dart --flavor dev --no-dds --keep-app-running -d <device-id>` sau lỗi runner `flutter test`; giữ nguyên assertions. Chạy Flutter build/test tuần tự để tránh tranh chấp generated plugin registrant.
+
 | Lớp | Kiểm tra cần thiết |
 |---|---|
 | Domain | Chấm mục tiêu, hint mapping, FSRS vectors, session planner, rose state machine, timezone |

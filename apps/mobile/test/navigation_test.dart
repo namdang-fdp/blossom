@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:no_mobile/data/local/app_database.dart';
+import 'package:no_mobile/features/profile/profile_bootstrap.dart';
+import 'package:no_mobile/features/profile/guest_profile_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:no_mobile/app/app.dart';
 import 'package:no_mobile/core/config/app_config.dart';
@@ -6,7 +10,22 @@ import 'package:no_mobile/features/scaffold/scaffold_page.dart';
 
 void main() {
   Future<void> start(WidgetTester tester) async {
-    await tester.pumpWidget(const NoApp(config: AppConfig(AppEnvironment.dev)));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          guestProfileProvider.overrideWith(
+            (_) async => ProfileIdentity(
+              profile: LocalProfile(
+                id: '11111111-1111-4111-8111-111111111111',
+                createdAt: DateTime.utc(2026),
+              ),
+              deviceId: '22222222-2222-4222-8222-222222222222',
+            ),
+          ),
+        ],
+        child: const NoApp(config: AppConfig(AppEnvironment.dev)),
+      ),
+    );
     await tester.pumpAndSettle();
   }
 
