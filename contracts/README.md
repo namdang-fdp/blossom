@@ -67,3 +67,24 @@ Changes typed: attempt append-only với original/effective/received time, libra
 Client stage các page theo snapshotId, commit từng page+token atomically để resume sau kill. Khi đủ pages, swap canonical dataset+cursor trong transaction, giữ toàn bộ outbox/pending attempts/conflicts đúng profile rồi replay/rebase pending trên canonical projection. Không reset outbox khi snapshot. Pull cũng áp dụng page+cursor cùng transaction; duplicate page/event UUID không tăng history/credit. Recovery path: CURSOR_EXPIRED → snapshot-first → snapshot-last → pull(checkpoint). Nếu mạng hoặc auth ngắt giữa chừng, giữ stage và pending; snapshot expired mới bắt đầu stage mới.
 
 Fixture/schema chỉ chứng minh wire shape và các kỳ vọng của protocol; identity scope, snapshot isolation, PostgreSQL transactions và replay convergence phải có integration evidence ở task runtime tương ứng.
+
+### Commands tái lập sau implementation
+
+Python tools có dependencies + transitive lock tại `contracts/tools/uv.lock`; `jsonschema[format]` được pin để URI và các format không bị âm thầm bỏ qua do thiếu optional validators. Dùng uv 0.12.19 như CI.
+
+```sh
+# Root: OpenAPI, toàn corpus và protocol expectations
+uv run --locked --project contracts/tools python contracts/tools/validate_fixtures.py
+uv run --locked --project contracts/tools python -m unittest discover -s contracts/tools -p 'test_*.py'
+# api/: Maven copy cùng fixtures lên test classpath
+./mvnw -B -ntp -Dtest=SyncContractTest test
+./mvnw -B -ntp verify
+# apps/mobile/: đọc corpus relative tới app root
+fvm flutter test test/contracts/sync_contract_test.dart
+fvm flutter analyze
+fvm flutter test
+```
+
+Mỗi case fixture có name/schema/valid/body; negative case thêm errorPath. Response case ghi method/path/status/headers; runner đối chiếu schema đúng endpoint. Push scenario ghi requestCase/acknowledged/pending/replayOf; snapshot ghi previousPage/snapshotPage. Runner kiểm tra expected invariants của dữ liệu mẫu, không mô phỏng handler hoặc giả DB idempotency đã chạy. Java dùng Jackson records + Bean Validation; Dart dùng typed DTO/union + format checks, giữ nguyên timestamp text khi serialize. IANA timezone lookup được runner/Java kiểm chứng; Dart wire DTO giữ tên timezone, domain adapter sẽ kiểm chứng timezone khi feature dùng nó.
+
+Evidence và giới hạn: [NO-003](../docs/evidence/NO-003.md). Java scalar coercion bị tắt để không nhận `"1"`/`1.5` làm integer; Dart kiểm tra calendar date và time components trước DateTime parse để không normalize dữ liệu sai.

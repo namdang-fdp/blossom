@@ -362,17 +362,17 @@ Mỗi task trên Kaneo chứa mô tả, tối đa ba acceptance criteria, verifi
 
 ### Checkpoint sau NO-003.1–NO-003.2
 
-- [ ] Validate OpenAPI đạt; reviewer đối chiếu operation fields/revision/limits/problem với offline-sync.
-- [ ] Walkthrough duplicate, conflict, partial success và 401: chỉ item có ack thành công được xác nhận; pending khác giữ nguyên.
-- [ ] Walkthrough cursor expiry → snapshot nhiều page → resume dưới concurrent changes: không thiếu tombstone/projection hoặc ghi đè outbox pending.
-- [ ] Review contract trước khi tạo DTO; nếu schema/payload chưa rõ, giải quyết trong slice tương ứng rồi tiếp tục.
+- [x] Validate OpenAPI đạt; reviewer đối chiếu operation fields/revision/limits/problem với offline-sync.
+- [x] Walkthrough duplicate, conflict, partial success và 401: chỉ item có ack thành công được xác nhận; pending khác giữ nguyên.
+- [x] Walkthrough cursor expiry → snapshot nhiều page → resume dưới concurrent changes: không thiếu tombstone/projection hoặc ghi đè outbox pending.
+- [x] Review contract trước khi tạo DTO; nếu schema/payload chưa rõ, giải quyết trong slice tương ứng rồi tiếp tục.
 
 ### Checkpoint sau NO-003.3–NO-003.4
 
-- [ ] Mọi fixture hợp lệ qua schema và DTO Java/Dart; fixture invalid bị từ chối tại trường/điều kiện dự kiến.
-- [ ] Focused tests, analyze, mobile regression và backend verify đạt; Docker IT chưa chạy phải ghi rõ, không báo pass.
-- [ ] Traceability cả hai AC NO-003 đầy đủ, README và evidence ghi command/version/kết quả thật; giữ offline guarantees.
-- [ ] Parent chỉ chuyển In Review khi có evidence của cả bốn subtask; Done sau acceptance/review theo quality-release.
+- [x] Mọi fixture hợp lệ qua schema và DTO Java/Dart; fixture invalid bị từ chối tại trường/điều kiện dự kiến.
+- [x] Focused tests, analyze, mobile regression và backend verify đạt; Docker IT chưa chạy phải ghi rõ, không báo pass.
+- [x] Traceability cả hai AC NO-003 đầy đủ, README và evidence ghi command/version/kết quả thật; giữ offline guarantees.
+- [x] Parent chỉ chuyển In Review khi có evidence của cả bốn subtask; Done sau acceptance/review theo quality-release.
 
 ### Lệnh kiểm chứng dự kiến
 
@@ -414,3 +414,9 @@ Thực hiện tuần tự vì chia sẻ OpenAPI và fixture corpus. Java/Dart c�
 ### Duyệt implementation NO-003 — 2026-10-04
 
 Chủ dự án đã hiểu phạm vi contract và yêu cầu bắt đầu triển khai. Đọc lại MCP xác nhận NO-002 hiện `done`; gate dependency được đáp ứng. Các trạng thái NO-002 `in-progress` phía trên là bằng chứng lúc lập plan, không phải blocker hiện tại. Triển khai bốn slice theo thứ tự, không mở rộng sang sync runtime.
+
+### Kết quả implementation NO-003 — 2026-10-04
+
+Đã triển khai bốn slice. Evidence: [NO-003](../docs/evidence/NO-003.md); contract và lệnh tái lập: [contracts README](../contracts/README.md). 41 shared fixtures, 5 Python regression tests, 43 contract tests mỗi runtime; backend full verify 52 tests không fail/error/skip, Spotless/Checkstyle đạt; mobile full suite 49 tests và analyze sạch. CI hiện có thêm locked fixture/schema checks; chưa chạy GitHub Actions cho nhánh này.
+
+Contract checkpoint được rà soát trước DTO, bao gồm ack từng item, immutable replay, snapshot checkpoint và pending preservation. NO-003 được bàn giao In Review, không tự đánh dấu parent Done. Các thông tin trạng thái/planning chưa triển khai phía trên là lịch sử lúc lập plan; user đã duyệt implementation trong phần duyệt ở trên. Paths phụ trợ ngoài scope chính: Maven fixture test resources, Python validator regression test/.gitignore và bước CI; không mở rộng scope sản phẩm.
