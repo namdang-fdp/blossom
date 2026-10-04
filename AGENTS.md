@@ -19,6 +19,7 @@ Read `docs/README.md`, the relevant feature spec, and `tasks/plan.md` before imp
 - No secrets, recordings, private learner sentences or production credentials in commits/logs.
 - Do not deploy publicly, publish a Play release, or send external messages unless authorized for that action. Creating planning tasks in Bloom is authorized.
 - Do not start agents automatically; only delegate when explicitly requested or otherwise explicitly authorized by applicable instructions.
+- Do not launch Android emulators on this workstation; they cause severe lag. Use the connected physical Android phone through ADB for device testing. Discover its current device ID with `adb devices -l`; Wi-Fi IP/ports are dynamic. Do not disable phone Wi-Fi or enable airplane mode during wireless ADB tests.
 
 ## Scope
 

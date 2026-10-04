@@ -4,7 +4,7 @@ Ngày lập: 2026-10-04. Task tracker: **Kaneo / Bloom**. Đặc tả sản ph�
 
 ## Đầu ra được yêu cầu hiện tại
 
-Backlog MVP đã xuất bản. Yêu cầu ngày 2026-10-04: bắt đầu NO-001 bằng việc đọc task Kaneo, kiểm chứng toolchain trên máy và lập kế hoạch scaffold Android. Chủ dự án đã duyệt plan và yêu cầu init trong repo này; bước tiếp theo là triển khai scaffold NO-001. Những task còn lại tiếp tục theo DAG hiện có; không lấy việc lập kế hoạch làm bằng chứng tính năng đã hoạt động. Trước implementation, repo chưa có build/test ứng dụng.
+Backlog MVP đã xuất bản. Yêu cầu ngày 2026-10-04: bắt đầu NO-001 bằng việc đọc task Kaneo, kiểm chứng toolchain trên máy và lập kế hoạch scaffold Android. Chủ dự án đã duyệt plan và yêu cầu init trong repo này; scaffold NO-001 đã có đầu ra để review. Những task còn lại tiếp tục theo DAG hiện có; không lấy việc lập kế hoạch làm bằng chứng tính năng đã hoạt động. Mobile scaffold có build/test tại `apps/mobile/`; backend chưa có scaffold.
 
 ## Cách đọc backlog
 
@@ -131,9 +131,9 @@ Khi kiểm tra ban đầu không có thiết bị kết nối. Lệnh launch AVD
 
 **Checkpoint sau bước 1–2:**
 
-- [ ] Numeric Flutter pin, wrapper và JDK đã xác nhận; dev/staging APK build thành công.
-- [ ] Hai bản cài chạy được trên emulator; bốn tab, Back và khởi chạy không mạng hoạt động.
-- [ ] Analyze sạch; tests config/router đạt; giới hạn scaffold không lấn guest/study/theme/CI.
+- [x] Numeric Flutter pin, wrapper và JDK đã xác nhận; dev/staging APK build thành công.
+- [x] Hai bản cài chạy được trên emulator; bốn tab, Back và khởi chạy không mạng hoạt động qua integration smoke.
+- [x] Analyze sạch; tests config/router đạt; giới hạn scaffold không lấn guest/study/theme/CI.
 
 **Bước 3 — Ghi bằng chứng để review (S).** Dependency: checkpoint trên. Cập nhật `apps/mobile/README.md`, `docs/architecture.md`, `docs/quality-release.md` với lệnh thực tế và giới hạn của scaffold; review diff, secrets/artifacts và coherence offline. Chuyển In Review trên Kaneo khi có đầy đủ đầu ra theo quy tắc task, chỉ Done khi acceptance có bằng chứng. Không dùng build thành công thay cho smoke router/emulator.
 
@@ -141,7 +141,7 @@ Khi kiểm tra ban đầu không có thiết bị kết nối. Lệnh launch AVD
 - Kiểm chứng: chạy chuỗi bên dưới trên scaffold, `git diff --check` và review file tracked trước bàn giao.
 - Files: `apps/mobile/README.md`, `docs/architecture.md`, `docs/quality-release.md`.
 
-### Lệnh kiểm chứng dự kiến — chưa chạy trên app
+### Lệnh kiểm chứng theo plan — kết quả thực tế ở evidence
 
 Chạy tại `apps/mobile/` sau scaffold, `<device-id>` lấy từ `flutter devices`, không giả định cố định. Bootstrap `fvm use 3.44.8` trước các lệnh FVM. JDK ở máy hiện tại: `/home/dorriss/.local/share/JetBrains/Toolbox/apps/android-studio/jbr`; hướng dẫn fresh checkout dùng JDK 21 tương đương, không commit đường dẫn riêng.
 
@@ -172,3 +172,13 @@ Manual: cài hai flavor song song, bật airplane mode trước mở app, đi đ
 | Package dev tạm chưa được kiểm tra quyền sở hữu | Không phù hợp release identity | Ghi rõ tạm thời, giải quyết ở task brand/release trước ký beta |
 
 Không có câu hỏi sản phẩm chặn kế hoạch scaffold. Chủ dự án đã review và duyệt plan trước code ngày 2026-10-04; vẫn giữ toàn bộ kế hoạch MVP và task tracker hiện có. Không spawn agent hoặc bắt đầu task khác trong phiên này.
+
+### Kết quả triển khai NO-001
+
+Plan đã được duyệt và scaffold được tạo ngay trong repo tại `apps/mobile/`. Bằng chứng: [NO-001](../docs/evidence/NO-001.md). Format/analyze sạch, 6 tests đạt, dev/staging debug APK build và run thành công, mỗi flavor đạt 1 integration smoke trong airplane mode. Đã xem screenshot chữ 200%, cold launch và phím Back thật trên emulator. Các bước task đã có đầu ra để review; trạng thái thực thi vẫn lấy từ Kaneo.
+
+### Thiết bị kiểm chứng từ phiên tiếp theo
+
+Chủ dự án yêu cầu ngừng dùng emulator vì gây lag máy. Không khởi chạy AVD nữa; dùng điện thoại Android thật qua ADB (USB hoặc Wireless debugging). Bằng chứng emulator NO-001 là lịch sử, không phải chỉ dẫn launch cho các phiên sau. Lấy device ID bằng `adb devices -l`; chỉ chạy app/integration khi điện thoại đã cấp quyền và có trạng thái `device`. Giữ nguyên các acceptance offline, kiểm chứng trên điện thoại thật thay cho emulator.
+
+Kiểm chứng bổ sung sau khi chủ dự án yêu cầu commit: OPPO Reno8, Android 14/API 34, ARM64 qua wireless ADB; 6 tests local và 1 integration smoke cho mỗi flavor đạt. Staging có lượt bị chặn cài/runner timeout trước khi fresh build chạy đạt; xem evidence. Smoke điện thoại chạy online, không làm mất wireless ADB. Không khởi chạy emulator. Chia history thành 4 atomic Conventional Commits: plan, scaffold, tests, tài liệu/evidence.
