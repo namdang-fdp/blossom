@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/config/app_config.dart';
+import '../features/profile/profile_bootstrap.dart';
 import 'router.dart';
 
-class NoApp extends StatefulWidget {
+class NoApp extends ConsumerStatefulWidget {
   const NoApp({super.key, required this.config});
 
   final AppConfig config;
 
   @override
-  State<NoApp> createState() => _NoAppState();
+  ConsumerState<NoApp> createState() => _NoAppState();
 }
 
-class _NoAppState extends State<NoApp> {
+class _NoAppState extends ConsumerState<NoApp> {
   late final GoRouter _router = createRouter();
 
   @override
@@ -32,6 +34,16 @@ class _NoAppState extends State<NoApp> {
     localizationsDelegates: GlobalMaterialLocalizations.delegates,
     theme: _createLightTheme(),
     routerConfig: _router,
+    builder: (context, child) => ref
+        .watch(guestProfileProvider)
+        .when(
+          skipLoadingOnRefresh: false,
+          data: (_) => child ?? const SizedBox.shrink(),
+          loading: () => const ProfileBootstrap(),
+          error: (_, _) => ProfileBootstrap(
+            onRetry: () => ref.invalidate(guestProfileProvider),
+          ),
+        ),
   );
 }
 
