@@ -1,4 +1,38 @@
 {
+  "planning_breakdowns": {
+    "NO-003": {
+      "parent_task_id": "vc6ayvbzrm6urudrfoij7pjx",
+      "publication_state": "verified",
+      "verified_on": "2026-10-04",
+      "note": "Breakdown NO-003; không thay counts của export 121 task gốc. Trạng thái live ở Kaneo.",
+      "tasks": {
+        "NO-003.1": {
+          "id": "qvfgd7p772agus9ahicb70un",
+          "number": 125,
+          "title": "[NO-003.1] [P1] Chốt push envelope và ack từng operation",
+          "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/qvfgd7p772agus9ahicb70un"
+        },
+        "NO-003.2": {
+          "id": "pwkm8w608nsojybiy8071swl",
+          "number": 126,
+          "title": "[NO-003.2] [P1] Chốt pull cursor và snapshot phục hồi",
+          "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/pwkm8w608nsojybiy8071swl"
+        },
+        "NO-003.3": {
+          "id": "suep06ysc10a2pjnsp9fz8u1",
+          "number": 127,
+          "title": "[NO-003.3] [P1] Kiểm chứng fixture bằng schema và DTO Java",
+          "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/suep06ysc10a2pjnsp9fz8u1"
+        },
+        "NO-003.4": {
+          "id": "ojzsah3ncqu6k64unoq3ufoq",
+          "number": 128,
+          "title": "[NO-003.4] [P1] Kiểm chứng DTO Dart và bàn giao contract",
+          "url": "https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ojzsah3ncqu6k64unoq3ufoq"
+        }
+      }
+    }
+  },
   "product": "Nở",
   "project_name": "Bloom",
   "project_id": "i11re6ts0794c06k7o1wbd10",

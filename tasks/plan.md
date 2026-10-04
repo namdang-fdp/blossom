@@ -317,3 +317,100 @@ Kiểm chứng bổ sung sau khi chủ dự án yêu cầu commit: OPPO Reno8, A
 ## Sửa blocker CI NO-002 — 2026-10-04
 
 PR #2 không pull được MinIO trên runner mới; local trước dùng cached image. Giữ nguyên release MinIO/mc, build image từ official GitHub binaries + pinned checksums, dùng chung Dockerfile cho Compose/Testcontainers và mở rộng CI path filters. Evidence và giới hạn tại `docs/backend-scaffold.md`; chưa thay đổi trạng thái Kaneo hoặc bắt đầu NO-003/090.
+
+## Kế hoạch chi tiết NO-003 — Hợp đồng đồng bộ và lỗi API
+
+Ngày lập: 2026-10-04. Nhánh `feature/common-contract` đã fetch và fast-forward `origin/main` từ `1b6725d` tới `957b2a1`, không conflict. Đây là phần mở rộng kế hoạch MVP hiện có; giữ nguyên các phần NO-001/NO-002. Chỉ lập kế hoạch, chưa triển khai contract/DTO hoặc duyệt implementation.
+
+### Điều tra task và dependency
+
+Đã đọc live Bloom bằng MCP: project ID `i11re6ts0794c06k7o1wbd10`, toàn bộ 124 task trước khi tạo breakdown, body/relations/comments NO-003 và columns. [NO-003 / BLO-3](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/vc6ayvbzrm6urudrfoij7pjx) đang `in-progress`, priority high, chưa có comment/subtask trước lượt này. Dependency NO-002 cũng đang `in-progress`; code scaffold đã có trên main nhưng không dùng sự hiện diện code làm bằng chứng task Done. Giữ nguyên trạng thái, assignee và deadline của parent/dependency.
+
+Hai acceptance criteria gốc:
+1. OpenAPI định nghĩa operation UUID, revision, per-item ack, cursor, snapshot và problem response.
+2. Có fixture duplicate, conflict, partial success, token expiry; không tin userId trong payload.
+
+Verification gốc: validate OpenAPI và round-trip cùng fixtures bằng DTO client/server mẫu. NO-003 chặn NO-026 (identity), NO-028 (sync persistence), NO-031 (mobile push); giữ nguyên các quan hệ này. Implementation chỉ bắt đầu sau NO-002 hoàn tất và chủ dự án review plan.
+
+Hiện `contracts/openapi.yaml` là OpenAPI 3.0.3/version 0.0.1, chỉ có health; backend Java 25/Spring Boot 3.5.16 dùng Jackson, mobile Flutter 3.44.8/Dart 3.12.2 chưa có sync client. Đã đọc `docs/README.md`, `docs/architecture.md`, `docs/offline-sync.md`, `docs/quality-release.md`, `api/README.md` và kế hoạch hiện có.
+
+### Quyết định kiến trúc và phạm vi
+
+- OpenAPI trong `contracts/` là canonical; giữ namespace `/api/v1` và health hiện có. Tiếp tục 3.0.3 để tránh đổi toolchain không cần thiết; chọn version contract mới khi chốt schema.
+- Đầu ra là contract, shared synthetic fixtures, schema validator và DTO mẫu trong test support Java/Dart. Không tạo HTTP sync handler, migration, authentication provider, network worker hoặc UI trong NO-003. Catalog/AI/guest migration/deletion API hoàn chỉnh thuộc task feature tương ứng; chỉ định nghĩa shared primitives khi cần.
+- Mỗi operation giữ UUID client và device sequence; ownership từ verified identity, không từ userId trong payload. Document idempotency theo account+operationId, xử lý ID trùng khác payload và ack riêng từng item.
+- Chốt typed payload cho tập operation MVP cần envelope; không dùng map tùy ý thay cho schema. Liệt kê operation/revision semantics trước khi viết fixture; domain scheduler/content chưa chốt dùng version/reference, không tự bịa thuật toán FSRS hoặc content schema.
+- Cursor opaque scoped theo account; snapshot có checkpoint ổn định qua nhiều page và continuation cursor. Rebase pending local operations là nghĩa vụ client; snapshot không cho phép mất attempts/pending data.
+- Problem JSON có code ổn định, field errors, requestId, retryability; text giải thích tiếng Việt. Tách lỗi toàn request khỏi conflict từng item trong mixed batch; fixture ghi HTTP status/headers/schema và expected outcome.
+- Round-trip compare JSON theo cấu trúc; không phụ thuộc key order. Làm rõ UTC offset/instant, integer range Dart/Java, nullable/absent và discriminator; mọi fixture dùng dữ liệu tổng hợp, không private learner sentences.
+- Runner schema không thay integration test ownership/idempotency/transaction/replay thật: các gate runtime thuộc NO-026/028/029/031 và task sync tiếp theo.
+
+### Task List — Kaneo / Bloom
+
+Kaneo là task list target, không tạo `tasks/todo.md` hoặc checklist trạng thái thứ hai. Đã tạo và đọc lại body/status/relations của bốn subtask; tất cả `to-do`, không assignee/deadline.
+
+| Thứ tự | Task | Đầu ra | Dependency | Scope |
+|---|---|---|---|---|
+| 1 | [NO-003.1 / BLO-125](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/qvfgd7p772agus9ahicb70un) | Chốt push envelope và ack từng operation | NO-002 (đang in-progress; gate trước implementation). | M · 3–5 file |
+| 2 | [NO-003.2 / BLO-126](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/pwkm8w608nsojybiy8071swl) | Chốt pull cursor và snapshot phục hồi | NO-003.1. | M · 4 file |
+| 3 | [NO-003.3 / BLO-127](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/suep06ysc10a2pjnsp9fz8u1) | Kiểm chứng fixture bằng schema và DTO Java | NO-003.2; yêu cầu NO-002 hoàn tất trước implementation. | M · 5 file |
+| 4 | [NO-003.4 / BLO-128](https://kaneo.dorriss.com/dashboard/workspace/L2xwoDH5loB5xcW8pEwbZ3zmA3uZALpN/project/i11re6ts0794c06k7o1wbd10/task/ojzsah3ncqu6k64unoq3ufoq) | Kiểm chứng DTO Dart và bàn giao contract | NO-003.3 và NO-001 (đã done). | M · 4 file |
+
+Native relations: NO-003 là parent của cả bốn qua `subtask`; `NO-002 → NO-003.1 → NO-003.2 → NO-003.3 → NO-003.4` qua `blocks`; thêm `NO-001 → NO-003.4` (NO-001 đã Done). Parent giữ native blocks tới NO-026/028/031; subtask không được coi là thay thế acceptance của parent.
+
+Mỗi task trên Kaneo chứa mô tả, tối đa ba acceptance criteria, verification commands/manual check, dependency và 3–5 files dự kiến. Slice 1–2 định nghĩa đường sync cùng fixture; slice 3–4 chứng minh hai runtime đọc cùng contract. DTO test support chưa phải production client sinh tự động.
+
+### Checkpoint sau NO-003.1–NO-003.2
+
+- [ ] Validate OpenAPI đạt; reviewer đối chiếu operation fields/revision/limits/problem với offline-sync.
+- [ ] Walkthrough duplicate, conflict, partial success và 401: chỉ item có ack thành công được xác nhận; pending khác giữ nguyên.
+- [ ] Walkthrough cursor expiry → snapshot nhiều page → resume dưới concurrent changes: không thiếu tombstone/projection hoặc ghi đè outbox pending.
+- [ ] Review contract trước khi tạo DTO; nếu schema/payload chưa rõ, giải quyết trong slice tương ứng rồi tiếp tục.
+
+### Checkpoint sau NO-003.3–NO-003.4
+
+- [ ] Mọi fixture hợp lệ qua schema và DTO Java/Dart; fixture invalid bị từ chối tại trường/điều kiện dự kiến.
+- [ ] Focused tests, analyze, mobile regression và backend verify đạt; Docker IT chưa chạy phải ghi rõ, không báo pass.
+- [ ] Traceability cả hai AC NO-003 đầy đủ, README và evidence ghi command/version/kết quả thật; giữ offline guarantees.
+- [ ] Parent chỉ chuyển In Review khi có evidence của cả bốn subtask; Done sau acceptance/review theo quality-release.
+
+### Lệnh kiểm chứng dự kiến
+
+Lệnh hiện có: từ root `uvx --from openapi-spec-validator==0.7.2 openapi-spec-validator contracts/openapi.yaml`; từ `api/`: `./mvnw -B -ntp test`, `./mvnw -B -ntp verify`; từ `apps/mobile/`: `fvm flutter analyze`, `fvm flutter test`.
+
+Đầu ra mới phải tạo/pin ở NO-003.3–4, chưa tồn tại hoặc chạy trong lượt planning:
+
+```sh
+# Root: validator đọc $ref/schema/format và expected outcomes trong shared fixtures
+uv run --project contracts/tools python contracts/tools/validate_fixtures.py
+# api/
+./mvnw -B -ntp -Dtest=SyncContractTest test
+./mvnw -B -ntp verify
+# apps/mobile/
+fvm flutter test test/contracts/sync_contract_test.dart
+fvm flutter analyze
+fvm flutter test
+# Root
+git diff --check
+```
+
+Maven verify bao gồm Docker/Testcontainers IT; thiếu hạ tầng phải báo chưa kiểm chứng. Slice contract/test-only không cần launch Android. Nếu implementation phát sinh kiểm chứng thiết bị, dùng phone qua `adb devices -l`, không emulator và không tắt Wi-Fi/airplane mode khi wireless ADB.
+
+### Rủi ro, quyết định còn mở và phối hợp
+
+| Rủi ro | Ảnh hưởng | Xử lý |
+|---|---|---|
+| NO-002 chưa Done dù đã merge scaffold | High: chạy task khi prerequisite chưa đạt | Gate implementation theo Kaneo; không tự đổi NO-002 |
+| Snapshot nhiều page dùng dữ liệu đang đổi | High: bỏ sót changes | Chốt snapshot identity/checkpoint/continuation ngay slice 2 |
+| Validation chỉ parse JSON, DTO bỏ field | High: contract pass giả | Resolve schemas/formats, negative corpus, compare đầy đủ hai runtime |
+| Ack duplicate/conflict bị hiểu là xóa cả batch | High: mất pending events | Expected outcomes theo operationId và walkthrough mixed batch |
+| Domain schema chưa chốt | Medium: bịa payload rồi sửa consumer | Tập operation/revision được review; tham chiếu content/scheduler version |
+| Cross-runtime timestamp/integer/null khác nhau | Medium: sai replay/revision | Vectors round-trip có offset, integer boundaries và absent/null |
+
+Cần chốt trong slice 1: danh sách operationType/payload v1, revision representation, batch/body limits, stable error codes và compatibility/version policy. Trong slice 2: cursor expiry HTTP/code, snapshot lifetime/checkpoint và page limits. Đây là quyết định kỹ thuật đề xuất để review, chưa phải endpoint hoạt động.
+
+Thực hiện tuần tự vì chia sẻ OpenAPI và fixture corpus. Java/Dart có thể làm song song sau contract freeze nếu chủ dự án yêu cầu; lượt này không spawn/delegate agents. Kế hoạch đã được lập để review; chưa có xác nhận duyệt implementation.
+
+### Duyệt implementation NO-003 — 2026-10-04
+
+Chủ dự án đã hiểu phạm vi contract và yêu cầu bắt đầu triển khai. Đọc lại MCP xác nhận NO-002 hiện `done`; gate dependency được đáp ứng. Các trạng thái NO-002 `in-progress` phía trên là bằng chứng lúc lập plan, không phải blocker hiện tại. Triển khai bốn slice theo thứ tự, không mở rộng sang sync runtime.
