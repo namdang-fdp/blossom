@@ -1,6 +1,6 @@
 # Nở — Android scaffold
 
-NO-001 tạo shell Android với 4 tab: Hôm nay, Kho từ, Luyện câu, Khu vườn. Nội dung hiện là placeholder. Guest/SQLite, starter pack/audio, học và lưu tiến độ thuộc các task tiếp theo; scaffold chưa đáp ứng toàn bộ offline MVP.
+NO-001 tạo shell Android với 4 tab: Hôm nay, Kho từ, Luyện câu, Khu vườn. NO-007 bổ sung guest/device identity bền trong SQLite/Drift và bootstrap có retry. Nội dung các tab hiện là placeholder; starter/audio, học và lưu tiến độ còn ở task sau. Chưa đáp ứng toàn bộ offline MVP.
 
 ## Toolchain
 
@@ -9,6 +9,7 @@ NO-001 tạo shell Android với 4 tab: Hôm nay, Kho từ, Luyện câu, Khu v�
 - Gradle wrapper **9.1.0**, Android Gradle Plugin **9.0.1**, Kotlin Gradle plugin **2.3.20**. Kotlin 2.2.0 trong `gradlew --version` là Kotlin nhúng của Gradle, không phải plugin Android.
 - Android compile/target SDK **36**, min SDK **24**, build-tools **36.0.0**, NDK **28.2.13676358**.
 - Router `go_router` **18.0.2**; commit `pubspec.lock`, `.fvmrc` và Gradle wrapper. Không commit SDK, `local.properties`, signing keys hay build artifacts.
+- Persistence: Drift/drift_dev **2.35.1**, drift_flutter **0.3.1**, sqlite3 **3.5.2**; Riverpod **3.4.3**, path_provider **2.1.6**, UUID **4.6.0**, build_runner **2.15.1**. Direct dependencies và lockfile được pin.
 
 ## Chạy từ fresh checkout
 
@@ -39,13 +40,15 @@ Namespace này là identity dev tạm, chưa chốt package phát hành. Bắt b
 Chạy tại `apps/mobile/`:
 
 ```sh
-fvm dart format --output=none --set-exit-if-changed lib test integration_test
+fvm dart format --output=none --set-exit-if-changed lib test integration_test test_driver
 fvm flutter analyze
 fvm flutter test
 fvm flutter build apk --debug --flavor dev
 fvm flutter build apk --debug --flavor staging
-fvm flutter test integration_test/scaffold_test.dart --flavor dev -d <device-id>
+fvm flutter drive --driver=test_driver/integration_test.dart --target=integration_test/scaffold_test.dart --flavor dev --no-dds --keep-app-running -d <device-id>
 fvm flutter test integration_test/scaffold_test.dart --flavor staging -d <device-id>
+fvm flutter test integration_test/guest_profile_test.dart --flavor dev -d <device-id>
+fvm flutter test integration_test/guest_profile_test.dart --flavor staging -d <device-id>
 ```
 
 APK: `build/app/outputs/flutter-apk/app-dev-debug.apk` và `app-staging-debug.apk`. Chỉ dùng debug signing cho scaffold; chưa cấu hình release key hay xuất bản.
@@ -77,6 +80,36 @@ UI dùng locale tiếng Việt; không có tên pilot hard-code. Kiến trúc ti
 
 Theme shell theo [UX hiện hành](../../docs/ux.md): nền, AppBar và thanh điều hướng trắng; primary rose #C43D68, điểm chọn #FFF0F4, chữ tối trung tính. Đây là baseline sau khi tích hợp main vào nhánh thiết kế, chưa phải bộ component hoàn chỉnh NO-006 hoặc mockup đã được duyệt trên điện thoại.
 
-Kiểm chứng tích hợp ngày 2026-10-04, Flutter 3.44.8 / Dart 3.12.2: format sạch, `fvm flutter analyze` không có vấn đề, `fvm flutter test --no-pub` đạt 6 tests (config, bốn tab, stack/Back, màn nhỏ với chữ 200%). Chưa build APK hoặc chạy lại trên điện thoại cho thay đổi palette này; evidence thiết bị NO-001 bên dưới thuộc bản scaffold trước.
+Kiểm chứng tích hợp ngày 2026-10-04, Flutter 3.44.8 / Dart 3.12.2: format sạch, `fvm flutter analyze` không có vấn đề, `fvm flutter test --no-pub` đạt 6 tests (config, bốn tab, stack/Back, màn nhỏ với chữ 200%). Đây là evidence tại thời điểm đổi palette; NO-007 bên dưới đã build và smoke hai flavor trên điện thoại thật với palette này.
 
 Bằng chứng NO-001: [commands và smoke đã chạy](../../docs/evidence/NO-001.md).
+
+## Guest local — NO-007
+
+App mở SQLite `no_local.sqlite` trong application support directory (Android: app-private `files/`), trên background isolate qua drift_flutter. Một transaction tạo profile UUID, device UUID và active-profile reference; shell chỉ hiện sau commit. Mở lại đọc identity đã lưu. Bootstrap lỗi hiện hướng dẫn tiếng Việt và “Thử lại”, không tự xóa DB hoặc tạo hồ sơ tạm trong RAM.
+
+Riverpod sở hữu DB/repository trong ProviderScope của app. Các truy cập profile cần ID tường minh; `withProfile` cung cấp scope để ghi atomically, scope hết hiệu lực sau callback. API này chưa phải authorization cho tài khoản server; account linking/logout/locked profiles thuộc P2.
+
+Schema hiện tại v2. Snapshot v1 là baseline phát triển chưa phát hành; v2 thêm displayName nullable. Test upgrade dùng dữ liệu thật, giữ profile/device UUID và active reference. Thay schema theo [Drift migrations](https://drift.simonbinder.eu/migrations/):
+
+```sh
+fvm dart run build_runner build
+fvm dart run drift_dev make-migrations
+fvm flutter test test/data/local/
+```
+
+Commit snapshots và generated Dart; không sửa snapshot cũ. Test integrity do dự án viết ở `test/data/local/migration_test.dart`; generated helpers ở `test/data/local/generated/`. Tool có thể tạo thêm template `migration_test.dart` trong generated directory: chuyển các case có giá trị sang test của dự án, không giữ test integrity với danh sách dữ liệu rỗng.
+
+Android cloud backup được tắt; extraction rules loại DB và journal khỏi device transfer để không clone installation identity. Backup có opt-in của Nở sẽ được xây ở P2. Chưa kiểm chứng OEM device transfer thực tế.
+
+Offline trên wireless ADB: chủ dự án chọn bản Dev release **không có quyền INTERNET**, được ký bằng debug key tạm theo scaffold, thay cho airplane mode. Kiểm tra permission trước cài; giữ Wi-Fi để ADB hoạt động. Không coi debug integration test online là phép thử offline.
+
+```sh
+fvm flutter build apk --release --flavor dev --target-platform android-arm64
+<android-sdk>/build-tools/36.0.0/aapt dump permissions build/app/outputs/flutter-apk/app-dev-release.apk
+adb -s <device-id> install -r build/app/outputs/flutter-apk/app-dev-release.apk
+adb -s <device-id> shell am force-stop com.dorriss.noapp.dev
+adb -s <device-id> shell am start -W -n com.dorriss.noapp.dev/com.dorriss.noapp.MainActivity
+```
+
+Chạy các lệnh Flutter tuần tự: build và test đồng thời có thể tranh chấp generated plugin registrant. Driver dùng `--keep-app-running` để tránh cleanup uninstall của Flutter; integration tests chỉ chạy trên flavor/sandbox dành cho test, vì runner có thể dọn app khi kết thúc. Không clear-data/uninstall app đang dùng để tạo fresh sandbox. Evidence NO-007 ghi rõ cách kiểm tra identity trước/sau cold launch và các lệnh đã chạy: [NO-007](../../docs/evidence/NO-007.md).
