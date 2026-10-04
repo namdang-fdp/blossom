@@ -2,9 +2,9 @@
 
 ## Definition of Done của task
 
-Acceptance criteria đạt; kiểm tra phù hợp phạm vi có bằng chứng; docs/contracts không mâu thuẫn; không chứa secret; không làm mất dữ liệu offline. Task chưa đạt không chuyển Done. Ghi command thực tế sau scaffold; hiện repo chưa có lệnh build/test ứng dụng chạy được.
+Acceptance criteria đạt; kiểm tra phù hợp phạm vi có bằng chứng; docs/contracts không mâu thuẫn; không chứa secret; không làm mất dữ liệu offline. Task chưa đạt không chuyển Done. Lệnh mobile hiện đã chạy được từ `apps/mobile/`; xem [mobile README](../apps/mobile/README.md) và [evidence NO-001](evidence/NO-001.md). Backend chưa có scaffold hoặc lệnh test được kiểm chứng.
 
-Lệnh dự kiến: `flutter analyze`, `flutter test`, `flutter test integration_test`, `flutter build appbundle`, `./mvnw test`, `./mvnw verify`. Pin đường dẫn/runtime ở task setup. Testcontainers có thể cần Docker; không báo test pass nếu môi trường không chạy được.
+Lệnh mobile: `fvm flutter analyze`, `fvm flutter test`, `fvm flutter test integration_test/scaffold_test.dart --flavor <dev|staging> -d <device-id>`, `fvm flutter build apk --debug --flavor <dev|staging>`. Lệnh release/backend dự kiến cho task sau: `flutter build appbundle`, `./mvnw test`, `./mvnw verify`. Testcontainers có thể cần Docker; không báo test pass nếu môi trường không chạy được.
 
 ## Các lớp kiểm chứng
 

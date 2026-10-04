@@ -1,5 +1,13 @@
 # Kiến trúc dự kiến
 
+## Scaffold Android hiện tại — NO-001
+
+Code ở `apps/mobile/`; lệnh setup/build/test và runtime thực tế tại [mobile README](../apps/mobile/README.md). Flutter 3.44.8/Dart 3.12.2 được pin bằng FVM; JDK 21, Gradle wrapper 9.1.0, AGP 9.0.1, Kotlin plugin 2.3.20. Compile/target SDK 36, min SDK 24 theo Flutter template. App ID dev tạm `com.dorriss.noapp` với suffix `.dev`/`.staging`; chưa chốt identity phát hành.
+
+Shell dùng `go_router` 18.0.2 với bốn StatefulShellBranch, locale tiếng Việt và hai product flavors dev/staging. Tab: Hôm nay, Kho từ, Luyện câu, Khu vườn. Giữ stack trong process khi đổi tab; Android Back pop child route trước, từ tab root khác về Hôm nay, từ root Hôm nay để OS thoát. Chưa có khôi phục stack bền sau process kill.
+
+`app/` giữ app root/router; `core/config/` giữ immutable config từ `appFlavor`; `features/scaffold/` giữ placeholder dùng chung. Không gọi mạng khi bootstrap, không có login wall. Riverpod, Drift, starter/audio, study và sync là kiến trúc đích ở các task sau, chưa được thực hiện bởi scaffold. Tách feature thật khi bắt đầu task tương ứng.
+
 ## Stack
 
 - Android-first: Flutter/Dart, Riverpod, SQLite qua Drift, HTTP client; secure storage cho credential, file app-private cho audio/recording.
