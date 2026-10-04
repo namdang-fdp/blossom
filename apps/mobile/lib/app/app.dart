@@ -30,10 +30,41 @@ class _NoAppState extends State<NoApp> {
     locale: const Locale('vi'),
     supportedLocales: const [Locale('vi')],
     localizationsDelegates: GlobalMaterialLocalizations.delegates,
-    theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFBE185D)),
-      scaffoldBackgroundColor: const Color(0xFFFFF8FA),
-    ),
+    theme: _createLightTheme(),
     routerConfig: _router,
+  );
+}
+
+// Scaffold baseline from docs/ux.md; the full component system belongs to NO-006.
+ThemeData _createLightTheme() {
+  final colors = ColorScheme.fromSeed(seedColor: const Color(0xFFE85D86))
+      .copyWith(
+        primary: const Color(0xFFC43D68),
+        onPrimary: Colors.white,
+        primaryContainer: const Color(0xFFFFF0F4),
+        onPrimaryContainer: const Color(0xFF1F2937),
+        surface: Colors.white,
+        surfaceContainerLowest: Colors.white,
+        surfaceContainerLow: const Color(0xFFF7F8FA),
+        surfaceContainer: const Color(0xFFF7F8FA),
+        surfaceContainerHigh: const Color(0xFFF7F8FA),
+        surfaceContainerHighest: const Color(0xFFF7F8FA),
+        onSurface: const Color(0xFF1F2937),
+        onSurfaceVariant: const Color(0xFF667085),
+        surfaceTint: Colors.transparent,
+      );
+  return ThemeData(
+    colorScheme: colors,
+    scaffoldBackgroundColor: colors.surface,
+    appBarTheme: AppBarTheme(
+      backgroundColor: colors.surface,
+      foregroundColor: colors.onSurface,
+      surfaceTintColor: Colors.transparent,
+    ),
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: colors.surface,
+      indicatorColor: colors.primaryContainer,
+      surfaceTintColor: Colors.transparent,
+    ),
   );
 }
