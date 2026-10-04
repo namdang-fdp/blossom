@@ -9,7 +9,7 @@
 | Client | Flutter, Android trước |
 | Backend | Spring Boot, PostgreSQL |
 | Offline | Bắt buộc; SQLite/Drift trên máy. Thay thế hoàn toàn đề xuất online-first trước đó |
-| Nhận diện | Màu hồng, mascot hoa hồng; học đều thì nở, nghỉ lâu thì rũ và có nhắc |
+| Nhận diện | Nền trắng sáng, hồng rose làm điểm nhấn, chữ tối trung tính; nội dung học và CTA nổi bật. Mascot hoa hồng; học đều thì nở, nghỉ lâu thì rũ và có nhắc. Palette baseline và quy tắc mockup ở [ux.md](ux.md) |
 | Nội dung | Từ, giới từ/cụm, mẫu câu, hoàn cảnh, active recall, nhớ lâu, import |
 | Công việc hiện tại | Tạo docs và chia task đầy đủ MVP trong Kaneo/Bloom; chưa viết ứng dụng |
 
@@ -38,3 +38,5 @@
 ## Cập nhật
 
 2026-10-04: offline-first là yêu cầu bắt buộc theo chỉnh sửa cuối của người dùng; PostgreSQL vẫn giữ phía server. Không còn kế hoạch bỏ SQLite.
+
+2026-10-04: sau phản hồi thử trên điện thoại, chủ dự án chốt cập nhật docs sang nền trắng sáng, đổi hồng theo hướng rose và ưu tiên dễ học. Palette baseline: primary #C43D68, rose #E85D86, primary-soft #FFF0F4. Mockup do chủ dự án làm sau; chưa coi palette/component đã được kiểm chứng trên thiết bị và chưa thay đổi ứng dụng.
