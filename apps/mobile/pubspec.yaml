@@ -1,0 +1,25 @@
+name: no_mobile
+description: Nở — Từ quen, câu của bạn.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.12.2
+  flutter: '>=3.44.8'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  go_router: 18.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: 6.0.0
+
+flutter:
+  uses-material-design: true
