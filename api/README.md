@@ -54,3 +54,7 @@ uvx --from openapi-spec-validator==0.7.2 openapi-spec-validator contracts/openap
 - Health `/api/v1/health` chỉ phản ánh tiến trình; readiness phản ánh PostgreSQL. Global Actuator health gồm Redis, không trả chi tiết connection. Swagger chỉ local. Đây chưa có auth/private APIs.
 
 Contract canonical: `contracts/openapi.yaml`; sync/error/identity thuộc NO-003/NO-026. Scaffold không triển khai học, grading, reminders hoặc upload recordings; các luồng học cốt lõi vẫn offline trên Flutter/Drift.
+
+## NO-003 — contract tests
+
+Sync push/pull/snapshot và problem response đã được định nghĩa trong `contracts/openapi.yaml`, chưa có runtime handler. `SyncContractTest` round-trip shared fixtures qua typed sample DTOs; Maven copy fixtures từ `../contracts/fixtures/` lên test classpath, không dùng fixture copy riêng. Focused command: `./mvnw -B -ntp -Dtest=SyncContractTest test`. Schema/protocol validator và Dart counterpart: [contract README](../contracts/README.md). Evidence: [NO-003](../docs/evidence/NO-003.md).

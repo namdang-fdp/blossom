@@ -22,10 +22,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Validate scaffold API contract
+      - name: Validate sync contract and shared fixtures
         run: |
-          python -m pip install openapi-spec-validator==0.7.2
-          openapi-spec-validator contracts/openapi.yaml
+          python -m pip install uv==0.12.19
+          uv run --locked --project contracts/tools python contracts/tools/validate_fixtures.py
+          uv run --locked --project contracts/tools python -m unittest discover -s contracts/tools -p 'test_*.py'
       - name: Quality and real infrastructure integration tests
         working-directory: api
         run: ./mvnw -B -ntp verify

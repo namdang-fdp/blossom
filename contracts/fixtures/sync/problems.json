@@ -1,0 +1,189 @@
+[
+  {
+    "name": "token_expired",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:token-expired",
+      "title": "Không thể đồng bộ",
+      "status": 401,
+      "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+      "code": "TOKEN_EXPIRED",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": false,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 401,
+      "headers": {
+        "Content-Type": "application/problem+json",
+        "WWW-Authenticate": "Bearer"
+      }
+    }
+  },
+  {
+    "name": "unauthenticated",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:unauthenticated",
+      "title": "Không thể đồng bộ",
+      "status": 401,
+      "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+      "code": "UNAUTHENTICATED",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": false,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 401,
+      "headers": {
+        "Content-Type": "application/problem+json",
+        "WWW-Authenticate": "Bearer"
+      }
+    }
+  },
+  {
+    "name": "forbidden",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:forbidden",
+      "title": "Không thể đồng bộ",
+      "status": 403,
+      "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+      "code": "FORBIDDEN",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": false,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 403,
+      "headers": {
+        "Content-Type": "application/problem+json"
+      }
+    }
+  },
+  {
+    "name": "unsupported_schema_version",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:unsupported-schema-version",
+      "title": "Không thể đồng bộ",
+      "status": 422,
+      "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+      "code": "UNSUPPORTED_SCHEMA_VERSION",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": false,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 422,
+      "headers": {
+        "Content-Type": "application/problem+json"
+      }
+    }
+  },
+  {
+    "name": "validation_failed",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:validation-failed",
+      "title": "Không thể đồng bộ",
+      "status": 422,
+      "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+      "code": "VALIDATION_FAILED",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": false,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 422,
+      "headers": {
+        "Content-Type": "application/problem+json"
+      }
+    }
+  },
+  {
+    "name": "rate_limited",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:rate-limited",
+      "title": "Không thể đồng bộ",
+      "status": 429,
+      "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+      "code": "RATE_LIMITED",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": true,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 429,
+      "headers": {
+        "Content-Type": "application/problem+json",
+        "Retry-After": "30"
+      }
+    }
+  },
+  {
+    "name": "payload_too_large",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:payload-too-large",
+      "title": "Không thể đồng bộ",
+      "status": 413,
+      "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+      "code": "PAYLOAD_TOO_LARGE",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": false,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 413,
+      "headers": {
+        "Content-Type": "application/problem+json"
+      }
+    }
+  },
+  {
+    "name": "temporarily_unavailable",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:temporarily-unavailable",
+      "title": "Không thể đồng bộ",
+      "status": 503,
+      "detail": "Vui lòng kiểm tra trạng thái đồng bộ.",
+      "code": "TEMPORARILY_UNAVAILABLE",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": true,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "POST",
+      "path": "/api/v1/sync/push",
+      "status": 503,
+      "headers": {
+        "Content-Type": "application/problem+json"
+      }
+    }
+  }
+]
