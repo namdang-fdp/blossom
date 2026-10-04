@@ -37,6 +37,8 @@ Mốc là nhóm kết quả, không phải bảy hàng đợi nối cứng. CI (
 5. Mở hai nhánh tính năng sau checkpoint: sync an toàn và kho từ/import. Nội dung/mascot có thể chuẩn bị cùng lúc khi đã ổn schema và brief.
 6. Luyện câu/AI, habit/notification, nội dung beta và release preparation theo dependency thực tế; cuối cùng closed test và readiness.
 
+Lưu ý thiết kế cập nhật 2026-10-04: NO-006 và các màn phụ thuộc phải theo [UX hiện hành](../docs/ux.md): nền trắng sáng, hồng rose làm điểm nhấn, ưu tiên nội dung học. Tên “bộ component nền màu hồng” trong snapshot backlog/ánh xạ export là tên lúc tạo task, không còn là yêu cầu phủ nền hồng. Lượt cập nhật docs này chưa sửa task trên Kaneo hoặc xác nhận implementation; mockup sẽ được chủ dự án làm sau.
+
 ## Quy tắc chạy một task
 
 1. Đọc body Kaneo, spec tham chiếu và task đang blocks. Nếu chưa xong dependency thì chọn task khác.
