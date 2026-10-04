@@ -51,3 +51,19 @@ uvx --from openapi-spec-validator==0.7.2 openapi-spec-validator contracts/openap
 ```
 
 Nguồn thiết kế: [OpenAPI 3.0.3](https://spec.openapis.org/oas/v3.0.3.html), [Problem Details RFC 9457](https://www.rfc-editor.org/rfc/rfc9457.html), [jsonschema format validation](https://python-jsonschema.readthedocs.io/en/stable/validate/). Quy tắc dữ liệu authoritative nằm ở `docs/offline-sync.md`.
+
+## Pull và phục hồi snapshot
+
+`GET /api/v1/sync/pull?cursor=…&pageSize=…`: pageSize 1–200, mặc định 100. Không cursor bắt đầu từ đầu stream còn retained; nếu lịch sử đã prune, trả CURSOR_EXPIRED để tải snapshot. nextCursor luôn có (kể cả empty page); hasMore cho biết còn page tại thời điểm đọc. Sau page cuối tiếp tục poll nextCursor để nhận changes mới. Cursor là token opaque scoped theo account, không dựa UUID/revision để suy thứ tự. INVALID_CURSOR/400 khác CURSOR_EXPIRED/409 và CURSOR_ACCOUNT_MISMATCH/403. Không cursor account A trong request account B.
+
+Changes typed: attempt append-only với original/effective/received time, library_entry có nghĩa/mẫu, tombstone, review_projection tối thiểu (dueAt, scheduler/rules version, sourceEventIds). Fixture dueAt là giá trị wire tổng hợp, không phải kết quả FSRS đã tính. State FSRS đầy đủ thuộc contract revision sau NO-004; không tuyên bố projection mẫu đủ khôi phục scheduler khi chưa chốt parity.
+
+`GET /api/v1/sync/snapshot` không pageToken tạo immutable snapshot tại checkpoint C. Snapshot giữ nguyên snapshotId/checkpoint/capturedAt qua mọi page, gồm canonical attempts, library, tombstones và projections tại C. pageToken ràng buộc account, snapshot, vị trí và pageSize; thay pageSize giữa chừng bị từ chối. Snapshot sống tối thiểu 24 giờ; server không prune stream sau C trong thời hạn snapshot. Nếu không giữ được checkpoint trả SNAPSHOT_EXPIRED/409 và bắt đầu lại, không trộn hai snapshot. CURSOR_EXPIRED không tự cho phép xóa local profile.
+
+- Page chưa cuối: hasMore=true, nextPageToken có giá trị, nextCursor=null.
+- Page cuối: hasMore=false, nextPageToken=null, nextCursor=checkpoint.
+- Changes sau C không chui vào snapshot page sau; pull(checkpoint) trả đủ chúng, kể cả delete giữa hai page. Fixture snapshot-resume minh họa thay đổi phát sinh khi snapshot đang tải.
+
+Client stage các page theo snapshotId, commit từng page+token atomically để resume sau kill. Khi đủ pages, swap canonical dataset+cursor trong transaction, giữ toàn bộ outbox/pending attempts/conflicts đúng profile rồi replay/rebase pending trên canonical projection. Không reset outbox khi snapshot. Pull cũng áp dụng page+cursor cùng transaction; duplicate page/event UUID không tăng history/credit. Recovery path: CURSOR_EXPIRED → snapshot-first → snapshot-last → pull(checkpoint). Nếu mạng hoặc auth ngắt giữa chừng, giữ stage và pending; snapshot expired mới bắt đầu stage mới.
+
+Fixture/schema chỉ chứng minh wire shape và các kỳ vọng của protocol; identity scope, snapshot isolation, PostgreSQL transactions và replay convergence phải có integration evidence ở task runtime tương ứng.

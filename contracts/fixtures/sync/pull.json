@@ -1,0 +1,184 @@
+[
+  {
+    "name": "pull-first",
+    "schema": "PullResponse",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "changes": [
+        {
+          "changeType": "attempt",
+          "eventId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 9007199254740991,
+          "revision": "rev_2",
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "receivedAt": "2026-10-04T07:01:00Z",
+          "effectiveReviewAt": "2026-10-04T07:00:00.123456Z",
+          "clockAdjusted": false,
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "value": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        },
+        {
+          "changeType": "library_entry",
+          "revision": "rev_2",
+          "value": {
+            "entryId": "30000000-0000-4000-8000-000000000020",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        }
+      ],
+      "nextCursor": "cursor_page_1",
+      "hasMore": true
+    },
+    "http": {
+      "method": "GET",
+      "path": "/api/v1/sync/pull",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  },
+  {
+    "name": "pull-last",
+    "schema": "PullResponse",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "changes": [
+        {
+          "changeType": "tombstone",
+          "entryId": "30000000-0000-4000-8000-000000000020",
+          "revision": "rev_3",
+          "deletedAt": "2026-10-04T08:00:00Z"
+        },
+        {
+          "changeType": "review_projection",
+          "targetId": "30000000-0000-4000-8000-000000000012",
+          "revision": "rev_4",
+          "schedulerVersion": "scheduler_pending_NO004",
+          "rulesVersion": "rules_1",
+          "dueAt": "2026-10-05T07:00:00Z",
+          "sourceEventIds": [
+            "30000000-0000-4000-8000-000000000001"
+          ]
+        }
+      ],
+      "nextCursor": "cursor_checkpoint_2",
+      "hasMore": false
+    },
+    "http": {
+      "method": "GET",
+      "path": "/api/v1/sync/pull",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  },
+  {
+    "name": "pull-empty",
+    "schema": "PullResponse",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "changes": [],
+      "nextCursor": "cursor_checkpoint_2",
+      "hasMore": false
+    },
+    "http": {
+      "method": "GET",
+      "path": "/api/v1/sync/pull",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  },
+  {
+    "name": "cursor_expired",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:cursor-expired",
+      "title": "Không thể tải dữ liệu",
+      "status": 409,
+      "detail": "Vui lòng bắt đầu lại quá trình đồng bộ.",
+      "code": "CURSOR_EXPIRED",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": false,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "GET",
+      "path": "/api/v1/sync/pull",
+      "status": 409,
+      "headers": {
+        "Content-Type": "application/problem+json"
+      }
+    }
+  },
+  {
+    "name": "invalid_cursor",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:invalid-cursor",
+      "title": "Không thể tải dữ liệu",
+      "status": 400,
+      "detail": "Vui lòng bắt đầu lại quá trình đồng bộ.",
+      "code": "INVALID_CURSOR",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": false,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "GET",
+      "path": "/api/v1/sync/pull",
+      "status": 400,
+      "headers": {
+        "Content-Type": "application/problem+json"
+      }
+    }
+  },
+  {
+    "name": "cursor_account_mismatch",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:cursor-account-mismatch",
+      "title": "Không thể tải dữ liệu",
+      "status": 403,
+      "detail": "Vui lòng bắt đầu lại quá trình đồng bộ.",
+      "code": "CURSOR_ACCOUNT_MISMATCH",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": false,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "GET",
+      "path": "/api/v1/sync/pull",
+      "status": 403,
+      "headers": {
+        "Content-Type": "application/problem+json"
+      }
+    }
+  }
+]

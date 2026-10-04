@@ -1,0 +1,149 @@
+[
+  {
+    "name": "snapshot-first",
+    "schema": "SnapshotResponse",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "snapshotId": "30000000-0000-4000-8000-000000000050",
+      "checkpoint": "cursor_snapshot_100",
+      "capturedAt": "2026-10-04T08:00:00Z",
+      "changes": [
+        {
+          "changeType": "attempt",
+          "eventId": "30000000-0000-4000-8000-000000000001",
+          "deviceId": "10000000-0000-4000-8000-000000000001",
+          "deviceSequence": 9007199254740991,
+          "revision": "rev_2",
+          "occurredAt": "2026-10-04T14:00:00.123456+07:00",
+          "receivedAt": "2026-10-04T07:01:00Z",
+          "effectiveReviewAt": "2026-10-04T07:00:00.123456Z",
+          "clockAdjusted": false,
+          "timezone": "Asia/Ho_Chi_Minh",
+          "learningDate": "2026-10-04",
+          "value": {
+            "attemptId": "30000000-0000-4000-8000-000000000010",
+            "sessionId": "30000000-0000-4000-8000-000000000011",
+            "targetId": "30000000-0000-4000-8000-000000000012",
+            "contentRevision": "content_1",
+            "targetType": "pattern_recall",
+            "attemptKind": "review",
+            "outcome": "assisted",
+            "hintCount": 1,
+            "rulesVersion": "rules_1"
+          }
+        }
+      ],
+      "nextPageToken": "snapshot_page_2",
+      "nextCursor": null,
+      "hasMore": true
+    },
+    "http": {
+      "method": "GET",
+      "path": "/api/v1/sync/snapshot",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  },
+  {
+    "name": "snapshot-last",
+    "schema": "SnapshotResponse",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "snapshotId": "30000000-0000-4000-8000-000000000050",
+      "checkpoint": "cursor_snapshot_100",
+      "capturedAt": "2026-10-04T08:00:00Z",
+      "changes": [
+        {
+          "changeType": "tombstone",
+          "entryId": "30000000-0000-4000-8000-000000000020",
+          "revision": "rev_3",
+          "deletedAt": "2026-10-04T08:00:00Z"
+        },
+        {
+          "changeType": "review_projection",
+          "targetId": "30000000-0000-4000-8000-000000000012",
+          "revision": "rev_4",
+          "schedulerVersion": "scheduler_pending_NO004",
+          "rulesVersion": "rules_1",
+          "dueAt": "2026-10-05T07:00:00Z",
+          "sourceEventIds": [
+            "30000000-0000-4000-8000-000000000001"
+          ]
+        }
+      ],
+      "nextPageToken": null,
+      "nextCursor": "cursor_snapshot_100",
+      "hasMore": false
+    },
+    "http": {
+      "method": "GET",
+      "path": "/api/v1/sync/snapshot",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    "previousPage": "snapshot-first"
+  },
+  {
+    "name": "snapshot-resume",
+    "schema": "PullResponse",
+    "valid": true,
+    "body": {
+      "schemaVersion": 1,
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "changes": [
+        {
+          "changeType": "library_entry",
+          "revision": "rev_5",
+          "value": {
+            "entryId": "30000000-0000-4000-8000-000000000021",
+            "sense": "quan tâm đến một hoạt động",
+            "usagePattern": "be interested in + noun/V-ing",
+            "note": null
+          }
+        }
+      ],
+      "nextCursor": "cursor_after_snapshot_101",
+      "hasMore": false
+    },
+    "http": {
+      "method": "GET",
+      "path": "/api/v1/sync/pull",
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    "snapshotPage": "snapshot-last"
+  },
+  {
+    "name": "snapshot-expired",
+    "schema": "Problem",
+    "valid": true,
+    "body": {
+      "type": "urn:no:problem:snapshot-expired",
+      "title": "Không thể tải dữ liệu",
+      "status": 409,
+      "detail": "Vui lòng bắt đầu lại quá trình đồng bộ.",
+      "code": "SNAPSHOT_EXPIRED",
+      "requestId": "20000000-0000-4000-8000-000000000001",
+      "retryable": false,
+      "fieldErrors": []
+    },
+    "http": {
+      "method": "GET",
+      "path": "/api/v1/sync/snapshot",
+      "status": 409,
+      "headers": {
+        "Content-Type": "application/problem+json"
+      }
+    }
+  }
+]
