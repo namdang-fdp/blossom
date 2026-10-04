@@ -52,3 +52,9 @@ Kaneo REST trả 403 khi đọc Bloom/NO-002 ngày 2026-10-04; chưa sửa scope
 Chưa triển khai identity/auth, sync handlers/server outbox, FSRS, content schema hoặc domain APIs. Kafka producer idempotence không thay thế transactional outbox/dedupe theo account. Bộ kiểm chứng này không chứng minh học offline trên thiết bị; đó là gate mobile riêng. JobRunr test chứng minh lưu job và worker stop/start/retry trong test process; chưa phải test crash/restart toàn JVM giữa một domain operation.
 
 Stack Docker local được giữ đang chạy để tiếp tục phát triển; dừng bằng `make stop`, volumes được giữ. Không deploy/public/publish hoặc push. Hướng dẫn đầy đủ ở [API README](../api/README.md).
+
+## Hợp nhất với Flutter scaffold
+
+Sau merge main, code Flutter NO-001 được chuyển từ `apps/mobile/` sang `frontend/` theo layout đã chốt. `frontend/README.md` hiện là hướng dẫn chạy thật, thay cho placeholder ở thời điểm kiểm chứng backend ban đầu. Source Flutter và các yêu cầu dùng điện thoại thật được giữ nguyên.
+
+Backend sau hợp nhất: `cd api && ./mvnw -B -ntp verify` đạt BUILD SUCCESS, 9 tests không fail/error/skip, Spotless/Checkstyle đạt (45.292 giây). Flutter format/analyze, 6 tests và hai APK ARM64 debug dev/staging cũng đạt tại `frontend/`; xem evidence NO-001 cho giới hạn device testing của lượt merge.

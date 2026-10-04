@@ -1,6 +1,19 @@
-# Nở
+# Nở — Từ quen, câu của bạn.
 
 App học tiếng Anh Android, Flutter + SQLite/Drift để học offline. Backend Spring Boot là modular monolith trong một Maven project.
+
+## Chạy Flutter Android
+
+Flutter 3.44.8 được pin bằng FVM. Build mobile dùng JDK 21; backend dùng JDK 25. Đọc [mobile README](frontend/README.md) trước khi chạy.
+
+```sh
+cd frontend
+fvm use 3.44.8
+fvm flutter pub get
+fvm flutter run --flavor dev -d <device-id>
+```
+
+Mobile hiện có scaffold 4 tab và config dev/staging. SQLite/Drift, starter pack/audio và luồng học offline thuộc task tiếp theo. Thiết bị test dùng điện thoại thật qua ADB; không launch emulator.
 
 ## Chạy backend local
 
