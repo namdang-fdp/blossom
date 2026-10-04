@@ -62,3 +62,18 @@ Backend sau hợp nhất: `cd api && ./mvnw -B -ntp verify` đạt BUILD SUCCESS
 ## Chốt lại layout
 
 Ngày 2026-10-04, theo yêu cầu mới nhất của chủ dự án, Flutter trở về `apps/mobile/`; `frontend/` dành cho web tương lai. Các lệnh tại `frontend/` ở mục merge phía trên là bằng chứng lịch sử.
+
+## Sửa CI không pull được MinIO — 2026-10-04
+
+Run [37183257885](https://github.com/namdang-fdp/blossom/actions/runs/37183257885) của PR #2 lỗi tại InfrastructureIT trước khi chạy các assertions, do Docker Hub từ chối pull `minio/minio:RELEASE.2025-09-07T16-13-09Z`. Pull trực tiếp tái hiện lỗi; hai tag server/client ở Quay trả 401, hai binary URL cũ tại dl.min.io trả 410. Những lượt local trước dùng image đã cache, không chứng minh registry còn phục vụ image cho runner mới.
+
+Giữ nguyên MinIO RELEASE.2025-09-07T16-13-09Z và mc RELEASE.2025-08-13T08-35-41Z. `infra/minio/Dockerfile` tải binary từ GitHub Releases chính thức, xác minh SHA-256 đã pin theo AMD64/ARM64, đóng image Alpine 3.22.3. Compose và Testcontainers dùng cùng Dockerfile; Maven đưa Dockerfile lên test classpath để không phụ thuộc working directory. Compose luôn build image local, healthcheck dùng HTTP readiness; CI cũng trigger khi Dockerfile hoặc Compose thay đổi.
+
+Sources: [MinIO release](https://github.com/minio/minio/releases/tag/RELEASE.2025-09-07T16-13-09Z), [mc release](https://github.com/minio/mc/releases/tag/RELEASE.2025-08-13T08-35-41Z). SHA-256 lấy từ assets `.sha256sum` tương ứng; binary URLs và checksum assets cả hai kiến trúc trả HTTP 200.
+
+- `docker build -t no-minio:RELEASE.2025-09-07T16-13-09Z infra/minio`: đạt; cả hai binary checksum OK.
+- `cd api && ./mvnw -B -ntp spotless:apply verify`: BUILD SUCCESS, 9 tests đạt, 0 fail/error/skip, Spotless và Checkstyle đạt; 1 phút 16 giây. Testcontainers build và chạy MinIO mới, S3 put/get/delete thật đạt.
+- `docker build -t no-api:ci api`: đạt, kiểm chứng bước runtime image của CI sau thay đổi Maven resources.
+- `docker compose config --quiet`: đạt. Compose smoke dùng project/volume riêng `no-minio-ci-check` và host ports động: MinIO healthy, initializer tạo bucket no-media thành công, runtime server/client báo đúng hai phiên bản đã pin. Project/volume smoke được xóa sau kiểm chứng; stack phát triển giữ nguyên.
+
+Runtime/build local mới kiểm chứng AMD64; chưa build/chạy ARM64 trong lượt sửa. Chưa có GitHub CI run cho bản sửa trước khi push.

@@ -30,6 +30,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
+import org.testcontainers.images.builder.ImageFromDockerfile;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.kafka.KafkaContainer;
@@ -57,7 +58,9 @@ class InfrastructureIT {
 
   @Container
   static GenericContainer<?> minio =
-      new GenericContainer<>("minio/minio:RELEASE.2025-09-07T16-13-09Z")
+      new GenericContainer<>(
+              new ImageFromDockerfile()
+                  .withFileFromClasspath("Dockerfile", "containers/minio/Dockerfile"))
           .withEnv("MINIO_ROOT_USER", "smoke-local")
           .withEnv("MINIO_ROOT_PASSWORD", "smoke-local-password")
           .withCommand("server /data")

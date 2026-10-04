@@ -165,6 +165,16 @@
     </dependencyManagement>
 
     <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+            <testResource>
+                <directory>../infra/minio</directory>
+                <targetPath>containers/minio</targetPath>
+                <includes><include>Dockerfile</include></includes>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

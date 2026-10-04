@@ -1,10 +1,10 @@
 name: Backend quality
 on:
   pull_request:
-    paths: ['api/**', 'contracts/**', '.github/workflows/api.yml']
+    paths: ['api/**', 'contracts/**', 'infra/minio/**', 'compose.yml', '.github/workflows/api.yml']
   push:
     branches: [main]
-    paths: ['api/**', 'contracts/**', '.github/workflows/api.yml']
+    paths: ['api/**', 'contracts/**', 'infra/minio/**', 'compose.yml', '.github/workflows/api.yml']
 permissions:
   contents: read
 jobs:

@@ -26,6 +26,8 @@ Profile `local` có credential dev và Swagger. Default profile yêu cầu env r
 
 `make app` chạy API và hạ tầng trong Docker; bucket `no-media` được tạo bởi one-shot `minio-init`. Chờ health API trong `docker compose ps`. `make stop` dừng stack, giữ volumes. Không chạy `down -v` nếu muốn giữ dữ liệu. Dozzle chỉ local và đọc Docker socket để xem log.
 
+MinIO và `mc` được đóng image local từ binary GitHub Releases chính thức, giữ phiên bản đã pin và xác minh SHA-256 cho AMD64/ARM64. Compose và Testcontainers cùng dùng `infra/minio/Dockerfile`; lần build đầu cần mạng tới Docker Hub (Alpine), Alpine packages và GitHub Releases. Không còn pull `minio/minio` hoặc `minio/mc` từ registry đã ngừng phục vụ các image này.
+
 ## Build/test
 
 ```sh

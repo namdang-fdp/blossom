@@ -311,3 +311,7 @@ Plan đã được duyệt và scaffold được tạo ngay trong repo tại `ap
 Chủ dự án yêu cầu ngừng dùng emulator vì gây lag máy. Không khởi chạy AVD nữa; dùng điện thoại Android thật qua ADB (USB hoặc Wireless debugging). Bằng chứng emulator NO-001 là lịch sử, không phải chỉ dẫn launch cho các phiên sau. Lấy device ID bằng `adb devices -l`; chỉ chạy app/integration khi điện thoại đã cấp quyền và có trạng thái `device`. Giữ nguyên các acceptance offline, kiểm chứng trên điện thoại thật thay cho emulator.
 
 Kiểm chứng bổ sung sau khi chủ dự án yêu cầu commit: OPPO Reno8, Android 14/API 34, ARM64 qua wireless ADB; 6 tests local và 1 integration smoke cho mỗi flavor đạt. Staging có lượt bị chặn cài/runner timeout trước khi fresh build chạy đạt; xem evidence. Smoke điện thoại chạy online, không làm mất wireless ADB. Không khởi chạy emulator. Chia history thành 4 atomic Conventional Commits: plan, scaffold, tests, tài liệu/evidence.
+
+## Sửa blocker CI NO-002 — 2026-10-04
+
+PR #2 không pull được MinIO trên runner mới; local trước dùng cached image. Giữ nguyên release MinIO/mc, build image từ official GitHub binaries + pinned checksums, dùng chung Dockerfile cho Compose/Testcontainers và mở rộng CI path filters. Evidence và giới hạn tại `docs/backend-scaffold.md`; chưa thay đổi trạng thái Kaneo hoặc bắt đầu NO-003/090.
